@@ -43,8 +43,7 @@ class App extends React.Component {
     const { authed } = this.state;
     return (
       <div className="App">
-        <h1>The Village Circle</h1>
-        <Router>
+       <Router>
           <MainNavbar authed={authed} />
           <Switch>
             {/* <PublicRoute path="/circle/:circleId" exact component={Circle} authed={authed} />
