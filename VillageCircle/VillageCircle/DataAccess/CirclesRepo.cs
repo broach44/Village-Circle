@@ -23,6 +23,20 @@ namespace VillageCircle.DataAccess
                 return db.Query<Circle>("select * from Circle;");
             }
         }
+
+        public Circle GetSingleCircle(int circleId)
+        {
+            var sql = @"
+                        select *
+                        from [Circle]
+                        where CircleId = @CircleId;
+                      ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { CircleId = circleId };
+                return db.QueryFirstOrDefault<Circle>(sql, parameters);
+            }
+        }
     }
 
 }

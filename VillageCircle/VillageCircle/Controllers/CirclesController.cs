@@ -27,5 +27,17 @@ namespace VillageCircle.Controllers
             }
             return Ok(circles);
         }
+
+        // api/circles/{circleId}
+        [HttpGet("{circleId}")]
+        public IActionResult GetCircleByCircleId(int circleId)
+        {
+            var circle = _circlesRepository.GetSingleCircle(circleId);
+            if (circle != null)
+            {
+                return Ok(circle);
+            }
+            return NotFound("This circle does not exist");
+        }
     }
 }

@@ -46,8 +46,8 @@ class App extends React.Component {
        <Router>
           <MainNavbar authed={authed} />
           <Switch>
-            {/* <PublicRoute path="/circle/:circleId" exact component={Circle} authed={authed} />
-            <PublicRoute path="/guild/:guildId" exact component={Guild} authed={authed} /> */}
+            <PublicRoute path="/circle/:circleId" exact component={Circle} authed={authed} />
+            {/* <PublicRoute path="/guild/:guildId" exact component={Guild} authed={authed} /> */}
             {/* <PublicRoute path="/gatheringHall/:gatheringHallId" exact component={GatheringHall} authed={authed} /> */}
             <PublicRoute path="/profile" exact component={Profile} authed={authed} />
             <PublicRoute path="/circles" exact component={Circles} authed={this.state.authed} />

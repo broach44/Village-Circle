@@ -12,4 +12,13 @@ const getAllCircles = () => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getAllCircles };
+const getCircleById = (circleId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/circles/${circleId}`)
+    .then((result) => {
+      const circle = result.data;
+      resolve(circle);
+    })
+    .catch((err) => reject(err));
+});
+
+export default { getAllCircles, getCircleById };
