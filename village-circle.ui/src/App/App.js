@@ -27,10 +27,10 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => {
   return <Route {...rest} render={(props) => routeChecker(props)} />;
 };
 
-// const PrivateRoute = ({ component: Component, authed, ...rest }) => {
-//   const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/auth', state: { from: props.location } }} />);
-//   return <Route {...rest} render={(props) => routeChecker(props)} />;
-// };
+const PrivateRoute = ({ component: Component, authed, ...rest }) => {
+  const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/auth', state: { from: props.location } }} />);
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};
 
 connection.setupFunc();
 
@@ -47,10 +47,10 @@ class App extends React.Component {
           <MainNavbar authed={authed} />
           <Switch>
             <PublicRoute path="/circle/:circleId" exact component={Circle} authed={authed} />
-            {/* <PublicRoute path="/guild/:guildId" exact component={Guild} authed={authed} /> */}
-            {/* <PublicRoute path="/gatheringHall/:gatheringHallId" exact component={GatheringHall} authed={authed} /> */}
-            <PublicRoute path="/profile" exact component={Profile} authed={authed} />
-            <PublicRoute path="/circles" exact component={Circles} authed={this.state.authed} />
+            <PublicRoute path="/guild/:guildId" exact component={Guild} authed={authed} />
+            <PublicRoute path="/gatheringHall/:gatheringHallId" exact component={GatheringHall} authed={authed} />
+            <PrivateRoute path="/profile" exact component={Profile} authed={authed} />
+            <PublicRoute path="/circles" exact component={Circles} authed={authed} />
             <PublicRoute path="/guilds" exact component={Guilds} authed={authed} />
             <PublicRoute path="/gatheringHalls" exact component={GatheringHalls} authed={authed} />
             <PublicRoute path="/" exact component={Home} authed={authed} />

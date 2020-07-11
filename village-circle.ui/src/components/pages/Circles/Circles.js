@@ -1,11 +1,10 @@
 import React from 'react';
 
+import { Card } from 'semantic-ui-react';
 import CircleCard from '../../shared/CircleCard/CircleCard';
 
 import circlesData from '../../../helpers/circlesData';
-
 import './Circles.scss';
-import { Card } from 'semantic-ui-react';
 
 class Circles extends React.Component {
   state = {
