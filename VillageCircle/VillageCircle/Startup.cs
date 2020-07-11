@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using VillageCircle.DataAccess;
 
 namespace VillageCircle
 {
@@ -33,7 +34,7 @@ namespace VillageCircle
                 );
 
             //service registration
-            // services.AddTransient<SomeRepoName>(); // create new instance every time
+            services.AddTransient<CirclesRepo>(); // create new instance every time
 
             services.AddSingleton<IConfiguration>(Configuration); // only create one instance and share it always
 

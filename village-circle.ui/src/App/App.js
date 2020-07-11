@@ -57,7 +57,6 @@ class App extends React.Component {
             <PublicRoute path="/auth" exact component={Auth} authed={authed} />
           </Switch>
         </Router>
-        <Button color='teal' className='coolButton'>Coolest Button Ever!</Button>
       </div>
     );
   }
