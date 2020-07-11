@@ -31,10 +31,13 @@ class MessageContainer extends React.Component {
       <Grid centered>
         <Grid.Column width={8}>
           <h3>Message Board:</h3>
-          <Card.Group>
-            { messages.map((message) => <Card key={message.messageId} fluid raised className="singleMessage">
-              <Card.Content description={message.messageText} /></Card>)}
-          </Card.Group>
+          {
+            (messages.length === 0) ? <h3>Currently no one has posted to this board!</h3>
+              : <Card.Group>
+                { messages.map((message) => <Card key={message.messageId} fluid raised className="singleMessage">
+                  <Card.Content description={message.messageText} /></Card>)}
+                </Card.Group>
+          }
         </Grid.Column>
       </Grid>
       </div>
