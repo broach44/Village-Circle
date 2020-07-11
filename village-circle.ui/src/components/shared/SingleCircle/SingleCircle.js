@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 
 import circleData from '../../../helpers/circlesData';
-
+import messageData from '../../../helpers/messagesData';
 
 import './SingleCircle.scss';
+import MessageContainer from '../MessageContainer/MessageContainer';
 
 class SingleCircle extends React.Component {
   state = {
     circle: {},
     circleMember: false,
+    circleMessages: [],
   }
 
   static props = {
@@ -19,13 +21,23 @@ class SingleCircle extends React.Component {
 
   componentDidMount() {
     this.getCircleData();
+    this.getMessageData();
   }
 
   getCircleData = () => {
     const { circleId } = this.props.match.params;
     circleData.getCircleById(circleId)
-      .then((result) => this.setState({ circle: result }))
+      .then((result) => {
+        this.setState({ circle: result });
+        this.getMessageData(result.boardId);
+      })
       .catch((err) => console.error('err from get single circle', err));
+  }
+
+  getMessageData = (boardId) => {
+    messageData.getAllMessages(boardId)
+      .then((messageArr) => this.setState({ circleMessages: messageArr }))
+      .catch((err) => console.error('err from get all messages', err));
   }
 
   joinCircle = (e) => {
@@ -35,13 +47,13 @@ class SingleCircle extends React.Component {
   }
 
   render() {
-    const { circle, circleMember } = this.state;
+    const { circle, circleMember, circleMessages } = this.state;
     return (
       <div className="SingleCircle">
         <h2>Circle: {circle.circleName}</h2>
         <p className="CircleDescription">{circle.circleDescription}</p>
         {
-          (circleMember) ? <div>Message Container</div> : <Button color='brown' onClick={this.joinCircle}>Click to Join Circle</Button>
+          (circleMember) ? <MessageContainer messages={circleMessages} /> : <Button color='brown' onClick={this.joinCircle}>Click to Join Circle</Button>
         }
       </div>
     );

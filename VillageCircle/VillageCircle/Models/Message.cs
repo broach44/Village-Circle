@@ -10,5 +10,6 @@ namespace VillageCircle.Models
         public int MessageId { get; set; }
         public int UserId { get; set; }
         public string MessageText { get; set; }
+        public int BoardId { get; set; }
     }
 }
