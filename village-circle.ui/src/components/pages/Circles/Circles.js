@@ -25,12 +25,11 @@ class Circles extends React.Component {
   render() {
     return (
       <div className="Circles">
-        <h2>Circles</h2>
-        <Card.Group itemsPerRow={4} centered>
+      <Card.Group itemsPerRow={4} centered stackable>
         {
           this.state.circles.map((circle) => <CircleCard key={circle.circleId} circle={circle} />)
         }
-        </Card.Group>
+      </Card.Group>
       </div>
     );
   }

@@ -16,7 +16,7 @@ class CircleCard extends React.Component {
         <Card.Content header={circle.circleName} />
         <Card.Content description={circle.circleDescription} />
         <Card.Content extra>
-          <Button floated='right' color='orange'>Check It Out</Button>
+          <Button floated='right' color='orange'>Check It Out --&gt;</Button>
         </Card.Content>
       </Card>
     );
