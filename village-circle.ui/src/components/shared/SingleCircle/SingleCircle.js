@@ -22,15 +22,16 @@ class SingleCircle extends React.Component {
 
   componentDidMount() {
     this.getCircleData();
-    this.getMessageData();
   }
 
   getCircleData = () => {
+    const { currentUserId } = this.state;
     const { circleId } = this.props.match.params;
     circleData.getCircleById(circleId)
       .then((result) => {
         this.setState({ circle: result });
         this.getMessageData(result.boardId);
+        this.verifyCircleMembership(currentUserId, circleId);
       })
       .catch((err) => console.error('err from get single circle', err));
   }
@@ -41,7 +42,12 @@ class SingleCircle extends React.Component {
       .catch((err) => console.error('err from get all messages', err));
   }
 
-  // TODO: function to verify whether user is a member of the circle
+  // The function below will return true or false to check for membership
+  verifyCircleMembership = (userId, circleId) => {
+    circleData.verifyMembership(userId, circleId)
+      .then((isMemberResult) => this.setState({ circleMember: isMemberResult }))
+      .catch((err) => console.error('error from verify circle membership', err));
+  }
 
   joinCircle = (e) => {
     e.preventDefault();

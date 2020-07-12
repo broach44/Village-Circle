@@ -21,4 +21,13 @@ const getCircleById = (circleId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getAllCircles, getCircleById };
+const verifyMembership = (userId, circleId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/circles/memberVerify/${userId}/${circleId}`)
+    .then((result) => {
+      const isMember = result.data;
+      resolve(isMember);
+    })
+    .catch();
+});
+
+export default { getAllCircles, getCircleById, verifyMembership };
