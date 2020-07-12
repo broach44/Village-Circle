@@ -12,4 +12,6 @@ const getAllMessages = (messageBoardId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getAllMessages };
+const postNewMessage = (messageObject) => axios.post(`${baseUrl}/messages`, messageObject);
+
+export default { getAllMessages, postNewMessage };

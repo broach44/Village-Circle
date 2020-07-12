@@ -8,6 +8,7 @@ import messageData from '../../../helpers/messagesData';
 import './SingleCircle.scss';
 import MessageContainer from '../MessageContainer/MessageContainer';
 import circlesData from '../../../helpers/circlesData';
+import messagesData from '../../../helpers/messagesData';
 
 class SingleCircle extends React.Component {
   state = {
@@ -50,6 +51,14 @@ class SingleCircle extends React.Component {
       .catch((err) => console.error('error from verify circle membership', err));
   }
 
+  postMessageToBoard = (messageObject) => {
+    messagesData.postNewMessage(messageObject)
+      .then(() => {
+        this.getMessageData(messageObject.boardId);
+      })
+      .catch((err) => console.error('err from post message To Board', err));
+  }
+
   joinThisCircle = (e) => {
     e.preventDefault();
     const { currentUserId, circle } = this.state;
@@ -63,13 +72,18 @@ class SingleCircle extends React.Component {
   }
 
   render() {
-    const { circle, circleMember, circleMessages } = this.state;
+    const {
+      circle,
+      circleMember,
+      circleMessages,
+      currentUserId,
+    } = this.state;
     return (
       <div className="SingleCircle">
         <h2>Circle: {circle.circleName}</h2>
         <p className="CircleDescription">{circle.circleDescription}</p>
         {
-          (circleMember) ? <MessageContainer messages={circleMessages} /> : <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
+          (circleMember) ? <MessageContainer currentUserId={currentUserId} postMessage={this.postMessageToBoard} messages={circleMessages} currentBoardId={circle.boardId} /> : <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
         }
       </div>
     );

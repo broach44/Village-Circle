@@ -17,6 +17,9 @@ class MessageContainer extends React.Component {
 
   static props = {
     messages: PropTypes.Array,
+    postMessage: PropTypes.func,
+    currentBoardId: PropTypes.int,
+    currentUserId: PropTypes.int,
   }
 
   resetInputBox = () => {
@@ -29,8 +32,16 @@ class MessageContainer extends React.Component {
 
   postEvent = (e) => {
     e.preventDefault();
-    this.resetInputBox();
+    const { currentBoardId, postMessage, currentUserId } = this.props;
+    const { currentPostMessage } = this.state;
     // TODO: Add backend function to post message then reset input box.
+    const messageObject = {
+      boardId: currentBoardId,
+      userId: currentUserId,
+      messageText: currentPostMessage,
+    };
+    postMessage(messageObject);
+    this.resetInputBox();
   }
 
   deleteMessage = (e) => {
