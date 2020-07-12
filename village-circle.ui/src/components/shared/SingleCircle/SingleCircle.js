@@ -7,6 +7,7 @@ import messageData from '../../../helpers/messagesData';
 
 import './SingleCircle.scss';
 import MessageContainer from '../MessageContainer/MessageContainer';
+import circlesData from '../../../helpers/circlesData';
 
 class SingleCircle extends React.Component {
   state = {
@@ -49,10 +50,16 @@ class SingleCircle extends React.Component {
       .catch((err) => console.error('error from verify circle membership', err));
   }
 
-  joinCircle = (e) => {
+  joinThisCircle = (e) => {
     e.preventDefault();
-    this.setState({ circleMember: true });
-    // TODO: Data call to create new member of the circle
+    const { currentUserId, circle } = this.state;
+    const memberInfo = {
+      userId: currentUserId,
+      circleId: circle.circleId,
+    };
+    circlesData.joinCircle(memberInfo)
+      .then(() => this.setState({ circleMember: true }))
+      .catch((err) => console.error('err from join circle', err));
   }
 
   render() {
@@ -62,7 +69,7 @@ class SingleCircle extends React.Component {
         <h2>Circle: {circle.circleName}</h2>
         <p className="CircleDescription">{circle.circleDescription}</p>
         {
-          (circleMember) ? <MessageContainer messages={circleMessages} /> : <Button color='brown' onClick={this.joinCircle}>Click to Join Circle</Button>
+          (circleMember) ? <MessageContainer messages={circleMessages} /> : <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
         }
       </div>
     );

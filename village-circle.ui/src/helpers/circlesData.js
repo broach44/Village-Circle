@@ -30,4 +30,11 @@ const verifyMembership = (userId, circleId) => new Promise((resolve, reject) => 
     .catch();
 });
 
-export default { getAllCircles, getCircleById, verifyMembership };
+const joinCircle = (memberInfo) => axios.post(`${baseUrl}/circles/newMember`, memberInfo);
+
+export default {
+  getAllCircles,
+  getCircleById,
+  verifyMembership,
+  joinCircle,
+};
