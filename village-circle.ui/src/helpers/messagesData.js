@@ -14,4 +14,6 @@ const getAllMessages = (messageBoardId) => new Promise((resolve, reject) => {
 
 const postNewMessage = (messageObject) => axios.post(`${baseUrl}/messages`, messageObject);
 
-export default { getAllMessages, postNewMessage };
+const deleteMessage = (messageId) => axios.delete(`${baseUrl}/messages/${messageId}`);
+
+export default { getAllMessages, postNewMessage, deleteMessage };

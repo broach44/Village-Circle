@@ -20,6 +20,7 @@ class MessageContainer extends React.Component {
     postMessage: PropTypes.func,
     currentBoardId: PropTypes.int,
     currentUserId: PropTypes.int,
+    deleteMessageFromBoard: PropTypes.func,
   }
 
   resetInputBox = () => {
@@ -47,14 +48,15 @@ class MessageContainer extends React.Component {
   deleteMessage = (e) => {
     e.preventDefault();
     // Call delete function from data file....reset message state
+    this.props.deleteMessageFromBoard(e.target.id);
   }
 
-  renderEditingButtons = (userIdOnMessage) => {
+  renderEditingButtons = (userIdOnMessage, messageId) => {
     if (userIdOnMessage === this.props.currentUserId) {
       return (
         <Button.Group basic size='small'>
           <Button icon='edit outline' />
-          <Button icon='delete' />
+          <Button icon='delete' id={messageId} onClick={this.deleteMessage} />
         </Button.Group>
       );
     } return (<></>);
@@ -84,7 +86,7 @@ class MessageContainer extends React.Component {
                 {
                   messages.map((message) => <Card key={message.messageId} fluid raised className="singleMessage">
                   <Card.Content description={message.messageText} />
-                  { this.renderEditingButtons(message.userId) }
+                  { this.renderEditingButtons(message.userId, message.messageId) }
                   </Card>)
                 }
                 </Card.Group>

@@ -57,6 +57,15 @@ class SingleCircle extends React.Component {
       .catch((err) => console.error('err from post message To Board', err));
   }
 
+  deleteMessageFromBoard = (messageId) => {
+    const { circle } = this.state;
+    messagesData.deleteMessage(messageId)
+      .then(() => {
+        this.getMessageData(circle.boardId);
+      })
+      .catch((err) => console.error('err from delete message', err));
+  }
+
   joinThisCircle = (e) => {
     e.preventDefault();
     const { currentUserId, circle } = this.state;
@@ -86,7 +95,8 @@ class SingleCircle extends React.Component {
                 currentUserId={currentUserId}
                 postMessage={this.postMessageToBoard}
                 messages={circleMessages}
-                currentBoardId={circle.boardId} />
+                currentBoardId={circle.boardId}
+                deleteMessageFromBoard={this.deleteMessageFromBoard} />
             : <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
         }
       </div>
