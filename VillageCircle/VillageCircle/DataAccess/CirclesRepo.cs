@@ -56,6 +56,21 @@ namespace VillageCircle.DataAccess
                 return true;
             }
         }
+
+        public CircleMember AddMember(CircleMember circleMemberToAdd)
+        {
+            var sql = @"
+                        insert into [CircleMember](UserId, CircleId)
+                        output inserted.*
+                        values(@UserId,@CircleId);
+                      ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { UserId = circleMemberToAdd.UserId, CircleId = circleMemberToAdd.CircleId };
+                var result = db.QueryFirstOrDefault<CircleMember>(sql, parameters);
+                return result;
+            }
+        }
     }
 
 }

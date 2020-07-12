@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VillageCircle.DataAccess;
+using VillageCircle.Models;
 
 namespace VillageCircle.Controllers
 {
@@ -46,6 +47,14 @@ namespace VillageCircle.Controllers
         {
             var isMember = _circlesRepository.VerifyMembership(userId, circleId);
             return Ok(isMember);
+        }
+        // api/circles/newMember
+        [HttpPost("newMember")]
+        public IActionResult AddNewMemberToCircle(CircleMember circleMemberToAdd)
+        {
+            var member = _circlesRepository.AddMember(circleMemberToAdd);
+            return Created("", member);
+            
         }
     }
 }
