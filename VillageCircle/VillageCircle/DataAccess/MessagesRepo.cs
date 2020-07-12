@@ -60,5 +60,20 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public Message Update(Message messageToUpdate)
+        {
+            var sql = @"
+                        update [Message]
+                        set messageText = @MessageText
+                        where MessageId = @MessageId;
+                       ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { MessageText = messageToUpdate.MessageText, MessageId = messageToUpdate.MessageId };
+                var result = db.QueryFirstOrDefault<Message>(sql, parameters);
+                return result;
+            }
+        }
     }
 }

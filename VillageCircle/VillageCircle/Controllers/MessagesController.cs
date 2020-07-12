@@ -47,5 +47,13 @@ namespace VillageCircle.Controllers
             var deletedMessage = _messagesRepository.DeleteMessage(messageId);
             return Ok("Message has been deleted successfully!");
         }
+
+        // api/messages
+        [HttpPut]
+        public IActionResult UpdateMessage(Message messageToUpdate)
+        {
+            var updatedMessage = _messagesRepository.Update(messageToUpdate);
+            return Ok("Message was updated successfully.");
+        }
     }
 }
