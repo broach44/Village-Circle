@@ -16,4 +16,11 @@ const postNewMessage = (messageObject) => axios.post(`${baseUrl}/messages`, mess
 
 const deleteMessage = (messageId) => axios.delete(`${baseUrl}/messages/${messageId}`);
 
-export default { getAllMessages, postNewMessage, deleteMessage };
+const updateMessage = (messageObject) => axios.put(`${baseUrl}/messages`, messageObject);
+
+export default {
+  getAllMessages,
+  postNewMessage,
+  deleteMessage,
+  updateMessage,
+};

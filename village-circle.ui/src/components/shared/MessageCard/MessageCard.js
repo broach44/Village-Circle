@@ -13,6 +13,7 @@ class MessageCard extends React.Component {
   static props = {
     message: PropTypes.Object,
     currentUserId: PropTypes.int,
+    updateUserMessage: PropTypes.func,
   }
 
   renderEditingButtons = (userIdOnMessage, messageId) => {
@@ -43,7 +44,15 @@ class MessageCard extends React.Component {
 
   saveEvent = (e) => {
     e.preventDefault();
+    const { textToEdit } = this.state;
+    const { message, updateUserMessage } = this.props;
     // Add link to save update and refresh messages.
+    const updatedMessageObject = {
+      messageId: message.messageId,
+      messageText: textToEdit,
+    };
+    updateUserMessage(updatedMessageObject);
+    this.setState({ editMode: false });
   }
 
   render() {

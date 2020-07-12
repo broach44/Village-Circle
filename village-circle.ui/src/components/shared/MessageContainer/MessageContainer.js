@@ -23,6 +23,7 @@ class MessageContainer extends React.Component {
     currentBoardId: PropTypes.int,
     currentUserId: PropTypes.int,
     deleteMessageFromBoard: PropTypes.func,
+    updateUserMessage: PropTypes.func,
   }
 
   resetInputBox = () => {
@@ -54,7 +55,7 @@ class MessageContainer extends React.Component {
   }
 
   render() {
-    const { messages, currentUserId } = this.props;
+    const { messages, currentUserId, updateUserMessage } = this.props;
     const { currentPostMessage } = this.state;
     return (
       <div>
@@ -75,7 +76,7 @@ class MessageContainer extends React.Component {
             (messages.length === 0) ? <h3>Currently no one has posted to this board!</h3>
               : <Card.Group>
                 {
-                  messages.map((message) => <MessageCard currentUserId={currentUserId} message={message} />)
+                  messages.map((message) => <MessageCard currentUserId={currentUserId} message={message} updateUserMessage={updateUserMessage} />)
                 }
                 </Card.Group>
           }
