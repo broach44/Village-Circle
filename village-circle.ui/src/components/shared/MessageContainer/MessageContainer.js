@@ -49,9 +49,20 @@ class MessageContainer extends React.Component {
     // Call delete function from data file....reset message state
   }
 
+  renderEditingButtons = (userIdOnMessage) => {
+    if (userIdOnMessage === this.props.currentUserId) {
+      return (
+        <Button.Group basic size='small'>
+          <Button icon='edit outline' />
+          <Button icon='delete' />
+        </Button.Group>
+      );
+    } return (<></>);
+  }
+
   render() {
     const { messages } = this.props;
-    const { currentPostMessage } = this.state;
+    const { currentPostMessage, currentUserId } = this.state;
     return (
       <div>
       <Form onSubmit={this.postEvent}>
@@ -70,13 +81,12 @@ class MessageContainer extends React.Component {
           {
             (messages.length === 0) ? <h3>Currently no one has posted to this board!</h3>
               : <Card.Group>
-                { messages.map((message) => <Card key={message.messageId} fluid raised className="singleMessage">
+                {
+                  messages.map((message) => <Card key={message.messageId} fluid raised className="singleMessage">
                   <Card.Content description={message.messageText} />
-                  <Button.Group basic size='small'>
-                    <Button icon='edit outline' />
-                    <Button icon='delete' />
-                  </Button.Group>
-                  </Card>)}
+                  { this.renderEditingButtons(message.userId) }
+                  </Card>)
+                }
                 </Card.Group>
           }
         </Grid.Column>
