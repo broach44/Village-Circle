@@ -39,5 +39,13 @@ namespace VillageCircle.Controllers
             }
             return NotFound("This circle does not exist");
         }
+
+        // api/circles/memberVerify/{userId}/{circleId}
+        [HttpGet("memberVerify/{userId}/{circleId}")]
+        public IActionResult VerifyUserCircleMembership(int userId, int circleId)
+        {
+            var isMember = _circlesRepository.VerifyMembership(userId, circleId);
+            return Ok(isMember);
+        }
     }
 }

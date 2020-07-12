@@ -37,6 +37,25 @@ namespace VillageCircle.DataAccess
                 return db.QueryFirstOrDefault<Circle>(sql, parameters);
             }
         }
+
+        public bool VerifyMembership(int userId, int circleId)
+        {
+            var sql = @"
+                        select *
+                        from [CircleMember]
+                        where UserId = @UserId and CircleId = @CircleId;
+                      ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { UserId = userId, CircleId = circleId };
+                var member = db.QueryFirstOrDefault<CircleMember>(sql, parameters);
+                if (member == null)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
     }
 
 }
