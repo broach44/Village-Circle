@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'semantic-ui-react';
 
-import circleData from '../../../helpers/circlesData';
-import messageData from '../../../helpers/messagesData';
-
-import './SingleCircle.scss';
 import MessageContainer from '../MessageContainer/MessageContainer';
 import circlesData from '../../../helpers/circlesData';
 import messagesData from '../../../helpers/messagesData';
+
+import './SingleCircle.scss';
 
 class SingleCircle extends React.Component {
   state = {
@@ -29,7 +27,7 @@ class SingleCircle extends React.Component {
   getCircleData = () => {
     const { currentUserId } = this.state;
     const { circleId } = this.props.match.params;
-    circleData.getCircleById(circleId)
+    circlesData.getCircleById(circleId)
       .then((result) => {
         this.setState({ circle: result });
         this.getMessageData(result.boardId);
@@ -39,14 +37,14 @@ class SingleCircle extends React.Component {
   }
 
   getMessageData = (boardId) => {
-    messageData.getAllMessages(boardId)
+    messagesData.getAllMessages(boardId)
       .then((messageArr) => this.setState({ circleMessages: messageArr }))
       .catch((err) => console.error('err from get all messages', err));
   }
 
   // The function below will return true or false to check for membership
   verifyCircleMembership = (userId, circleId) => {
-    circleData.verifyMembership(userId, circleId)
+    circlesData.verifyMembership(userId, circleId)
       .then((isMemberResult) => this.setState({ circleMember: isMemberResult }))
       .catch((err) => console.error('error from verify circle membership', err));
   }
@@ -83,7 +81,13 @@ class SingleCircle extends React.Component {
         <h2>Circle: {circle.circleName}</h2>
         <p className="CircleDescription">{circle.circleDescription}</p>
         {
-          (circleMember) ? <MessageContainer currentUserId={currentUserId} postMessage={this.postMessageToBoard} messages={circleMessages} currentBoardId={circle.boardId} /> : <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
+          (circleMember)
+            ? <MessageContainer
+                currentUserId={currentUserId}
+                postMessage={this.postMessageToBoard}
+                messages={circleMessages}
+                currentBoardId={circle.boardId} />
+            : <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
         }
       </div>
     );
