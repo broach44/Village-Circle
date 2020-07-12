@@ -7,6 +7,8 @@ import {
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
+import MessageCard from '../MessageCard/MessageCard';
+
 import './MessageContainer.scss';
 
 class MessageContainer extends React.Component {
@@ -51,19 +53,8 @@ class MessageContainer extends React.Component {
     this.props.deleteMessageFromBoard(e.target.id);
   }
 
-  renderEditingButtons = (userIdOnMessage, messageId) => {
-    if (userIdOnMessage === this.props.currentUserId) {
-      return (
-        <Button.Group basic size='small'>
-          <Button icon='edit outline' />
-          <Button icon='delete' id={messageId} onClick={this.deleteMessage} />
-        </Button.Group>
-      );
-    } return (<></>);
-  }
-
   render() {
-    const { messages } = this.props;
+    const { messages, currentUserId } = this.props;
     const { currentPostMessage } = this.state;
     return (
       <div>
@@ -84,10 +75,7 @@ class MessageContainer extends React.Component {
             (messages.length === 0) ? <h3>Currently no one has posted to this board!</h3>
               : <Card.Group>
                 {
-                  messages.map((message) => <Card key={message.messageId} fluid raised className="singleMessage">
-                  <Card.Content description={message.messageText} />
-                  { this.renderEditingButtons(message.userId, message.messageId) }
-                  </Card>)
+                  messages.map((message) => <MessageCard currentUserId={currentUserId} message={message} />)
                 }
                 </Card.Group>
           }
