@@ -9,6 +9,7 @@ import './Circles.scss';
 class Circles extends React.Component {
   state = {
     circles: [],
+    currentUserId: 1,
   }
 
   getCirclesData = () => {

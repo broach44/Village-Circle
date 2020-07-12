@@ -37,6 +37,7 @@ connection.setupFunc();
 class App extends React.Component {
   state = {
     authed: false,
+    userId: 1,
   }
 
   render() {

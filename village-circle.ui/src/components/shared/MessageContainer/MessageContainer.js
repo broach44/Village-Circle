@@ -33,6 +33,11 @@ class MessageContainer extends React.Component {
     // TODO: Add backend function to post message then reset input box.
   }
 
+  deleteMessage = (e) => {
+    e.preventDefault();
+    // Call delete function from data file....reset message state
+  }
+
   render() {
     const { messages } = this.props;
     const { currentPostMessage } = this.state;

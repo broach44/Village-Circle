@@ -13,6 +13,7 @@ class SingleCircle extends React.Component {
     circle: {},
     circleMember: false,
     circleMessages: [],
+    currentUserId: 1,
   }
 
   static props = {
@@ -39,6 +40,8 @@ class SingleCircle extends React.Component {
       .then((messageArr) => this.setState({ circleMessages: messageArr }))
       .catch((err) => console.error('err from get all messages', err));
   }
+
+  // TODO: function to verify whether user is a member of the circle
 
   joinCircle = (e) => {
     e.preventDefault();
