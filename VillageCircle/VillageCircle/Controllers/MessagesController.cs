@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VillageCircle.DataAccess;
+using VillageCircle.Models;
 
 namespace VillageCircle.Controllers
 {
@@ -29,6 +30,14 @@ namespace VillageCircle.Controllers
                 return NotFound("No Messages found with that board id.");
             }
             return Ok(messages);
+        }
+
+        // api/messages
+        [HttpPost]
+        public IActionResult CreateNewMessage(Message newMessageToAdd)
+        {
+            var message = _messagesRepository.AddMessage(newMessageToAdd);
+            return Created("", message);
         }
     }
 }

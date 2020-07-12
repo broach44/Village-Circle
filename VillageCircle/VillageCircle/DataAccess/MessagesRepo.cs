@@ -27,5 +27,25 @@ namespace VillageCircle.DataAccess
                 return messages;
             }
         }
+
+        public Message AddMessage(Message messageToAdd)
+        {
+            var sql = @"
+                        insert into [Message](BoardId, UserId, MessageText)
+                        output inserted.*
+                        values(@BoardId, @UserId, @MessageText);
+                      ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new
+                {
+                    BoardId = messageToAdd.BoardId,
+                    UserId = messageToAdd.UserId,
+                    MessageText = messageToAdd.MessageText
+                };
+                var result = db.QueryFirstOrDefault<Message>(sql, parameters);
+                return result;
+            }
+        }
     }
 }
