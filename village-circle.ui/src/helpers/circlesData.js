@@ -12,4 +12,29 @@ const getAllCircles = () => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getAllCircles };
+const getCircleById = (circleId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/circles/${circleId}`)
+    .then((result) => {
+      const circle = result.data;
+      resolve(circle);
+    })
+    .catch((err) => reject(err));
+});
+
+const verifyMembership = (userId, circleId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/circles/memberVerify/${userId}/${circleId}`)
+    .then((result) => {
+      const isMember = result.data;
+      resolve(isMember);
+    })
+    .catch();
+});
+
+const joinCircle = (memberInfo) => axios.post(`${baseUrl}/circles/newMember`, memberInfo);
+
+export default {
+  getAllCircles,
+  getCircleById,
+  verifyMembership,
+  joinCircle,
+};
