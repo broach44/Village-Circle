@@ -47,5 +47,18 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public Message DeleteMessage(int messageId)
+        {
+            var sql = @"DELETE from [Message]
+                        WHERE MessageId = @MessageId";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { MessageId = messageId };
+                var result = db.QueryFirstOrDefault<Message>(sql, parameters);
+                return result;
+            }
+        }
     }
 }

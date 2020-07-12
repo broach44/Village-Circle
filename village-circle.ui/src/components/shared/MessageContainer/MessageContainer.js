@@ -62,7 +62,7 @@ class MessageContainer extends React.Component {
 
   render() {
     const { messages } = this.props;
-    const { currentPostMessage, currentUserId } = this.state;
+    const { currentPostMessage } = this.state;
     return (
       <div>
       <Form onSubmit={this.postEvent}>
