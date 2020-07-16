@@ -5,6 +5,7 @@ import {
   Image,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import LoginModal from '../LoginModal/LoginModal';
 
 class MainNavbar extends Component {
   state = { activeItem: 'home' }
@@ -44,7 +45,8 @@ class MainNavbar extends Component {
           />
           <Menu.Menu position='right'>
             <Menu.Item>
-              <Button>Login</Button>
+              <LoginModal />
+              {/* <Button>Profile</Button> */}
             </Menu.Item>
           </Menu.Menu>
         </Menu>

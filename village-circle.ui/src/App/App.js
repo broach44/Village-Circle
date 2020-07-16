@@ -6,6 +6,8 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
+import firebase from 'firebase';
+import 'firebase/auth';
 
 import Auth from '../components/pages/Auth/Auth';
 import MainNavbar from '../components/shared/MainNavbar/MainNavbar';
@@ -21,6 +23,7 @@ import Profile from '../components/pages/Profile/Profile';
 import connection from '../helpers/connection';
 
 import './App.scss';
+import authData from '../helpers/authData';
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === false ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
@@ -32,13 +35,28 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   return <Route {...rest} render={(props) => routeChecker(props)} />;
 };
 
-connection.setupFunc();
+connection();
 
 class App extends React.Component {
   state = {
     authed: false,
     userId: 1,
+    user: null,
   }
+
+  // componentDidMount() {
+  //   this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+  //     if (user) {
+  //       this.setState({ authed: true });
+  //     } else {
+  //       this.setState({ authed: false });
+  //     }
+  //   });
+  // }
+
+  // componentWillUnmount() {
+  //   this.removeListener();
+  // }
 
   render() {
     const { authed } = this.state;
