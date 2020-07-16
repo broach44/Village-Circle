@@ -1,3 +1,13 @@
 {
-  "databaseURL": " https://localhost:44391/api"
+  "databaseURL": " https://localhost:44391/api",
+  "firebaseKeys": {
+    "apiKey": "AIzaSyBm6qy8xtmdfjnICgk15vz1AL5_wUNL3Wo",
+    "authDomain": "village-circle.firebaseapp.com",
+    "databaseURL": "https://village-circle.firebaseio.com",
+    "projectId": "village-circle",
+    "storageBucket": "village-circle.appspot.com",
+    "messagingSenderId": "196389996085",
+    "appId": "1:196389996085:web:9631bd4e75a2bcf125137c",
+    "measurementId": "G-0RXKCY37NK"
+  }
 }
