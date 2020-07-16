@@ -5,6 +5,7 @@ import {
   Form,
   Input,
 } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 import authData from '../../../helpers/authData';
 
@@ -13,6 +14,10 @@ class LoginModal extends Component {
     open: false,
     email: '',
     password: '',
+  }
+
+  static props = {
+    toggleAuthState: PropTypes.func,
   }
 
   show = (size) => () => this.setState({ size, open: true })
@@ -38,6 +43,7 @@ class LoginModal extends Component {
     };
     authData.loginUser(user);
     this.close();
+    this.props.toggleAuthState();
   }
 
   render() {
