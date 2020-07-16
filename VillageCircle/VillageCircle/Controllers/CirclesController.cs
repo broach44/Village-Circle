@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VillageCircle.DataAccess;
 using VillageCircle.Models;
@@ -17,7 +18,9 @@ namespace VillageCircle.Controllers
         {
             _circlesRepository = circlesRepository;
         }
+
         // api/Circles
+        [HttpGet]
         public IActionResult GetAllCircles()
         {
             var circles = _circlesRepository.GetCircles();
@@ -48,6 +51,8 @@ namespace VillageCircle.Controllers
             var isMember = _circlesRepository.VerifyMembership(userId, circleId);
             return Ok(isMember);
         }
+
+        [Authorize]
         // api/circles/newMember
         [HttpPost("newMember")]
         public IActionResult AddNewMemberToCircle(CircleMember circleMemberToAdd)
