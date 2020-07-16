@@ -52,9 +52,9 @@ namespace VillageCircle.Controllers
             return Ok(isMember);
         }
 
-        [Authorize]
         // api/circles/newMember
         [HttpPost("newMember")]
+        [Authorize]
         public IActionResult AddNewMemberToCircle(CircleMember circleMemberToAdd)
         {
             var member = _circlesRepository.AddMember(circleMemberToAdd);

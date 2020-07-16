@@ -48,7 +48,7 @@ namespace VillageCircle
                         ValidateIssuer = true,
                         ValidIssuer = authSettings["Issue"],
                         ValidateAudience = true,
-                        ValidAudience = authSettings["Audence"],
+                        ValidAudience = authSettings["Audience"],
                         ValidateLifetime = true
                     };
                 }
@@ -66,6 +66,7 @@ namespace VillageCircle
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
 
@@ -73,7 +74,6 @@ namespace VillageCircle
 
             app.UseCors("ItsAllGood");
 
-            app.UseAuthentication();
 
             app.UseAuthorization();
 
