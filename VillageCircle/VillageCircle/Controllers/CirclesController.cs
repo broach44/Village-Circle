@@ -46,6 +46,7 @@ namespace VillageCircle.Controllers
 
         // api/circles/memberVerify/{userId}/{circleId}
         [HttpGet("memberVerify/{userId}/{circleId}")]
+        [Authorize]
         public IActionResult VerifyUserCircleMembership(int userId, int circleId)
         {
             var isMember = _circlesRepository.VerifyMembership(userId, circleId);
