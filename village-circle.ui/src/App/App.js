@@ -23,11 +23,6 @@ import connection from '../helpers/connection';
 
 import './App.scss';
 
-const PublicRoute = ({ component: Component, authed, ...rest }) => {
-  const routeChecker = (props) => (authed === false ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
-  return <Route {...rest} render={(props) => routeChecker(props)} />;
-};
-
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/auth', state: { from: props.location } }} />);
   return <Route {...rest} render={(props) => routeChecker(props)} />;
@@ -38,42 +33,38 @@ connection();
 class App extends React.Component {
   state = {
     authed: false,
-    // userId: 1,
-    // user: null,
   }
 
-  // getUserData = () => {
-  //   authData.getUid()
-  //     .then((uid) => this.setUser(uid))
-  //     .catch();
-  // }
+  componentDidMount() {
+    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ authed: true });
+      } else {
+        this.setState({ authed: false });
+      }
+    });
+  }
 
-  // setUser = (uid) => {
-  //   usersData.getSingleUserData(uid)
-  //     .then((currentUser) => this.setState({ user: currentUser }))
-  //     .catch();
-  // }
-
-  // toggleAuthState = () => {
-  //   this.setState({ authed: true });
-  // }
+  componentWillUnmount() {
+    this.removeListener();
+  }
 
   render() {
     const { authed } = this.state;
     return (
       <div className="App">
        <Router>
-          <MainNavbar toggleAuthState={this.toggleAuthState} authed={authed} />
+          <MainNavbar authed={authed} />
           <Switch>
             <PrivateRoute path="/profile" exact component={Profile} authed={authed} />
-            <PublicRoute path="/circle/:circleId" exact component={Circle} authed={authed} />
-            <PublicRoute path="/guild/:guildId" exact component={Guild} authed={authed} />
-            <PublicRoute path="/gatheringHall/:gatheringHallId" exact component={GatheringHall} authed={authed} />
-            <PublicRoute path="/circles" exact component={Circles} authed={authed} />
-            <PublicRoute path="/guilds" exact component={Guilds} authed={authed} />
-            <PublicRoute path="/gatheringHalls" exact component={GatheringHalls} authed={authed} />
-            <PublicRoute path="/" exact component={Home} authed={authed} />
-            <PublicRoute path="/auth" exact component={Auth} authed={authed} />
+            <Route path="/circle/:circleId" exact component={Circle} authed={authed} />
+            <Route path="/guild/:guildId" exact component={Guild} authed={authed} />
+            <Route path="/gatheringHall/:gatheringHallId" exact component={GatheringHall} authed={authed} />
+            <Route path="/circles" exact component={Circles} authed={authed} />
+            <Route path="/guilds" exact component={Guilds} authed={authed} />
+            <Route path="/gatheringHalls" exact component={GatheringHalls} authed={authed} />
+            <Route path="/" exact component={Home} authed={authed} />
+            <Route path="/auth" exact component={Auth} authed={authed} />
           </Switch>
         </Router>
       </div>

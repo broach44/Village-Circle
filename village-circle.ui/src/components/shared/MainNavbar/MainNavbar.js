@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import {
   Menu,
-  Button,
   Image,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import LoginModal from '../LoginModal/LoginModal';
 
 class MainNavbar extends Component {
   state = { activeItem: 'home' }
 
-  static props = {
-    toggleAuthState: PropTypes.func,
-  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -50,7 +45,7 @@ class MainNavbar extends Component {
           />
           <Menu.Menu position='right'>
             <Menu.Item>
-              <LoginModal toggleAuthState={this.props.toggleAuthState} />
+              <LoginModal />
               {/* <Button>Profile</Button> */}
             </Menu.Item>
           </Menu.Menu>

@@ -43,7 +43,7 @@ class LoginModal extends Component {
     };
     authData.loginUser(user);
     this.close();
-    this.props.toggleAuthState();
+
   }
 
   render() {
