@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Card } from 'semantic-ui-react';
 import CircleCard from '../../shared/CircleCard/CircleCard';
@@ -10,6 +11,10 @@ class Circles extends React.Component {
   state = {
     circles: [],
     currentUserId: 1,
+  }
+
+  static props = {
+    authed: PropTypes.bool,
   }
 
   getCirclesData = () => {
@@ -27,7 +32,7 @@ class Circles extends React.Component {
       <div className="Circles">
       <Card.Group itemsPerRow={4} centered stackable>
         {
-          this.state.circles.map((circle) => <CircleCard key={circle.circleId} circle={circle} />)
+          this.state.circles.map((circle) => <CircleCard key={circle.circleId} circle={circle} authed={this.props.authed} />)
         }
       </Card.Group>
       </div>

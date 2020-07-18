@@ -48,14 +48,8 @@ class MessageContainer extends React.Component {
     this.resetInputBox();
   }
 
-  deleteMessage = (e) => {
-    e.preventDefault();
-    // Call delete function from data file....reset message state
-    this.props.deleteMessageFromBoard(e.target.id);
-  }
-
   render() {
-    const { messages, currentUserId, updateUserMessage } = this.props;
+    const { messages, currentUserId, updateUserMessage, deleteMessageFromBoard } = this.props;
     const { currentPostMessage } = this.state;
     return (
       <div>
@@ -76,7 +70,7 @@ class MessageContainer extends React.Component {
             (messages.length === 0) ? <h3>Currently no one has posted to this board!</h3>
               : <Card.Group>
                 {
-                  messages.map((message) => <MessageCard currentUserId={currentUserId} message={message} updateUserMessage={updateUserMessage} />)
+                  messages.map((message) => <MessageCard key={message.messageId} currentUserId={currentUserId} message={message} updateUserMessage={updateUserMessage} deleteMessageFromBoard={deleteMessageFromBoard} />)
                 }
                 </Card.Group>
           }

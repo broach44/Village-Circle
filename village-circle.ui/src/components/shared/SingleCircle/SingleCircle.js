@@ -5,6 +5,8 @@ import { Button } from 'semantic-ui-react';
 import MessageContainer from '../MessageContainer/MessageContainer';
 import circlesData from '../../../helpers/circlesData';
 import messagesData from '../../../helpers/messagesData';
+import userData from '../../../helpers/usersData';
+import authData from '../../../helpers/authData';
 
 import './SingleCircle.scss';
 
@@ -13,25 +15,37 @@ class SingleCircle extends React.Component {
     circle: {},
     circleMember: false,
     circleMessages: [],
-    currentUserId: 1,
+    currentUser: {},
   }
 
   static props = {
-    authed: PropTypes.bool,
+    authed: PropTypes.Boolean,
+    uid: PropTypes.string,
   }
 
   componentDidMount() {
     this.getCircleData();
   }
 
+  getUser = (uid, circleId) => {
+    userData.getSingleUserData(uid)
+      .then((user) => {
+        this.setState({ currentUser: user });
+        this.verifyCircleMembership(user.userId, circleId);
+      })
+      .catch((err) => console.error('err from get user', err));
+  }
+
   getCircleData = () => {
-    const { currentUserId } = this.state;
     const { circleId } = this.props.match.params;
+    const { authed, uid } = this.props;
     circlesData.getCircleById(circleId)
       .then((result) => {
         this.setState({ circle: result });
-        this.getMessageData(result.boardId);
-        this.verifyCircleMembership(currentUserId, circleId);
+        if (authed) {
+          this.getMessageData(result.boardId);
+          this.getUser(uid, circleId);
+        }
       })
       .catch((err) => console.error('err from get single circle', err));
   }
@@ -77,9 +91,9 @@ class SingleCircle extends React.Component {
 
   joinThisCircle = (e) => {
     e.preventDefault();
-    const { currentUserId, circle } = this.state;
+    const { currentUser, circle } = this.state;
     const memberInfo = {
-      userId: currentUserId,
+      userId: currentUser.userId,
       circleId: circle.circleId,
     };
     circlesData.joinCircle(memberInfo)
@@ -92,7 +106,7 @@ class SingleCircle extends React.Component {
       circle,
       circleMember,
       circleMessages,
-      currentUserId,
+      currentUser,
     } = this.state;
     return (
       <div className="SingleCircle">
@@ -101,7 +115,7 @@ class SingleCircle extends React.Component {
         {
           (circleMember)
             ? <MessageContainer
-                currentUserId={currentUserId}
+                currentUserId={currentUser.userId}
                 postMessage={this.postMessageToBoard}
                 messages={circleMessages}
                 currentBoardId={circle.boardId}

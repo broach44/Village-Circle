@@ -1,5 +1,5 @@
 {
-  "databaseURL": " https://localhost:44391/api",
+  "databaseURL": "https://localhost:44391/api",
   "firebaseKeys": {
     "apiKey": "AIzaSyBm6qy8xtmdfjnICgk15vz1AL5_wUNL3Wo",
     "authDomain": "village-circle.firebaseapp.com",

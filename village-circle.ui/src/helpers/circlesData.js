@@ -27,7 +27,7 @@ const verifyMembership = (userId, circleId) => new Promise((resolve, reject) => 
       const isMember = result.data;
       resolve(isMember);
     })
-    .catch();
+    .catch((error) => reject(error));
 });
 
 const joinCircle = (memberInfo) => axios.post(`${baseUrl}/circles/newMember`, memberInfo);

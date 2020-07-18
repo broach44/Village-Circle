@@ -16,10 +16,6 @@ class LoginModal extends Component {
     password: '',
   }
 
-  static props = {
-    toggleAuthState: PropTypes.func,
-  }
-
   show = (size) => () => this.setState({ size, open: true })
 
   close = () => this.setState({ open: false })
@@ -43,7 +39,6 @@ class LoginModal extends Component {
     };
     authData.loginUser(user);
     this.close();
-
   }
 
   render() {
