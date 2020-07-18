@@ -33,6 +33,7 @@ namespace VillageCircle
             //service registration
             services.AddTransient<CirclesRepo>(); // create new instance every time
             services.AddTransient<MessagesRepo>();
+            services.AddTransient<UsersRepo>();
 
             services.AddSingleton<IConfiguration>(Configuration); // only create one instance and share it always
 
@@ -57,6 +58,7 @@ namespace VillageCircle
                 options.AddPolicy("ItsAllGood",
                     builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
                 );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
