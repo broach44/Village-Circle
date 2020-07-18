@@ -122,17 +122,13 @@ class SingleCircle extends React.Component {
         )
       } return (
         <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
-      )
-    } else return ( <p>You should login if you want to join this board</p> )
+      );
+    } return (<p>You should login if you want to join this board</p>);
   }
-
 
   render() {
     const {
       circle,
-      circleMember,
-      circleMessages,
-      currentUser,
     } = this.state;
     return (
       <div className="SingleCircle">
