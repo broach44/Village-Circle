@@ -21,7 +21,7 @@ namespace VillageCircle.Controllers
 
         // api/users/{uid}
         [HttpGet("{uid}")]
-        //[Authorize]
+        [Authorize]
         public IActionResult GetSingleUserByUid(string uid)
         {
             var user = _usersRepository.GetSingleUser(uid);
