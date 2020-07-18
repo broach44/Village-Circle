@@ -28,6 +28,22 @@ namespace VillageCircle.DataAccess
             }
         }
 
+        public IEnumerable<MessageProfileView> GetMessagesByUser(int userId)
+        {
+            var sql = @"
+                        select [messageBoard].boardName
+                        from [message]
+                        join [MessageBoard] on [MessageBoard].messageBoardId = [Message].boardId
+                        where [message].userId = @UserId
+                      ";
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { UserId = userId };
+                var result = db.Query<MessageProfileView>(sql, parameters);
+                return result;
+            }
+        }
+
         public Message AddMessage(Message messageToAdd)
         {
             var sql = @"
