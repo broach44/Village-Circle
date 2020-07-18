@@ -61,7 +61,7 @@ class Profile extends React.Component {
           <Grid.Column>
             <Header>Activity</Header>
             {
-              userPosts.map((post) => <p>Posted to {post.boardName} Board on 1/1/1111 : Earned 99 points!</p>)
+              userPosts.map((post) => <p>Posted to {post.boardName} Board on {post.postDateTime} : Earned 99 points!</p>)
             }
           </Grid.Column>
         </Grid>
