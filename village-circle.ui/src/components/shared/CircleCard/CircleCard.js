@@ -8,6 +8,7 @@ import './CircleCard.scss';
 class CircleCard extends React.Component {
   static props = {
     circle: PropTypes.object,
+    authed: PropTypes.Boolean,
   }
 
   render() {

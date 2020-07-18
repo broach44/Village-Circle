@@ -2,19 +2,27 @@ import React, { Component } from 'react';
 import {
   Menu,
   Image,
+  Button,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import LoginModal from '../LoginModal/LoginModal';
 
 class MainNavbar extends Component {
-  state = { activeItem: 'home' }
+  state = {
+    activeItem: 'home',
+  }
 
+  static props = {
+    authed: PropTypes.bool,
+    logoutUser: PropTypes.func,
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     const { activeItem } = this.state;
-
+    const { authed } = this.props;
     return (
       <div>
         <Menu pointing>
@@ -44,10 +52,16 @@ class MainNavbar extends Component {
             to="/gatheringhalls"
           />
           <Menu.Menu position='right'>
-            <Menu.Item>
-              <LoginModal />
-              {/* <Button>Profile</Button> */}
-            </Menu.Item>
+              {
+                (authed) ? <><Menu.Item as={ Link }
+                name='profile'
+                active={activeItem === 'profile'}
+                onClick={this.handleItemClick}
+                to="/profile"
+              /><Menu.Item><Button onClick={this.props.logoutUser}>Logout</Button>
+                </Menu.Item></>
+                  : <Menu.Item><LoginModal /></Menu.Item>
+              }
           </Menu.Menu>
         </Menu>
       </div>

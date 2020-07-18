@@ -1,5 +1,10 @@
 import React from 'react';
-import { Card, Input, Button, Icon } from 'semantic-ui-react';
+import {
+  Card,
+  Input,
+  Button,
+  Icon,
+} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import './MessageCard.scss';
@@ -14,6 +19,7 @@ class MessageCard extends React.Component {
     message: PropTypes.Object,
     currentUserId: PropTypes.int,
     updateUserMessage: PropTypes.func,
+    deleteMessageFromBoard: PropTypes.func,
   }
 
   renderEditingButtons = (userIdOnMessage, messageId) => {
@@ -25,7 +31,7 @@ class MessageCard extends React.Component {
             (!editMode) ? <Button icon='edit outline' onClick={this.beginEditingMessage} />
               : <Button icon='save outline' />
           }
-          <Button icon='delete' id={messageId} onClick={this.deleteMessage} />
+          <Button icon='delete' id={messageId} onClick={this.deleteEvent} />
         </Button.Group>
       );
     } return (<></>);
@@ -53,6 +59,12 @@ class MessageCard extends React.Component {
     };
     updateUserMessage(updatedMessageObject);
     this.setState({ editMode: false });
+  }
+
+  deleteEvent = (e) => {
+    e.preventDefault();
+    const { message, deleteMessageFromBoard } = this.props;
+    deleteMessageFromBoard(message.messageId);
   }
 
   render() {
