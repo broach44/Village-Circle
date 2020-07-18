@@ -13,6 +13,7 @@ import usersData from '../../../helpers/usersData';
 class Profile extends React.Component {
   state = {
     user: {},
+    userPosts: [],
   }
 
   componentDidMount() {
@@ -21,12 +22,21 @@ class Profile extends React.Component {
 
   getUserData = () => {
     usersData.getSingleUserData(this.props.uid)
-      .then((userData) => this.setState({ user: userData }))
+      .then((userData) => {
+        this.setState({ user: userData });
+        this.getPostInfo(userData.userId);
+      })
       .catch((err) => console.error('err from getuser', err));
   }
 
+  getPostInfo = (userId) => {
+    usersData.getUserPosts(userId)
+      .then((posts) => this.setState({ userPosts: posts }))
+      .catch((err) => console.error('err from get post info', err));
+  }
+
   render() {
-    const { user } = this.state;
+    const { user, userPosts } = this.state;
     return (
       <Container fluid textAlign='left' className="Profile">
         <Header>My Profile</Header>
@@ -50,11 +60,9 @@ class Profile extends React.Component {
           </Grid.Column>
           <Grid.Column>
             <Header>Activity</Header>
-            <p>Posted to Some Location Message Board on 1/1/1111 : Earned 99 points!</p>
-            <p>Posted to Some Location Message Board on 1/1/1111 : Earned 99 points!</p>
-            <p>Posted to Some Location Message Board on 1/1/1111 : Earned 99 points!</p>
-            <p>Posted to Some Location Message Board on 1/1/1111 : Earned 99 points!</p>
-            <p>Posted to Some Location Message Board on 1/1/1111 : Earned 99 points!</p>
+            {
+              userPosts.map((post) => <p>Posted to {post.boardName} Board on 1/1/1111 : Earned 99 points!</p>)
+            }
           </Grid.Column>
         </Grid>
       </Container>
