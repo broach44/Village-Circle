@@ -12,4 +12,13 @@ const getSingleUserData = (uid) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getSingleUserData };
+const getUserPosts = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/messages/userPosts/${userId}`)
+    .then((result) => {
+      const postInfo = result.data;
+      resolve(postInfo);
+    })
+    .catch((err) => reject(err));
+});
+
+export default { getSingleUserData, getUserPosts };

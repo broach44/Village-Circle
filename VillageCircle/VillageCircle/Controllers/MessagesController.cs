@@ -11,7 +11,6 @@ using VillageCircle.Models;
 namespace VillageCircle.Controllers
 {
     [Route("api/messages")]
-    [Authorize]
     [ApiController]
     public class MessagesController : ControllerBase
     {
@@ -30,6 +29,19 @@ namespace VillageCircle.Controllers
             if (isEmpty)
             {
                 return NotFound("No Messages found with that board id.");
+            }
+            return Ok(messages);
+        }
+
+        // api/messages/userPosts/{userId}
+        [HttpGet("userPosts/{userId}")]
+        public IActionResult GetMessagesByUserId(int userId)
+        {
+            var messages = _messagesRepository.GetMessagesByUser(userId);
+            var isEmpty = !messages.Any();
+            if (isEmpty)
+            {
+                return Ok("This user has not posted any messages");
             }
             return Ok(messages);
         }

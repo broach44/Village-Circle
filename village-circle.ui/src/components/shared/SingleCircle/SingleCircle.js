@@ -6,7 +6,6 @@ import MessageContainer from '../MessageContainer/MessageContainer';
 import circlesData from '../../../helpers/circlesData';
 import messagesData from '../../../helpers/messagesData';
 import userData from '../../../helpers/usersData';
-import authData from '../../../helpers/authData';
 
 import './SingleCircle.scss';
 
@@ -110,7 +109,7 @@ class SingleCircle extends React.Component {
       currentUser,
     } = this.state;
     if (authed) {
-      if (circleMember) {
+      if (circleMember && circle.boardId !== 0) {
         return (
           <MessageContainer
                 currentUserId={currentUser.userId}
@@ -119,20 +118,16 @@ class SingleCircle extends React.Component {
                 currentBoardId={circle.boardId}
                 deleteMessageFromBoard={this.deleteMessageFromBoard}
                 updateUserMessage={this.updateUserMessage} />
-        )
+        );
       } return (
         <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
-      )
-    } else return ( <p>You should login if you want to join this board</p> )
+      );
+    } return (<p>You should login if you want to join this board</p>);
   }
-
 
   render() {
     const {
       circle,
-      circleMember,
-      circleMessages,
-      currentUser,
     } = this.state;
     return (
       <div className="SingleCircle">

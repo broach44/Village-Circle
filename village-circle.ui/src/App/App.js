@@ -64,7 +64,7 @@ class App extends React.Component {
        <Router>
           <MainNavbar authed={authed} logoutUser={this.logoutUser} />
           <Switch>
-            <PrivateRoute path="/profile" exact component={Profile} authed={authed} />
+            <PrivateRoute path="/profile" exact component={Profile} authed={authed} uid={uid}/>
             <Route path="/circle/:circleId" render={(props) => <Circle {...props} authed={authed} uid={uid} />}/>
             <Route path="/guild/:guildId" render={(props) => <Guild {...props} authed={authed} />}/>
             <Route path="/gatheringHall/:gatheringHallId" render={(props) => <GatheringHall {...props} authed={authed} />}/>
