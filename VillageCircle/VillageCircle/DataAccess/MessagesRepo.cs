@@ -19,7 +19,7 @@ namespace VillageCircle.DataAccess
 
         public IEnumerable<Message> GetAllMessages(int boardId)
         {
-            var sql = "select * from [Message] where BoardId = @BoardId;";
+            var sql = "select * from [Message] where BoardId = @BoardId order by postDateTime;";
             using (var db = new SqlConnection(connectionString))
             {
                 var parameters = new { BoardId = boardId };
@@ -31,10 +31,11 @@ namespace VillageCircle.DataAccess
         public IEnumerable<MessageProfileView> GetMessagesByUser(int userId)
         {
             var sql = @"
-                        select [messageBoard].boardName
+                        select [messageBoard].boardName, [message].postdatetime
                         from [message]
                         join [MessageBoard] on [MessageBoard].messageBoardId = [Message].boardId
                         where [message].userId = @UserId
+                        order by [message].postDateTime;
                       ";
             using (var db = new SqlConnection(connectionString))
             {
@@ -46,10 +47,11 @@ namespace VillageCircle.DataAccess
 
         public Message AddMessage(Message messageToAdd)
         {
+            DateTime dateTime = DateTime.Now;
             var sql = @"
-                        insert into [Message](BoardId, UserId, MessageText)
+                        insert into [Message](BoardId, UserId, MessageText, PostDateTime)
                         output inserted.*
-                        values(@BoardId, @UserId, @MessageText);
+                        values(@BoardId, @UserId, @MessageText, @PostDateTime);
                       ";
             using (var db = new SqlConnection(connectionString))
             {
@@ -57,7 +59,8 @@ namespace VillageCircle.DataAccess
                 {
                     BoardId = messageToAdd.BoardId,
                     UserId = messageToAdd.UserId,
-                    MessageText = messageToAdd.MessageText
+                    MessageText = messageToAdd.MessageText,
+                    PostDateTime = dateTime
                 };
                 var result = db.QueryFirstOrDefault<Message>(sql, parameters);
                 return result;

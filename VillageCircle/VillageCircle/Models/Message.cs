@@ -11,5 +11,6 @@ namespace VillageCircle.Models
         public int UserId { get; set; }
         public string MessageText { get; set; }
         public int BoardId { get; set; }
+        public DateTime PostDateTime { get; set; }
     }
 }

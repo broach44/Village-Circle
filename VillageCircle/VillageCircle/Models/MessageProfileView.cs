@@ -8,5 +8,6 @@ namespace VillageCircle.Models
     public class MessageProfileView
     {
         public string BoardName { get; set; }
+        public DateTime PostDateTime { get; set; }
     }
 }
