@@ -15,12 +15,10 @@ class MainNavbar extends Component {
 
   static props = {
     authed: PropTypes.bool,
+    logoutUser: PropTypes.func,
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-  logoutEvent = (e) => {
-  }
 
   render() {
     const { activeItem } = this.state;
@@ -60,7 +58,7 @@ class MainNavbar extends Component {
                 active={activeItem === 'profile'}
                 onClick={this.handleItemClick}
                 to="/profile"
-              /><Menu.Item><Button>Logout</Button>
+              /><Menu.Item><Button onClick={this.props.logoutUser}>Logout</Button>
                 </Menu.Item></>
                   : <Menu.Item><LoginModal /></Menu.Item>
               }

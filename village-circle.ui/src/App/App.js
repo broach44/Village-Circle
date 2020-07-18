@@ -5,7 +5,7 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import firebase from 'firebase';
+import firebase, { auth } from 'firebase';
 import 'firebase/auth';
 
 import MainNavbar from '../components/shared/MainNavbar/MainNavbar';
@@ -47,6 +47,12 @@ class App extends React.Component {
     });
   }
 
+  logoutUser = () => {
+    authData.logoutUser()
+      .then(() => this.setState({ authed: false, uid: '' }))
+      .catch((err) => console.error('err from logout', err));
+  }
+
   componentWillUnmount() {
     this.removeListener();
   }
@@ -56,7 +62,7 @@ class App extends React.Component {
     return (
       <div className="App">
        <Router>
-          <MainNavbar authed={authed} />
+          <MainNavbar authed={authed} logoutUser={this.logoutUser} />
           <Switch>
             <PrivateRoute path="/profile" exact component={Profile} authed={authed} />
             <Route path="/circle/:circleId" render={(props) => <Circle {...props} authed={authed} uid={uid} />}/>

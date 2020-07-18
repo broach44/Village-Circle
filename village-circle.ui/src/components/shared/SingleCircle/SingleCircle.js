@@ -101,6 +101,32 @@ class SingleCircle extends React.Component {
       .catch((err) => console.error('err from join circle', err));
   }
 
+  renderBoard = () => {
+    const { authed } = this.props;
+    const {
+      circle,
+      circleMember,
+      circleMessages,
+      currentUser,
+    } = this.state;
+    if (authed) {
+      if (circleMember) {
+        return (
+          <MessageContainer
+                currentUserId={currentUser.userId}
+                postMessage={this.postMessageToBoard}
+                messages={circleMessages}
+                currentBoardId={circle.boardId}
+                deleteMessageFromBoard={this.deleteMessageFromBoard}
+                updateUserMessage={this.updateUserMessage} />
+        )
+      } return (
+        <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
+      )
+    } else return ( <p>You should login if you want to join this board</p> )
+  }
+
+
   render() {
     const {
       circle,
@@ -112,17 +138,7 @@ class SingleCircle extends React.Component {
       <div className="SingleCircle">
         <h2>Circle: {circle.circleName}</h2>
         <p className="CircleDescription">{circle.circleDescription}</p>
-        {
-          (circleMember)
-            ? <MessageContainer
-                currentUserId={currentUser.userId}
-                postMessage={this.postMessageToBoard}
-                messages={circleMessages}
-                currentBoardId={circle.boardId}
-                deleteMessageFromBoard={this.deleteMessageFromBoard}
-                updateUserMessage={this.updateUserMessage} />
-            : <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
-        }
+        { this.renderBoard() }
       </div>
     );
   }
