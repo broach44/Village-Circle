@@ -1,3 +1,37 @@
 .homeComponent {
   display: block;
+  background-image: url(https://images.unsplash.com/photo-1574023715809-d5b57546e16a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+  background-size: cover;
+  max-width: 100;
+  height: 100vh;
+  .circleDiv {
+    border: 2px solid red;
+    align-content: center;
+    height: 2.5rem;
+    position: absolute;
+    left: 30rem;
+    top: 19rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    transform: rotate(-4deg);
+    &:hover {
+      border: 2px solid whitesmoke;
+    }
+  }
+  .guildDiv {
+    position: absolute;
+    left: 28rem;
+    top: 40.5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    transform: rotate(-14deg);
+  }
+  .hallDiv {
+    position: absolute;
+    left: 32rem;
+    top: 45.5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    transform: rotate(-14deg);
+  }
 }
