@@ -4,34 +4,54 @@
   background-size: cover;
   max-width: 100;
   height: 100vh;
+  a {
+    color: rgb(59, 45, 45);
+  }
   .circleDiv {
-    border: 2px solid red;
-    align-content: center;
-    height: 2.5rem;
     position: absolute;
+    padding: 8px;
     left: 30rem;
-    top: 19rem;
+    top: 18.5rem;
     font-size: 2.5rem;
     font-weight: bold;
     transform: rotate(-4deg);
     &:hover {
-      border: 2px solid whitesmoke;
+      border-bottom: 8px solid teal;
     }
   }
   .guildDiv {
     position: absolute;
-    left: 28rem;
-    top: 40.5rem;
+    padding: 8px;
+    left: 27rem;
+    top: 40rem;
     font-size: 2.5rem;
     font-weight: bold;
     transform: rotate(-14deg);
+    &:hover {
+      border-bottom: 8px solid teal;
+    }
   }
   .hallDiv {
     position: absolute;
     left: 32rem;
-    top: 45.5rem;
+    padding: 8px;
+    top: 45rem;
     font-size: 2.5rem;
     font-weight: bold;
     transform: rotate(-14deg);
+    &:hover {
+      border-bottom: 8px solid teal;
+    }
+  }
+  .welcomeDiv {
+    position: absolute;
+    line-height: 2rem;
+    width: 350px;
+    left: 50rem;
+    top: 10rem;
+    font-size: large;
+    .innerwelcome {
+      padding: 15px;
+    }
   }
 }
