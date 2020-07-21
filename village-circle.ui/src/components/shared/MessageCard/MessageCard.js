@@ -6,6 +6,7 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import './MessageCard.scss';
 
@@ -76,6 +77,7 @@ class MessageCard extends React.Component {
         (editMode) ? <Input icon={<Icon name='save outline' onClick={this.saveEvent} link />} fluid focus value={textToEdit} onChange={this.updateText} />
           : <Card.Content description={message.messageText} />
       }
+      <Card.Content extra textAlign='right'>Posted {moment(message.postDateTime).format('LLL')}</Card.Content>
       { this.renderEditingButtons(message.userId, message.messageId) }
       </Card>
     );
