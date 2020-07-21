@@ -19,7 +19,7 @@ namespace VillageCircle.DataAccess
 
         public IEnumerable<Message> GetAllMessages(int boardId)
         {
-            var sql = "select * from [Message] where BoardId = @BoardId order by postDateTime;";
+            var sql = "select * from [Message] where BoardId = @BoardId order by postDateTime desc;";
             using (var db = new SqlConnection(connectionString))
             {
                 var parameters = new { BoardId = boardId };

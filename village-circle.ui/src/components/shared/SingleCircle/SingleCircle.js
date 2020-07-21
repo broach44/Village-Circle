@@ -96,7 +96,10 @@ class SingleCircle extends React.Component {
       circleId: circle.circleId,
     };
     circlesData.joinCircle(memberInfo)
-      .then(() => this.setState({ circleMember: true }))
+      .then(() => {
+        this.setState({ circleMember: true })
+        this.getCircleData();
+      })
       .catch((err) => console.error('err from join circle', err));
   }
 
