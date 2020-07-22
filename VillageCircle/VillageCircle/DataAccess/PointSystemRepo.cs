@@ -50,5 +50,27 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public PointEntry AddPoints(PointEntry pointEntryToAdd)
+        {
+            DateTime dateTime = DateTime.Now;
+            var sql = @"
+                           insert into [PointLog](UserId, EarnedDate, ActivityPointId)
+                           output inserted.*
+                           values(@UserId, @EarnedDate, @ActivityPointId);
+                      ";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new
+                {
+                    UserId = pointEntryToAdd.UserId,
+                    EarnedDate = dateTime,
+                    ActivityPointId = pointEntryToAdd.ActivityPointId,
+                };
+                var result = db.QueryFirstOrDefault<PointEntry>(sql, parameters);
+                return result;
+            }
+        }
     }
 }

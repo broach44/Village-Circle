@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VillageCircle.DataAccess;
+using VillageCircle.Models;
 
 namespace VillageCircle.Controllers
 {
@@ -32,6 +33,14 @@ namespace VillageCircle.Controllers
         {
             var userLog = _pointSystemRepository.GetUserLog(userId);
             return Ok(userLog);
+        }
+
+        // api/pointSystem
+        [HttpPost]
+        public IActionResult AddPointsToLog(PointEntry pointEntryToAdd)
+        {
+            var pointEntry = _pointSystemRepository.AddPoints(pointEntryToAdd);
+            return Created("Successfully created entry for points", pointEntry);
         }
     }
 }
