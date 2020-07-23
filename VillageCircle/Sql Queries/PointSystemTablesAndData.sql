@@ -43,9 +43,15 @@ values
 
 select * from ActivityPoints
 
-select * from PointLog
+select * from [PointLog]
+
+select PointLog.PointLogId, PointLog.UserId, PointLog.EarnedDate, PointLog.ActivityPointId, ActivityPoints.NumberOfPoints, ActivityPoints.ActivityName
+from PointLog
+join ActivityPoints on PointLog.ActivityPointId = ActivityPoints.ActivityPointId
+where PointLog.UserId = 1;
 
 
 select sum(numberOfPoints) as totalPoints
 from PointLog
 join ActivityPoints on PointLog.ActivityPointId = ActivityPoints.ActivityPointId
+where pointlog.UserId = 1;

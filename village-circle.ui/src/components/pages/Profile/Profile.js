@@ -7,13 +7,16 @@ import {
   Divider,
   Grid,
 } from 'semantic-ui-react';
+import moment from 'moment';
 import './Profile.scss';
 import usersData from '../../../helpers/usersData';
+import pointsData from '../../../helpers/pointsData';
 
 class Profile extends React.Component {
   state = {
     user: {},
     userPosts: [],
+    userPointTotal: 0,
   }
 
   componentDidMount() {
@@ -25,6 +28,7 @@ class Profile extends React.Component {
       .then((userData) => {
         this.setState({ user: userData });
         this.getPostInfo(userData.userId);
+        this.getUserTotal(userData.userId);
       })
       .catch((err) => console.error('err from getuser', err));
   }
@@ -35,8 +39,14 @@ class Profile extends React.Component {
       .catch((err) => console.error('err from get post info', err));
   }
 
+  getUserTotal = (userId) => {
+    pointsData.getPointTotal(userId)
+      .then((result) => this.setState({ userPointTotal: result }))
+      .catch((err) => console.error('err from get User point total', err));
+  }
+
   render() {
-    const { user, userPosts } = this.state;
+    const { user, userPosts, userPointTotal } = this.state;
     return (
       <Container fluid textAlign='left' className="Profile">
         <Header>My Profile</Header>
@@ -49,6 +59,7 @@ class Profile extends React.Component {
             <p>Age: {user.age}</p>
             {/* <p>Total Points Earned: 200</p> */}
             <p>Email: {user.email}</p>
+            <p>Total Points: {userPointTotal}</p>
             <Button disabled>Edit Profile</Button>
           </Grid.Column>
         </Grid>
@@ -61,7 +72,7 @@ class Profile extends React.Component {
           <Grid.Column>
             <Header>Activity</Header>
             {
-              userPosts.map((post) => <p>Posted to {post.boardName} Board on {post.postDateTime} : Earned 99 points!</p>)
+              userPosts.map((post) => <p>Posted to {post.boardName} Board on {moment(post.postDateTime).format('LL')} : Earned 15 points!</p>)
             }
           </Grid.Column>
         </Grid>
