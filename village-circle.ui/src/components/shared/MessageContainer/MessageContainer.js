@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import MessageCard from '../MessageCard/MessageCard';
 
 import './MessageContainer.scss';
+import pointsData from '../../../helpers/pointsData';
 
 class MessageContainer extends React.Component {
   state = {
@@ -46,6 +47,19 @@ class MessageContainer extends React.Component {
     };
     postMessage(messageObject);
     this.resetInputBox();
+    this.earnPointsForPost();
+  }
+
+  earnPointsForPost = () => {
+    // this function will add points for current user posting...activity id = 1 for post points
+    const { currentUserId } = this.props;
+    const pointObjectToAdd = {
+      userId: currentUserId,
+      activityPointId: 1,
+    };
+    pointsData.addPoints(pointObjectToAdd)
+      .then()
+      .catch((err) => console.error('err from earn points', err));
   }
 
   render() {
