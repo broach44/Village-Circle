@@ -44,6 +44,14 @@ namespace VillageCircle.Controllers
             return NotFound("This circle does not exist");
         }
 
+        // api/circles/owner/{userId}
+        [HttpGet("owner/{userId}")]
+        public IActionResult GetCirclesByOwnerUserId(int userId)
+        {
+            var circles = _circlesRepository.GetCirclesByUserId(userId);
+            return Ok(circles);
+        }
+
         // api/circles/memberVerify/{userId}/{circleId}
         [HttpGet("memberVerify/{userId}/{circleId}")]
         [Authorize]

@@ -13,5 +13,8 @@ namespace VillageCircle.Models
         public int Age { get; set; }
         public string Email { get; set; }
         public string Uid { get; set; }
+        public int UserLevelId { get; set; }
+        public bool IsParent { get; set; }
+        public bool IsChild { get; set; }
     }
 }

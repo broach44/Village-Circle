@@ -28,5 +28,13 @@ namespace VillageCircle.Controllers
             return Ok(user);
         }
 
+        // api/users/children/{userId}
+        [HttpGet("children/{userId}")]
+        public IActionResult GetChildrenByUserId(int userId)
+        {
+            var children = _usersRepository.GetChildren(userId);
+            return Ok(children);
+        }
+
     }
 }

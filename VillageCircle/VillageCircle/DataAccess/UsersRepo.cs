@@ -31,5 +31,22 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public IEnumerable<User> GetChildren(int userId)
+        {
+            var sql = @"
+                        select [user].*
+                        from [UserParentConnection]
+                        join [user] on [user].userId = [UserParentConnection].childUserId
+                        where [UserParentConnection].parentUserId = @UserId;
+                      ";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { UserId = userId };
+                var result = db.Query<User>(sql, parameters);
+                return result;
+            }
+        }
     }
 }

@@ -30,6 +30,15 @@ const verifyMembership = (userId, circleId) => new Promise((resolve, reject) => 
     .catch((error) => reject(error));
 });
 
+const getCirclesByUser = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/circles/owner/${userId}`)
+    .then((result) => {
+      const circles = result.data;
+      resolve(circles);
+    })
+    .catch((error) => reject(error));
+})
+
 const joinCircle = (memberInfo) => axios.post(`${baseUrl}/circles/newMember`, memberInfo);
 
 export default {
@@ -37,4 +46,5 @@ export default {
   getCircleById,
   verifyMembership,
   joinCircle,
+  getCirclesByUser,
 };

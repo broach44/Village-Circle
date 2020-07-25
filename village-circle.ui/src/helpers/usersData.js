@@ -21,4 +21,13 @@ const getUserPosts = (userId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getSingleUserData, getUserPosts };
+const getChildren = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/users/children/${userId}`)
+    .then((result) => {
+      const children = result.data;
+      resolve(children);
+    })
+    .catch((err) => reject(err));
+})
+
+export default { getSingleUserData, getUserPosts, getChildren };
