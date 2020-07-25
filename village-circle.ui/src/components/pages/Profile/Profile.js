@@ -12,6 +12,7 @@ class Profile extends React.Component {
     user: {},
     isParent: false,
     isChild: false,
+    children: [],
   }
 
   static props = {
@@ -27,6 +28,9 @@ class Profile extends React.Component {
       .then((result) => {
         this.setState({ user: result });
         this.checkUserLevel(result);
+        if (result.isParent) {
+          this.getAllChildren(result.userId);
+        }
       })
       .catch((err) => console.error('err from set currentUser', err));
   }
@@ -36,14 +40,25 @@ class Profile extends React.Component {
     if (user.isParent) this.setState({ isParent: true });
   }
 
+  getAllChildren = (userId) => {
+    usersData.getChildren(userId)
+      .then((data) => this.setState({ children: data }))
+      .catch((err) => console.error('err from get children', err));
+  }
+
   // if isChild is true, render Child Profile otherwise renderAdult Profile
 
   render() {
-    const { isChild, isParent, user } = this.state;
+    const {
+      isChild,
+      isParent,
+      user,
+      children,
+    } = this.state;
     return (
       <>
         {
-          (isChild) ? <ChildProfile uid={this.props.uid} /> : <AdultProfile uid={this.props.uid} user={user} isParent={isParent} />
+          (isChild) ? <ChildProfile uid={this.props.uid} /> : <AdultProfile uid={this.props.uid} user={user} isParent={isParent} children={children} />
         }
       </>
     );

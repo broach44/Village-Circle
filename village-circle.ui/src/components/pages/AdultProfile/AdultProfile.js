@@ -11,26 +11,14 @@ import {
 import ChildCard from '../../shared/ChildCard/ChildCard';
 
 import './AdultProfile.scss';
+import usersData from '../../../helpers/usersData';
 
 class AdultProfile extends React.Component {
   static props = {
     user: PropTypes.object,
     uid: PropTypes.string,
     isParent: PropTypes.bool,
-  }
-
-  // TODO: IF isParent is true, render child cards
-  // 1) request to pull back children for parent
-  // 2) generate set of cards based on children
-  // 3) buttons for each child will navigate to their profile to see activity
-
-  renderChildCards = () => {
-    return (
-      <>
-
-        <ChildCard />
-      </>
-    );
+    children: PropTypes.array,
   }
 
   renderSimpleAdultProfile = () => {
@@ -42,33 +30,32 @@ class AdultProfile extends React.Component {
           <Button color='brown' disabled><Icon name='add circle'/>Create New Circle</Button>
         </Grid.Column>
         <Grid.Column textAlign='center'>
-          <Button color='brown' diabled><Icon name='add circle'/>Create New Guild</Button>
+          <Button color='brown' disabled><Icon name='add circle'/>Create New Guild</Button>
         </Grid.Column>
         <Grid.Column textAlign='center'>
-          <Button color='brown' diasabled><Icon name='add circle'/>Create New Gathering Hall</Button>
+          <Button color='brown' disabled><Icon name='add circle'/>Create New Gathering Hall</Button>
         </Grid.Column>
       </Grid>
       </>
     );
   }
 
+  // TODO: IF isParent is true, render child cards
+  // 1) request to pull back children for parent
+  // 2) generate set of cards based on children
+  // 3) buttons for each child will navigate to their profile to see activity
+
   renderParentProfile = () => {
+    const { children } = this.props;
     return (
       <>
         <Header as='h2' textAlign='left'>My Children</Header>
         <Grid centered columns='4'>
-          <Grid.Column><ChildCard /></Grid.Column>
-          <Grid.Column><ChildCard /></Grid.Column>
-          <Grid.Column><ChildCard /></Grid.Column>
-          <Grid.Column><ChildCard /></Grid.Column>
-          <Grid.Column><ChildCard /></Grid.Column>
-          <Grid.Column><ChildCard /></Grid.Column>
-          <Grid.Column><ChildCard /></Grid.Column>
-          <Grid.Column><ChildCard /></Grid.Column>
+          {children.map((child) => <Grid.Column><ChildCard child={child}/></Grid.Column>)}
         </Grid>
       { this.renderSimpleAdultProfile() }
       </>
-    )
+    );
   }
 
   // if isParent and isChild are both false, render Adult Profile without child cards
