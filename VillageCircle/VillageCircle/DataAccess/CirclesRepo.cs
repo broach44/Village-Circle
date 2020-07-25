@@ -38,6 +38,16 @@ namespace VillageCircle.DataAccess
             }
         }
 
+        public IEnumerable<Circle> GetCirclesByUserId(int userId)
+        {
+            var sql = "select * from [CIRCLE] where userId = @UserId;";
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { UserId = userId };
+                return db.Query<Circle>(sql, parameters);
+            }
+        }
+
         public bool VerifyMembership(int userId, int circleId)
         {
             var sql = @"
