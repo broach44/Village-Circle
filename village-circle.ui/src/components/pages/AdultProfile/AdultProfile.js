@@ -11,7 +11,7 @@ import {
 import ChildCard from '../../shared/ChildCard/ChildCard';
 
 import './AdultProfile.scss';
-import usersData from '../../../helpers/usersData';
+import CircleCard from '../../shared/CircleCard/CircleCard';
 
 class AdultProfile extends React.Component {
   static props = {
@@ -19,6 +19,7 @@ class AdultProfile extends React.Component {
     uid: PropTypes.string,
     isParent: PropTypes.bool,
     children: PropTypes.array,
+    circles: PropTypes.arrayOf,
   }
 
   renderSimpleAdultProfile = () => {
@@ -28,6 +29,11 @@ class AdultProfile extends React.Component {
       <Grid centered columns='equal'>
         <Grid.Column textAlign='center'>
           <Button color='brown' disabled><Icon name='add circle'/>Create New Circle</Button>
+          <Grid columns={2}>
+          {
+            this.props.circles.map((circle) => <Grid.Column><CircleCard circle={circle} /></Grid.Column>)
+          }
+          </Grid>
         </Grid.Column>
         <Grid.Column textAlign='center'>
           <Button color='brown' disabled><Icon name='add circle'/>Create New Guild</Button>

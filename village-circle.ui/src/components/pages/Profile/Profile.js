@@ -6,6 +6,7 @@ import './Profile.scss';
 import AdultProfile from '../AdultProfile/AdultProfile';
 import ChildProfile from '../ChildProfile/ChildProfile';
 import usersData from '../../../helpers/usersData';
+import circlesData from '../../../helpers/circlesData';
 
 class Profile extends React.Component {
   state = {
@@ -13,6 +14,7 @@ class Profile extends React.Component {
     isParent: false,
     isChild: false,
     children: [],
+    myCircles: [],
   }
 
   static props = {
@@ -31,6 +33,9 @@ class Profile extends React.Component {
         if (result.isParent) {
           this.getAllChildren(result.userId);
         }
+        if (result.isChild === false) {
+          this.getMyCircles(result.userId);
+        }
       })
       .catch((err) => console.error('err from set currentUser', err));
   }
@@ -46,6 +51,12 @@ class Profile extends React.Component {
       .catch((err) => console.error('err from get children', err));
   }
 
+  getMyCircles = (userId) => {
+    circlesData.getCirclesByUser(userId)
+      .then((data) => this.setState({ myCircles: data }))
+      .catch((err) => console.error('err from getCircles', err));
+  }
+
   // if isChild is true, render Child Profile otherwise renderAdult Profile
 
   render() {
@@ -54,11 +65,12 @@ class Profile extends React.Component {
       isParent,
       user,
       children,
+      myCircles,
     } = this.state;
     return (
       <>
         {
-          (isChild) ? <ChildProfile uid={this.props.uid} /> : <AdultProfile uid={this.props.uid} user={user} isParent={isParent} children={children} />
+          (isChild) ? <ChildProfile uid={this.props.uid} /> : <AdultProfile uid={this.props.uid} circles={myCircles} user={user} isParent={isParent} children={children} />
         }
       </>
     );
