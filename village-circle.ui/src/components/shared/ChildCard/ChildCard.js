@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, Button } from 'semantic-ui-react';
 
 import './ChildCard.scss';
 
-class CircleCard extends React.Component {
+class ChildCard extends React.Component {
   static props = {
     child: PropTypes.object,
     authed: PropTypes.Boolean,
@@ -23,11 +23,11 @@ class CircleCard extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button floated='right' color='orange'>Review Activity/Profile</Button>
+          <Button as={ Link } to={`/childProfile/${child.uid}`} floated='right' color='orange'>Review Activity/Profile</Button>
         </Card.Content>
       </Card>
     );
   }
 }
 
-export default CircleCard;
+export default ChildCard;

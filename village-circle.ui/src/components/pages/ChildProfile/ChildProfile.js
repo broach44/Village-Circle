@@ -27,11 +27,19 @@ class ChildProfile extends React.Component {
   }
 
   componentDidMount() {
-    this.getUserData();
+    this.checkForUid();
+    // this.getUserData();
   }
 
-  getUserData = () => {
-    usersData.getSingleUserData(this.props.uid)
+  checkForUid = () => {
+    if (this.props.uid === undefined) {
+      const { uid } = this.props.match.params;
+      this.getUserData(uid);
+    } else this.getUserData(this.props.uid);
+  }
+
+  getUserData = (uid) => {
+    usersData.getSingleUserData(uid)
       .then((userData) => {
         this.setState({ childUser: userData });
         this.getPostInfo(userData.userId);
@@ -55,7 +63,7 @@ class ChildProfile extends React.Component {
   render() {
     const { childUser, userPosts, userPointTotal } = this.state;
     return (
-      <Container fluid textAlign='left' className="Profile">
+      <Container fluid textAlign='left' className="ChildProfile">
       <Header>My Profile</Header>
         <Grid columns='equal'>
           <Grid.Column width={2}>

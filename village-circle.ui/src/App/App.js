@@ -22,6 +22,7 @@ import connection from '../helpers/connection';
 
 import './App.scss';
 import authData from '../helpers/authData';
+import ChildProfile from '../components/pages/ChildProfile/ChildProfile';
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/auth', state: { from: props.location } }} />);
@@ -65,6 +66,7 @@ class App extends React.Component {
           <MainNavbar authed={authed} logoutUser={this.logoutUser} />
           <Switch>
             <PrivateRoute path="/profile" exact component={Profile} authed={authed} uid={uid}/>
+            <PrivateRoute path="/childProfile/:uid" exact component={ChildProfile} authed={authed} />
             <Route path="/circle/:circleId" render={(props) => <Circle {...props} authed={authed} uid={uid} />}/>
             <Route path="/guild/:guildId" render={(props) => <Guild {...props} authed={authed} />}/>
             <Route path="/gatheringHall/:gatheringHallId" render={(props) => <GatheringHall {...props} authed={authed} />}/>
