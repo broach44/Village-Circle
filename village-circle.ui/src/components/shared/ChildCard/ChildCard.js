@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Card, Button } from 'semantic-ui-react';
 
-import './CircleCard.scss';
+import './ChildCard.scss';
 
 class CircleCard extends React.Component {
   static props = {
@@ -12,13 +12,13 @@ class CircleCard extends React.Component {
   }
 
   render() {
-    const { child } = this.props;
+    const { childUser } = this.props;
     return (
       <Card className="ChildCard">
-        <Card.Content header='Name of child' />
+        <Card.Content header='childname' />
         <Card.Content description='anything here?' />
         <Card.Content extra>
-          <Button as={ Link } to={`/circle/${circle.circleId}`} floated='right' color='orange'>Review Activity/Profile</Button>
+          <Button floated='right' color='orange'>Review Activity/Profile</Button>
         </Card.Content>
       </Card>
     );

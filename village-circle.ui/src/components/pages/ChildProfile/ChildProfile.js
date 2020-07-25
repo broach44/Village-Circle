@@ -17,7 +17,7 @@ import './ChildProfile.scss';
 
 class ChildProfile extends React.Component {
   state = {
-    user: {},
+    childUser: {},
     userPosts: [],
     userPointTotal: 0,
   }
@@ -33,7 +33,7 @@ class ChildProfile extends React.Component {
   getUserData = () => {
     usersData.getSingleUserData(this.props.uid)
       .then((userData) => {
-        this.setState({ user: userData });
+        this.setState({ childUser: userData });
         this.getPostInfo(userData.userId);
         this.getUserTotal(userData.userId);
       })
@@ -53,7 +53,7 @@ class ChildProfile extends React.Component {
   }
 
   render() {
-    const { user, userPosts, userPointTotal } = this.state;
+    const { childUser, userPosts, userPointTotal } = this.state;
     return (
       <Container fluid textAlign='left' className="Profile">
       <Header>My Profile</Header>
@@ -62,10 +62,10 @@ class ChildProfile extends React.Component {
             <Image src={'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-20kR46wUnTXeI8wTX1CUN5PpX81PJDpiSg&usqp=CAU'} size='small' />
           </Grid.Column>
           <Grid.Column>
-            <p>Name: {user.firstName} {user.lastName}</p>
-            <p>Age: {user.age}</p>
+            <p>Name: {childUser.firstName} {childUser.lastName}</p>
+            <p>Age: {childUser.age}</p>
             {/* <p>Total Points Earned: 200</p> */}
-            <p>Email: {user.email}</p>
+            <p>Email: {childUser.email}</p>
             <p>Total Points: {userPointTotal}</p>
             <Button disabled>Edit Profile</Button>
           </Grid.Column>
