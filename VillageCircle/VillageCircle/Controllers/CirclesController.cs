@@ -70,5 +70,13 @@ namespace VillageCircle.Controllers
             return Created("", member);
             
         }
+
+        // api/circles/
+        [HttpPost]
+        public IActionResult CreateNewCircle(Circle circleToAdd)
+        {
+            var circle = _circlesRepository.AddCircle(circleToAdd);
+            return Created("", circle);
+        }
     }
 }
