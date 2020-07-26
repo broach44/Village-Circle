@@ -115,6 +115,7 @@ class SingleCircle extends React.Component {
       if (circleMember && circle.boardId !== 0) {
         return (
           <MessageContainer
+                currentUser={currentUser}
                 currentUserId={currentUser.userId}
                 postMessage={this.postMessageToBoard}
                 messages={circleMessages}
@@ -135,6 +136,7 @@ class SingleCircle extends React.Component {
     return (
       <div className="SingleCircle">
         <h2>Circle: {circle.circleName}</h2>
+        <h3>Leader: {circle.circleLeader}</h3>
         <p className="CircleDescription">{circle.circleDescription}</p>
         { this.renderBoard() }
       </div>

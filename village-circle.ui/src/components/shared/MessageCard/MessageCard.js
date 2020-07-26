@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-  Card,
+  Comment,
   Input,
-  Button,
   Icon,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -27,13 +26,13 @@ class MessageCard extends React.Component {
     const { editMode } = this.setState;
     if (userIdOnMessage === this.props.currentUserId) {
       return (
-        <Button.Group basic size='small'>
+        <Comment.Actions basic size='small'>
           {
-            (!editMode) ? <Button icon='edit outline' onClick={this.beginEditingMessage} />
-              : <Button icon='save outline' />
+            (!editMode) ? <Comment.Action><Icon name='edit outline' onClick={this.beginEditingMessage}/></Comment.Action>
+              : <Comment.Action><Icon icon='save outline'/></Comment.Action>
           }
-          <Button icon='delete' id={messageId} onClick={this.deleteEvent} />
-        </Button.Group>
+          <Comment.Action><Icon name='delete' id={messageId} onClick={this.deleteEvent}/></Comment.Action>
+        </Comment.Actions>
       );
     } return (<></>);
   }
@@ -72,14 +71,20 @@ class MessageCard extends React.Component {
     const { message } = this.props;
     const { editMode, textToEdit } = this.state;
     return (
-      <Card key={message.messageId} fluid raised className="singleMessage">
-      {
-        (editMode) ? <Input icon={<Icon name='save outline' onClick={this.saveEvent} link />} fluid focus value={textToEdit} onChange={this.updateText} />
-          : <Card.Content description={message.messageText} />
-      }
-      <Card.Content extra textAlign='right'>Posted {moment(message.postDateTime).format('LLL')}</Card.Content>
-      { this.renderEditingButtons(message.userId, message.messageId) }
-      </Card>
+      <Comment key={message.messageId} fluid raised className="singleMessage">
+        <Comment.Avatar src={`https://api.adorable.io/avatars/75/${message.userName}@adorable.io.png`}/>
+        <Comment.Content>
+          <Comment.Author>{message.userName}</Comment.Author>
+          <Comment.Metadata>
+            <div>Posted {moment(message.postDateTime).format('LLL')}</div>
+          </Comment.Metadata>
+          {
+            (editMode) ? <Input icon={<Icon name='save outline' onClick={this.saveEvent} link />} fluid focus value={textToEdit} onChange={this.updateText} />
+              : <Comment.Text>{message.messageText}</Comment.Text>
+          }
+          { this.renderEditingButtons(message.userId, message.messageId) }
+        </Comment.Content>
+      </Comment>
     );
   }
 }
