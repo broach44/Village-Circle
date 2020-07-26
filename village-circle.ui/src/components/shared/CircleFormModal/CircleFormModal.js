@@ -17,6 +17,7 @@ class CircleFormModal extends Component {
 
   static props = {
     userId: PropTypes.int,
+    saveNewCircle: PropTypes.func,
   }
 
   show = (size) => () => this.setState({ size, open: true })
@@ -33,6 +34,17 @@ class CircleFormModal extends Component {
 
   saveDescriptionInput = (e) => {
     this.setState({ circleDescriptionInput: e.target.value });
+  }
+
+  saveNewCircleEvent = (e) => {
+    e.preventDefault();
+    const newCircle = {
+      userId: this.props.userId,
+      circleName: this.state.circleNameInput,
+      circleDescription: this.state.circleDescriptionInput,
+    };
+    this.props.saveNewCircle(newCircle);
+    this.close();
   }
 
   render() {
@@ -61,6 +73,7 @@ class CircleFormModal extends Component {
               icon='save'
               labelPosition='right'
               content='Save New Circle'
+              onClick={this.saveNewCircleEvent}
             />
           </Modal.Actions>
         </Modal>

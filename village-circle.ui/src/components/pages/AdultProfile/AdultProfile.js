@@ -21,6 +21,7 @@ class AdultProfile extends React.Component {
     isParent: PropTypes.bool,
     children: PropTypes.array,
     circles: PropTypes.arrayOf,
+    saveNewCircle: PropTypes.func,
   }
 
   renderSimpleAdultProfile = () => {
@@ -29,7 +30,7 @@ class AdultProfile extends React.Component {
       <Header as='h2' textAlign='left'>My Boards</Header>
       <Grid centered columns='equal'>
         <Grid.Column textAlign='center'>
-          <CircleFormModal userId={this.props.user.userId} />
+          <CircleFormModal saveNewCircle={this.props.saveNewCircle} userId={this.props.user.userId} />
           <Grid columns={2}>
           {
             this.props.circles.map((circle) => <Grid.Column><CircleCard circle={circle} /></Grid.Column>)
