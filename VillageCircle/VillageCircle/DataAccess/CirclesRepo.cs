@@ -27,8 +27,9 @@ namespace VillageCircle.DataAccess
         public Circle GetSingleCircle(int circleId)
         {
             var sql = @"
-                        select *
+                        select [Circle].*, [user].firstName + ' ' + [user].lastName as CircleLeader
                         from [Circle]
+                        join [User] on [User].UserId = [Circle].UserId
                         where CircleId = @CircleId;
                       ";
             using (var db = new SqlConnection(connectionString))

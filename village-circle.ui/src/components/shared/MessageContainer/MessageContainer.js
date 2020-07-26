@@ -3,7 +3,7 @@ import {
   Form,
   Button,
   Grid,
-  Card,
+  Comment,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,6 @@ import pointsData from '../../../helpers/pointsData';
 class MessageContainer extends React.Component {
   state = {
     currentPostMessage: '',
-    currentUser: null,
   }
 
   static props = {
@@ -25,6 +24,7 @@ class MessageContainer extends React.Component {
     currentUserId: PropTypes.int,
     deleteMessageFromBoard: PropTypes.func,
     updateUserMessage: PropTypes.func,
+    currentUser: PropTypes.object,
   }
 
   resetInputBox = () => {
@@ -82,11 +82,11 @@ class MessageContainer extends React.Component {
           <h3>Message Board:</h3>
           {
             (messages.length === 0) ? <h3>Currently no one has posted to this board!</h3>
-              : <Card.Group>
+              : <Comment.Group>
                 {
                   messages.map((message) => <MessageCard key={message.messageId} currentUserId={currentUserId} message={message} updateUserMessage={updateUserMessage} deleteMessageFromBoard={deleteMessageFromBoard} />)
                 }
-                </Card.Group>
+                </Comment.Group>
           }
         </Grid.Column>
       </Grid>
