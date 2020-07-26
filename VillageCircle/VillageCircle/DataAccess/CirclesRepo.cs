@@ -81,6 +81,37 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public Circle AddCircle(Circle circleToAdd)
+        {
+            var sql1 = @"
+                        insert into [MessageBoard](BoardName, BoardDescription)
+                        output inserted.*
+                        values(@BoardName, @BoardDescription);
+                      ";
+
+            var sql2 = @"
+                        insert into [Circle](UserId, CircleName, CircleDescription, BoardId)
+                        output inserted.*
+                        values(@UserId, @CircleName, @CircleDescription, @BoardId)
+                        ";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters1 = new { BoardName = circleToAdd.CircleName, BoardDescription = circleToAdd.CircleDescription };
+                var result1 = db.QueryFirstOrDefault<MessageBoard>(sql1, parameters1);
+
+                var parameters2 = new
+                {
+                    UserId = circleToAdd.UserId,
+                    CircleName = circleToAdd.CircleName,
+                    CircleDescription = circleToAdd.CircleDescription,
+                    BoardId = result1.MessageBoardId
+                };
+                var result2 = db.QueryFirstOrDefault<Circle>(sql2, parameters2);
+                return result2;
+            }
+        }
     }
 
 }

@@ -12,6 +12,7 @@ import ChildCard from '../../shared/ChildCard/ChildCard';
 
 import './AdultProfile.scss';
 import CircleCard from '../../shared/CircleCard/CircleCard';
+import CircleFormModal from '../../shared/CircleFormModal/CircleFormModal';
 
 class AdultProfile extends React.Component {
   static props = {
@@ -20,6 +21,7 @@ class AdultProfile extends React.Component {
     isParent: PropTypes.bool,
     children: PropTypes.array,
     circles: PropTypes.arrayOf,
+    saveNewCircle: PropTypes.func,
   }
 
   renderSimpleAdultProfile = () => {
@@ -28,7 +30,7 @@ class AdultProfile extends React.Component {
       <Header as='h2' textAlign='left'>My Boards</Header>
       <Grid centered columns='equal'>
         <Grid.Column textAlign='center'>
-          <Button color='brown' disabled><Icon name='add circle'/>Create New Circle</Button>
+          <CircleFormModal saveNewCircle={this.props.saveNewCircle} userId={this.props.user.userId} />
           <Grid columns={2}>
           {
             this.props.circles.map((circle) => <Grid.Column><CircleCard circle={circle} /></Grid.Column>)

@@ -57,6 +57,12 @@ class Profile extends React.Component {
       .catch((err) => console.error('err from getCircles', err));
   }
 
+  saveNewCircle = (circleObject) => {
+    circlesData.createNewCircle(circleObject)
+      .then(() => this.getMyCircles(this.state.user.userId))
+      .catch((err) => console.error('err from save new circle', err));
+  }
+
   // if isChild is true, render Child Profile otherwise renderAdult Profile
 
   render() {
@@ -70,7 +76,7 @@ class Profile extends React.Component {
     return (
       <>
         {
-          (isChild) ? <ChildProfile uid={this.props.uid} /> : <AdultProfile uid={this.props.uid} circles={myCircles} user={user} isParent={isParent} children={children} />
+          (isChild) ? <ChildProfile uid={this.props.uid} /> : <AdultProfile uid={this.props.uid} saveNewCircle={this.saveNewCircle} circles={myCircles} user={user} isParent={isParent} children={children} />
         }
       </>
     );

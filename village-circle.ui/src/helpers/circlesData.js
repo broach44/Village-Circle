@@ -41,10 +41,13 @@ const getCirclesByUser = (userId) => new Promise((resolve, reject) => {
 
 const joinCircle = (memberInfo) => axios.post(`${baseUrl}/circles/newMember`, memberInfo);
 
+const createNewCircle = (circleObj) => axios.post(`${baseUrl}/circles`, circleObj);
+
 export default {
   getAllCircles,
   getCircleById,
   verifyMembership,
   joinCircle,
   getCirclesByUser,
+  createNewCircle,
 };
