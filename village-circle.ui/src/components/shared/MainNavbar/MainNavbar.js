@@ -6,7 +6,12 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import logoImage from '../../../images/the-village-circle-logo2-transbg.png';
 import LoginModal from '../LoginModal/LoginModal';
+
+
+
+import './MainNavbar.scss';
 
 class MainNavbar extends Component {
   state = {
@@ -25,8 +30,8 @@ class MainNavbar extends Component {
     const { authed } = this.props;
     return (
       <div>
-        <Menu pointing>
-        <Image src={'https://www.logolynx.com/images/logolynx/d2/d23c21b326b84a31bbffe0cf84626d69.jpeg'} size='tiny' />
+        <Menu pointing className='MainNavbar'>
+        <Image src={logoImage} size='tiny' />
           <Menu.Item as={ Link }
             name='home'
             active={activeItem === 'home'}

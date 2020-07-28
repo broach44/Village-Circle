@@ -1,3 +1,9 @@
-.MainNavbar {
-  display: block;
-}
+.MainNavbar.ui.pointing.menu {
+  a { 
+    color: #2b2420;
+  }
+    background-color: #d1c9c6;
+    .active.item:after {
+      background-color: #d1c9c6;
+    }
+  }
