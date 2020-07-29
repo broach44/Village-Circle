@@ -85,6 +85,7 @@ namespace VillageCircle.DataAccess
 
         public Circle AddCircle(Circle circleToAdd)
         {
+
             var sql1 = @"
                         insert into [MessageBoard](BoardName, BoardDescription)
                         output inserted.*
@@ -110,6 +111,9 @@ namespace VillageCircle.DataAccess
                     BoardId = result1.MessageBoardId
                 };
                 var result2 = db.QueryFirstOrDefault<Circle>(sql2, parameters2);
+
+                var newMember = new CircleMember { UserId = circleToAdd.UserId, CircleId = result2.CircleId };
+                AddMember(newMember);
                 return result2;
             }
         }

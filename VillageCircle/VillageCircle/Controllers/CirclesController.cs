@@ -76,6 +76,8 @@ namespace VillageCircle.Controllers
         public IActionResult CreateNewCircle(Circle circleToAdd)
         {
             var circle = _circlesRepository.AddCircle(circleToAdd);
+
+
             return Created("", circle);
         }
     }
