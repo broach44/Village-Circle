@@ -22,7 +22,7 @@ namespace VillageCircle.DataAccess
             var sql = @"
                         select *
                         from [Goals]
-                        where userId = @UserId and isComplete = 0;
+                        where userId = @UserId;
                         ";
             using (var db = new SqlConnection(connectionString))
             {
