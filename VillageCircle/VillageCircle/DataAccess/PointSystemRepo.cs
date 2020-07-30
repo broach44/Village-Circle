@@ -19,6 +19,10 @@ namespace VillageCircle.DataAccess
 
         public int GetTotal(int userId)
         {
+            var sql1 = @"
+                        select * from [PointLog] where UserId = @UserId;
+                        ";
+
             var sql = @"
                         select sum(numberOfPoints)
                         from PointLog
@@ -28,8 +32,13 @@ namespace VillageCircle.DataAccess
             using (var db = new SqlConnection(connectionString))
             {
                 var parameters = new { UserId = userId };
-                var result = db.QueryFirstOrDefault<int>(sql, parameters);
-                return result;
+                var hasLog = db.QueryFirstOrDefault<PointEntry>(sql1, parameters);
+                if (hasLog != null)
+                {
+                    var result = db.QueryFirstOrDefault<int>(sql, parameters);
+                    return result;
+                }
+                return 0;
             }
         }
 
