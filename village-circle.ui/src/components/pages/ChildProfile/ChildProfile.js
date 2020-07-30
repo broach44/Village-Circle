@@ -7,6 +7,7 @@ import {
   Divider,
   Grid,
   Table,
+  Message,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -57,7 +58,7 @@ class ChildProfile extends React.Component {
   getPostInfo = (userId) => {
     usersData.getUserPosts(userId)
       .then((posts) => this.setState({ userPosts: posts }))
-      .catch((err) => console.error('err from get post info', err));
+      .catch(() => this.setState({ userPosts: [] }));
   }
 
   getUserTotal = (userId) => {
@@ -79,6 +80,14 @@ class ChildProfile extends React.Component {
     goalsData.createGoal(goalObj)
       .then(() => this.getUserGoals(childUser.userId))
       .catch((err) => console.error('err from save new goal', err));
+  }
+
+  renderActivityZone = () => {
+    const { userPosts } = this.state;
+    if (userPosts !== 'This user has not posted any messages') {
+      return (userPosts.map((post) => <p key={`${post.postLogId}${post.postDateTime}`}>Posted to {post.boardName} Board on {moment(post.postDateTime).format('LL')} : Earned 15 points!</p>));
+    }
+    return (<Message>Oops! Looks like you don't have any activity yet.  Join a group and start participating to earn points!</Message>);
   }
 
   render() {
@@ -123,9 +132,8 @@ class ChildProfile extends React.Component {
           </Grid.Column>
           <Grid.Column>
             <Header>Activity</Header>
-            {
-              userPosts.map((post) => <p key={`${post.postLogId}${post.postDateTime}`}>Posted to {post.boardName} Board on {moment(post.postDateTime).format('LL')} : Earned 15 points!</p>)
-            }
+            { this.renderActivityZone() }
+
           </Grid.Column>
         </Grid>
       </Container>
