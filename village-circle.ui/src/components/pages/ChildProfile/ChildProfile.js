@@ -12,6 +12,7 @@ import moment from 'moment';
 
 import usersData from '../../../helpers/usersData';
 import pointsData from '../../../helpers/pointsData';
+import goalsData from '../../../helpers/goalsData';
 
 import './ChildProfile.scss';
 
@@ -20,6 +21,7 @@ class ChildProfile extends React.Component {
     childUser: {},
     userPosts: [],
     userPointTotal: 0,
+    goals: [],
   }
 
   static props = {
@@ -44,6 +46,7 @@ class ChildProfile extends React.Component {
         this.setState({ childUser: userData });
         this.getPostInfo(userData.userId);
         this.getUserTotal(userData.userId);
+        this.getUserGoals(userData.userId);
       })
       .catch((err) => console.error('err from getuser', err));
   }
@@ -58,6 +61,14 @@ class ChildProfile extends React.Component {
     pointsData.getPointTotal(userId)
       .then((result) => this.setState({ userPointTotal: result }))
       .catch((err) => console.error('err from get User point total', err));
+  }
+
+  getUserGoals = (userId) => {
+    goalsData.getGoals(userId)
+      .then((goalArr) => {
+        this.setState({ goals: goalArr });
+      })
+      .catch((err) => console.error('err from get user goals', err));
   }
 
   render() {
