@@ -66,20 +66,20 @@ class MessageContainer extends React.Component {
     const { messages, currentUserId, updateUserMessage, deleteMessageFromBoard } = this.props;
     const { currentPostMessage } = this.state;
     return (
-      <div>
+      <div className='CircleMessageContainer'>
       <Form onSubmit={this.postEvent}>
         <Grid>
           <Grid.Row centered>
-            <Grid.Column width={8}>
+            <Grid.Column width={6}>
               <Form.TextArea placeholder='Write a message...' value={currentPostMessage} onChange={this.setPostMessage}/>
+              <Button floated='right' size='small'>Post Message</Button>
             </Grid.Column>
-              <Button size='small'>Post Message</Button>
           </Grid.Row>
         </Grid>
       </Form>
       <Grid centered>
-        <Grid.Column width={8}>
-          <h3>Message Board:</h3>
+        <Grid.Column className='gridMessageContainer' width={8}>
+          <h3 className="messageBoardTitle">Message Board:</h3>
           {
             (messages.length === 0) ? <h3>Currently no one has posted to this board!</h3>
               : <Comment.Group>

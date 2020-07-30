@@ -1,6 +1,20 @@
-.MessageContainer {
-  display: block;
+// .MessageContainer {
+//   display: block;
+
+// }
+// .singleMessage {
+//   padding: 20px;
+// }
+.CircleMessageContainer {
+  margin-top: 1rem;
 }
-.singleMessage {
-  padding: 20px;
+
+.messageBoardTitle {
+  color: lightgray;
+}
+.gridMessageContainer {
+  margin-top: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 42rem;
+  overflow-y: auto;
 }
