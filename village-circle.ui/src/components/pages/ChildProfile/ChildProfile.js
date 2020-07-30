@@ -85,7 +85,8 @@ class ChildProfile extends React.Component {
       <Header>My Profile</Header>
         <Grid columns='equal'>
           <Grid.Column width={2}>
-            <Image src={'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-20kR46wUnTXeI8wTX1CUN5PpX81PJDpiSg&usqp=CAU'} size='small' />
+            <Image src={`https://api.adorable.io/avatars/285/${childUser.firstName}@adorable.io.png`} size='small' />
+            {/* <Image src={'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-20kR46wUnTXeI8wTX1CUN5PpX81PJDpiSg&usqp=CAU'} size='small' /> */}
           </Grid.Column>
           <Grid.Column>
             <p>Name: {childUser.firstName} {childUser.lastName}</p>
