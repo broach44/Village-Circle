@@ -6,6 +6,7 @@ import {
   Container,
   Divider,
   Grid,
+  Table,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -13,6 +14,7 @@ import moment from 'moment';
 import usersData from '../../../helpers/usersData';
 import pointsData from '../../../helpers/pointsData';
 import goalsData from '../../../helpers/goalsData';
+import GoalTableRow from '../../shared/GoalTableRow/GoalTableRow';
 
 import './ChildProfile.scss';
 
@@ -72,7 +74,12 @@ class ChildProfile extends React.Component {
   }
 
   render() {
-    const { childUser, userPosts, userPointTotal } = this.state;
+    const {
+      childUser,
+      userPosts,
+      userPointTotal,
+      goals,
+    } = this.state;
     return (
       <Container fluid textAlign='left' className="ChildProfile">
       <Header>My Profile</Header>
@@ -92,8 +99,18 @@ class ChildProfile extends React.Component {
         <Divider hidden />
         <Grid columns={2}>
           <Grid.Column>
-            <Header>Goals</Header>
-            <p>*** COMING SOON ***</p>
+            <Header>My Goals</Header>
+            <Table>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Points To Achieve</Table.HeaderCell>
+                  <Table.HeaderCell>Status</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+            { goals.map((goal) => <GoalTableRow key={goal.goalId} goal={goal} />) }
+            </Table.Body>
+            </Table>
           </Grid.Column>
           <Grid.Column>
             <Header>Activity</Header>
