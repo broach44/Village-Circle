@@ -1,0 +1,22 @@
+.comments {
+  .comment {
+    .author {
+      color: lightgray!important;
+    }
+    .metadata {
+      color: tan!important;
+    }
+    .text {
+      color: lightgray!important;
+    }
+    .actions {
+      i.icon.edit {
+        color: green!important;
+      }
+      i.icon.delete {
+      color: red!important;
+      }
+    }
+    
+  }
+}

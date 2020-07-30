@@ -135,9 +135,11 @@ class SingleCircle extends React.Component {
     } = this.state;
     return (
       <div className="SingleCircle">
-        <h2>Circle: {circle.circleName}</h2>
-        <h3>Leader: {circle.circleLeader}</h3>
-        <p className="CircleDescription">{circle.circleDescription}</p>
+        <div className="CircleInfoDiv">
+          <h2>Circle: {circle.circleName}</h2>
+          <h3>Leader: {circle.circleLeader}</h3>
+          <p className="CircleDescription">{circle.circleDescription}</p>
+        </div>
         { this.renderBoard() }
       </div>
     );

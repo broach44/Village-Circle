@@ -30,7 +30,7 @@ class MainNavbar extends Component {
     const { authed } = this.props;
     return (
       <div>
-        <Menu pointing className='MainNavbar'>
+        <Menu pointing fixed='top' className='MainNavbar'>
         <Image src={logoImage} size='tiny' />
           <Menu.Item as={ Link }
             name='home'
