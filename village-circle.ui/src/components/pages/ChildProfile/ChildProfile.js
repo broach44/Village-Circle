@@ -15,6 +15,7 @@ import usersData from '../../../helpers/usersData';
 import pointsData from '../../../helpers/pointsData';
 import goalsData from '../../../helpers/goalsData';
 import GoalTableRow from '../../shared/GoalTableRow/GoalTableRow';
+import NewGoalModal from '../../shared/NewGoalModal/NewGoalModal';
 
 import './ChildProfile.scss';
 
@@ -73,6 +74,13 @@ class ChildProfile extends React.Component {
       .catch((err) => console.error('err from get user goals', err));
   }
 
+  saveNewGoal = (goalObj) => {
+    const { childUser } = this.state;
+    goalsData.createGoal(goalObj)
+      .then(() => this.getUserGoals(childUser.userId))
+      .catch((err) => console.error('err from save new goal', err));
+  }
+
   render() {
     const {
       childUser,
@@ -100,7 +108,7 @@ class ChildProfile extends React.Component {
         <Divider hidden />
         <Grid columns={2}>
           <Grid.Column>
-            <Header>My Goals</Header>
+            <Header floated='left'>My Goals</Header><NewGoalModal saveNewGoal={this.saveNewGoal} userId={childUser.userId} />
             <Table>
               <Table.Header>
                 <Table.Row>
