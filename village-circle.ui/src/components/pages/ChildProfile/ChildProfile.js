@@ -93,7 +93,6 @@ class ChildProfile extends React.Component {
   render() {
     const {
       childUser,
-      userPosts,
       userPointTotal,
       goals,
     } = this.state;
