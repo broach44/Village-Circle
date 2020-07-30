@@ -125,7 +125,8 @@ class ChildProfile extends React.Component {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-            { goals.map((goal) => <GoalTableRow key={goal.goalId} goal={goal} />) }
+            { (goals.length === 0) ? <Table.Row><Table.Cell>You currently do not have any goals. Click the button above to add a new goal</Table.Cell></Table.Row>
+              : goals.map((goal) => <GoalTableRow key={goal.goalId} goal={goal} />) }
             </Table.Body>
             </Table>
           </Grid.Column>
