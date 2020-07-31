@@ -21,6 +21,7 @@ class SingleCircle extends React.Component {
     circleMessages: [],
     currentUser: {},
     announcements: [],
+    leaderView: false,
   }
 
   static props = {
@@ -32,11 +33,12 @@ class SingleCircle extends React.Component {
     this.getCircleData();
   }
 
-  getUser = (uid, circleId) => {
+  getUser = (uid, circleId, circleUserId) => {
     userData.getSingleUserData(uid)
       .then((user) => {
         this.setState({ currentUser: user });
         this.verifyCircleMembership(user.userId, circleId);
+        this.checkLeaderStatus(user.userId, circleUserId);
       })
       .catch((err) => console.error('err from get user', err));
   }
@@ -49,7 +51,7 @@ class SingleCircle extends React.Component {
         this.setState({ circle: result });
         if (authed) {
           this.getMessageData(result.boardId);
-          this.getUser(uid, circleId);
+          this.getUser(uid, circleId, result.userId);
           this.getAnnouncementData(result.circleId);
           this.getLinkData(result.circleId);
         }
@@ -80,6 +82,10 @@ class SingleCircle extends React.Component {
     circlesData.verifyMembership(userId, circleId)
       .then((isMemberResult) => this.setState({ circleMember: isMemberResult }))
       .catch((err) => console.error('error from verify circle membership', err));
+  }
+
+  checkLeaderStatus = (userId, circleUserId) => {
+    if (userId === circleUserId) this.setState({ leaderView: true });
   }
 
   postMessageToBoard = (messageObject) => {
@@ -132,6 +138,7 @@ class SingleCircle extends React.Component {
       circleMessages,
       currentUser,
       links,
+      leaderView,
     } = this.state;
     if (authed) {
       if (circleMember && circle.boardId !== 0) {
@@ -148,8 +155,8 @@ class SingleCircle extends React.Component {
                   updateUserMessage={this.updateUserMessage} />
             </Grid.Column>
             <Grid.Column width={6}>
-              <AnnouncementContainer announcements={announcements} />
-              <LinkContainer links={links} />
+              <AnnouncementContainer announcements={announcements} leaderView={leaderView} />
+              <LinkContainer links={links} leaderView={leaderView} />
             </Grid.Column>
           </Grid>
         );
@@ -157,6 +164,11 @@ class SingleCircle extends React.Component {
         <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
       );
     } return (<p>You should login if you want to join this board</p>);
+  }
+
+  renderLeaderView = () => {
+    if (this.state.leaderView) return <Button>View Members</Button>;
+    return <></>;
   }
 
   render() {
@@ -167,7 +179,7 @@ class SingleCircle extends React.Component {
       <div className="SingleCircle">
         <div className="CircleInfoDiv">
           <h2>Circle: {circle.circleName}</h2>
-          <h3>Leader: {circle.circleLeader}</h3>
+          <h3>Leader: {circle.circleLeader}     {this.renderLeaderView()}</h3>
           <p className="CircleDescription">{circle.circleDescription}</p>
         </div>
         { this.renderBoard() }
