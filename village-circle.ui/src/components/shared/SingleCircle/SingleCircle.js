@@ -11,6 +11,8 @@ import userData from '../../../helpers/usersData';
 
 import './SingleCircle.scss';
 import AnnouncementContainer from '../AnnouncementContainer/AnnouncementContainer';
+import linksData from '../../../helpers/linksData';
+import LinkContainer from '../LinkContainer/LinkContainer';
 
 class SingleCircle extends React.Component {
   state = {
@@ -49,6 +51,7 @@ class SingleCircle extends React.Component {
           this.getMessageData(result.boardId);
           this.getUser(uid, circleId);
           this.getAnnouncementData(result.circleId);
+          this.getLinkData(result.circleId);
         }
       })
       .catch((err) => console.error('err from get single circle', err));
@@ -64,6 +67,12 @@ class SingleCircle extends React.Component {
     announcementsData.getAllAnnouncements(circleId)
       .then((result) => this.setState({ announcements: result }))
       .catch((err) => console.error('err from get announcements', err));
+  }
+
+  getLinkData = (circleId) => {
+    linksData.getAllLinks(circleId)
+      .then((result) => this.setState({ links: result }))
+      .catch((err) => console.error('err from get links', err));
   }
 
   // The function below will return true or false to check for membership
@@ -122,6 +131,7 @@ class SingleCircle extends React.Component {
       circleMember,
       circleMessages,
       currentUser,
+      links,
     } = this.state;
     if (authed) {
       if (circleMember && circle.boardId !== 0) {
@@ -139,6 +149,7 @@ class SingleCircle extends React.Component {
             </Grid.Column>
             <Grid.Column width={6}>
               <AnnouncementContainer announcements={announcements} />
+              <LinkContainer links={links} />
             </Grid.Column>
           </Grid>
         );
