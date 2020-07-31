@@ -114,12 +114,6 @@ class SingleCircle extends React.Component {
       .catch((err) => console.error('err from update message', err));
   }
 
-  saveNewLink = (newLinkObject) => {
-    linksData.createNewLink(newLinkObject)
-      .then(() => this.getLinkData(this.state.circle.circleId))
-      .catch((err) => console.error('err from save new link', err));
-  }
-
   joinThisCircle = (e) => {
     e.preventDefault();
     const { currentUser, circle } = this.state;
@@ -162,7 +156,7 @@ class SingleCircle extends React.Component {
             </Grid.Column>
             <Grid.Column width={6}>
               <AnnouncementContainer getAnnouncementData={this.getAnnouncementData} circleId={circle.circleId} announcements={announcements} leaderView={leaderView} />
-              <LinkContainer saveNewLink={this.saveNewLink} circleId={circle.circleId} links={links} leaderView={leaderView} />
+              <LinkContainer getLinkData={this.getLinkData} saveNewLink={this.saveNewLink} circleId={circle.circleId} links={links} leaderView={leaderView} />
             </Grid.Column>
           </Grid>
         );
