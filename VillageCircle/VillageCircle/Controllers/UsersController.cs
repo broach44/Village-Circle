@@ -36,5 +36,13 @@ namespace VillageCircle.Controllers
             return Ok(children);
         }
 
+        // api/users/circleMembers/{circleId}
+        [HttpGet("circleMembers/{circleId}")]
+        public IActionResult GetCircleMembersByCircleId(int circleId)
+        {
+            var members = _usersRepository.GetCircleMemberUsers(circleId);
+            return Ok(members);
+        }
+
     }
 }

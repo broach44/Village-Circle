@@ -48,5 +48,27 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public IEnumerable<User> GetCircleMemberUsers(int circleId)
+        {
+            var circleLeaderIdQuery = "select userId from [circle] where circleid = @CircleId;";
+
+            var sql = @"
+                        select [user].*
+                        from [CircleMember]
+                        join [User] on [user].userId = [CircleMember].userId
+                        where CircleId = @CircleId and [User].UserId != @UserId;
+                        ";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters1 = new { CircleId = circleId };
+                var circleLeaderId = db.QueryFirstOrDefault<int>(circleLeaderIdQuery, parameters1);
+
+                var parameters2 = new { CircleId = circleId, UserId = circleLeaderId };
+                var result = db.Query<User>(sql, parameters2);
+                return result;
+            }
+        }
     }
 }
