@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Table, Message, Button } from 'semantic-ui-react';
+import { Table, Message } from 'semantic-ui-react';
 import LinkTableRow from '../LinkTableRow/LinkTableRow';
 import './LinkContainer.scss';
+import NewLinkModal from '../NewLinkModal/NewLinkModal';
 
 class LinkContainer extends React.Component {
   static props = {
     links: PropTypes.array,
     leaderView: PropTypes.bool,
+    circleId: PropTypes.int,
+    saveNewLink: PropTypes.func,
   }
 
   renderTableView = () => {
@@ -35,7 +38,7 @@ class LinkContainer extends React.Component {
   }
 
   renderLeaderView = () => {
-    if (this.props.leaderView) return <Button>Add New Link</Button>;
+    if (this.props.leaderView) return <NewLinkModal saveNewLink={this.props.saveNewLink} circleId={this.props.circleId} />;
     return <></>;
   }
 
