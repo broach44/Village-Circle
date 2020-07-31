@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
+import { Button, Grid } from 'semantic-ui-react';
 
 import MessageContainer from '../MessageContainer/MessageContainer';
+
+import announcementsData from '../../../helpers/announcementsData';
 import circlesData from '../../../helpers/circlesData';
 import messagesData from '../../../helpers/messagesData';
 import userData from '../../../helpers/usersData';
 
 import './SingleCircle.scss';
+import AnnouncementContainer from '../AnnouncementContainer/AnnouncementContainer';
 
 class SingleCircle extends React.Component {
   state = {
@@ -15,6 +18,7 @@ class SingleCircle extends React.Component {
     circleMember: false,
     circleMessages: [],
     currentUser: {},
+    announcements: [],
   }
 
   static props = {
@@ -44,6 +48,7 @@ class SingleCircle extends React.Component {
         if (authed) {
           this.getMessageData(result.boardId);
           this.getUser(uid, circleId);
+          this.getAnnouncementData(result.circleId);
         }
       })
       .catch((err) => console.error('err from get single circle', err));
@@ -53,6 +58,12 @@ class SingleCircle extends React.Component {
     messagesData.getAllMessages(boardId)
       .then((messageArr) => this.setState({ circleMessages: messageArr }))
       .catch((err) => console.error('err from get all messages', err));
+  }
+
+  getAnnouncementData = (circleId) => {
+    announcementsData.getAllAnnouncements(circleId)
+      .then((result) => this.setState({ announcements: result }))
+      .catch((err) => console.error('err from get announcements', err));
   }
 
   // The function below will return true or false to check for membership
@@ -106,6 +117,7 @@ class SingleCircle extends React.Component {
   renderBoard = () => {
     const { authed } = this.props;
     const {
+      announcements,
       circle,
       circleMember,
       circleMessages,
@@ -114,14 +126,21 @@ class SingleCircle extends React.Component {
     if (authed) {
       if (circleMember && circle.boardId !== 0) {
         return (
-          <MessageContainer
-                currentUser={currentUser}
-                currentUserId={currentUser.userId}
-                postMessage={this.postMessageToBoard}
-                messages={circleMessages}
-                currentBoardId={circle.boardId}
-                deleteMessageFromBoard={this.deleteMessageFromBoard}
-                updateUserMessage={this.updateUserMessage} />
+          <Grid>
+            <Grid.Column width={10}>
+            <MessageContainer
+                  currentUser={currentUser}
+                  currentUserId={currentUser.userId}
+                  postMessage={this.postMessageToBoard}
+                  messages={circleMessages}
+                  currentBoardId={circle.boardId}
+                  deleteMessageFromBoard={this.deleteMessageFromBoard}
+                  updateUserMessage={this.updateUserMessage} />
+            </Grid.Column>
+            <Grid.Column width={6}>
+              <AnnouncementContainer announcements={announcements} />
+            </Grid.Column>
+          </Grid>
         );
       } return (
         <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
