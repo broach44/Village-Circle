@@ -9,11 +9,17 @@ class SingleAnnouncementCard extends React.Component {
   static props = {
     announcement: PropTypes.object,
     leaderView: PropTypes.bool,
+    deleteAnnouncement: PropTypes.func,
   }
 
   renderLeaderView = () => {
-    if (this.props.leaderView === true) return (<Popup trigger={<Icon name='delete' />} position='top right' content='Delete Announcement' size='small'/>);
+    if (this.props.leaderView === true) return (<Popup trigger={<Icon name='delete' onClick={this.deleteAnnouncementEvent} />} position='top right' content='Delete Announcement' size='small'/>);
     return <></>;
+  }
+
+  deleteAnnouncementEvent = (e) => {
+    e.preventDefault();
+    this.props.deleteAnnouncement(this.props.announcement.announcementId);
   }
 
   render() {

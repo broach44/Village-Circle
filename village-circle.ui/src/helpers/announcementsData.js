@@ -14,4 +14,6 @@ const getAllAnnouncements = (circleId) => new Promise((resolve, reject) => {
 
 const createNewAnnouncement = (announcementObj) => axios.post(`${baseUrl}/announcements`, announcementObj);
 
-export default { getAllAnnouncements, createNewAnnouncement };
+const deleteAnnouncement = (announcementId) => axios.delete(`${baseUrl}/announcements/${announcementId}`);
+
+export default { getAllAnnouncements, createNewAnnouncement, deleteAnnouncement };
