@@ -20,7 +20,8 @@ namespace VillageCircle.DataAccess
         public IEnumerable<Announcement> GetAllAnnouncements(int circleId)
         {
             var sql = @"select * from [Announcements]
-                        where CircleId = @CircleId;";
+                        where CircleId = @CircleId
+                        order by AnnouncementDateTime desc;";
 
             using (var db = new SqlConnection(connectionString))
             {

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
 
 import MessageContainer from '../MessageContainer/MessageContainer';
+
+import announcementsData from '../../../helpers/announcementsData';
 import circlesData from '../../../helpers/circlesData';
 import messagesData from '../../../helpers/messagesData';
 import userData from '../../../helpers/usersData';
@@ -15,6 +17,7 @@ class SingleCircle extends React.Component {
     circleMember: false,
     circleMessages: [],
     currentUser: {},
+    announcements: [],
   }
 
   static props = {
@@ -44,6 +47,7 @@ class SingleCircle extends React.Component {
         if (authed) {
           this.getMessageData(result.boardId);
           this.getUser(uid, circleId);
+          this.getAnnouncementData(result.circleId);
         }
       })
       .catch((err) => console.error('err from get single circle', err));
@@ -53,6 +57,12 @@ class SingleCircle extends React.Component {
     messagesData.getAllMessages(boardId)
       .then((messageArr) => this.setState({ circleMessages: messageArr }))
       .catch((err) => console.error('err from get all messages', err));
+  }
+
+  getAnnouncementData = (circleId) => {
+    announcementsData.getAllAnnouncements(circleId)
+      .then((result) => this.setState({ announcements: result }))
+      .catch((err) => console.error('err from get announcements', err));
   }
 
   // The function below will return true or false to check for membership
