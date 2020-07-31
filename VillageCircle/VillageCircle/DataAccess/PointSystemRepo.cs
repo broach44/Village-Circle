@@ -81,5 +81,16 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public IEnumerable<PointActivity> GetActivityPointOptions()
+        {
+            var sql = @"select * from [ActivityPoints] where ActivityPointId != 1;";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                var result = db.Query<PointActivity>(sql);
+                return result;
+            }
+        }
     }
 }

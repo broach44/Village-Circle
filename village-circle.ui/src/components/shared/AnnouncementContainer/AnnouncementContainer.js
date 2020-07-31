@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import './AnnouncementContainer.scss';
 import SingleAnnouncementCard from '../SingleAnnouncementCard/SingleAnnouncementCard';
-import announcementsData from '../../../helpers/announcementsData';
 
 class AnnouncementContainer extends React.Component {
   static props = {

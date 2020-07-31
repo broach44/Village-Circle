@@ -28,6 +28,6 @@ const getChildren = (userId) => new Promise((resolve, reject) => {
       resolve(children);
     })
     .catch((err) => reject(err));
-})
+});
 
 export default { getSingleUserData, getUserPosts, getChildren };

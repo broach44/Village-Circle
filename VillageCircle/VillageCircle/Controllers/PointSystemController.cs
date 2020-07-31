@@ -42,5 +42,13 @@ namespace VillageCircle.Controllers
             var pointEntry = _pointSystemRepository.AddPoints(pointEntryToAdd);
             return Created("Successfully created entry for points", pointEntry);
         }
+
+        // api/pointSystem/options
+        [HttpGet("options")]
+        public IActionResult GetPointSystemOptions()
+        {
+            var activityPointOptions = _pointSystemRepository.GetActivityPointOptions();
+            return Ok(activityPointOptions);
+        }
     }
 }
