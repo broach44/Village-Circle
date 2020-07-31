@@ -155,7 +155,7 @@ class SingleCircle extends React.Component {
                   updateUserMessage={this.updateUserMessage} />
             </Grid.Column>
             <Grid.Column width={6}>
-              <AnnouncementContainer announcements={announcements} leaderView={leaderView} />
+              <AnnouncementContainer getAnnouncementData={this.getAnnouncementData} circleId={circle.circleId} announcements={announcements} leaderView={leaderView} />
               <LinkContainer links={links} leaderView={leaderView} />
             </Grid.Column>
           </Grid>

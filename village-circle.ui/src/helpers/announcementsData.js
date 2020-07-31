@@ -12,4 +12,6 @@ const getAllAnnouncements = (circleId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default { getAllAnnouncements };
+const createNewAnnouncement = (announcementObj) => axios.post(`${baseUrl}/announcements`, announcementObj);
+
+export default { getAllAnnouncements, createNewAnnouncement };
