@@ -12,6 +12,15 @@ const getPointTotal = (userId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+const getActivityOptions = () => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pointSystem/options`)
+    .then((result) => {
+      const options = result.data;
+      resolve(options);
+    })
+    .catch((error) => reject(error));
+})
+
 const addPoints = (pointEntryObj) => axios.post(`${baseUrl}/pointsystem`, pointEntryObj);
 
-export default { getPointTotal, addPoints };
+export default { getPointTotal, addPoints, getActivityOptions };

@@ -36,5 +36,13 @@ namespace VillageCircle.Controllers
             return Created("Create new announcement successfully", announcement);
         }
 
+        // api/announcements/{announcementId}
+        [HttpDelete("{announcementId}")]
+        public IActionResult DeleteAnnouncementById(int announcementId)
+        {
+            var deletedAnnouncement = _announcementsRepo.DeleteAnnouncement(announcementId);
+            return Ok("Announcement has been deleted successfully!");
+        }
+
     }
 }

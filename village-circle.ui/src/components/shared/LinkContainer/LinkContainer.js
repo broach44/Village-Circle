@@ -3,15 +3,34 @@ import PropTypes from 'prop-types';
 
 import { Table, Message } from 'semantic-ui-react';
 import LinkTableRow from '../LinkTableRow/LinkTableRow';
+import NewLinkModal from '../NewLinkModal/NewLinkModal';
+
+import linksData from '../../../helpers/linksData';
+
 import './LinkContainer.scss';
 
 class LinkContainer extends React.Component {
   static props = {
     links: PropTypes.array,
+    leaderView: PropTypes.bool,
+    circleId: PropTypes.int,
+    getLinkData: PropTypes.func,
+  }
+
+  saveNewLink = (newLinkObject) => {
+    linksData.createNewLink(newLinkObject)
+      .then(() => this.props.getLinkData(this.props.circleId))
+      .catch((err) => console.error('err from save new link', err));
+  }
+
+  deleteLink = (linkId) => {
+    linksData.deleteLink(linkId)
+      .then(() => this.props.getLinkData(this.props.circleId))
+      .catch((err) => console.error('err from delete link', err));
   }
 
   renderTableView = () => {
-    const { links } = this.props;
+    const { links, leaderView } = this.props;
     if (links.length === 0) {
       return (<Message>
       Looks like there aren't any links yet. Don't worry, I'm sure your leader will add some soon.
@@ -27,16 +46,22 @@ class LinkContainer extends React.Component {
         </Table.Header>
 
         <Table.Body>
-          { links.map((link) => <LinkTableRow link={link} />)}
+          { links.map((link) => <LinkTableRow key={link.linkId} deleteLink={this.deleteLink} link={link} leaderView={leaderView} />)}
         </Table.Body>
       </Table>
     );
+  }
+
+  renderLeaderView = () => {
+    if (this.props.leaderView) return <NewLinkModal saveNewLink={this.saveNewLink} circleId={this.props.circleId} />;
+    return <></>;
   }
 
   render() {
     return (
       <div className='LinkContainer'>
         <h2>Links:</h2>
+        { this.renderLeaderView() }
         { this.renderTableView() }
       </div>
     );

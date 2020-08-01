@@ -21,6 +21,7 @@ const getUserPosts = (userId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+// Data call to get children for a parent, links to parent profile***********
 const getChildren = (userId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/users/children/${userId}`)
     .then((result) => {
@@ -28,6 +29,7 @@ const getChildren = (userId) => new Promise((resolve, reject) => {
       resolve(children);
     })
     .catch((err) => reject(err));
-})
+});
+// **************************************************************************
 
 export default { getSingleUserData, getUserPosts, getChildren };
