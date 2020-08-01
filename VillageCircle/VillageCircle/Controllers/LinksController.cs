@@ -36,7 +36,7 @@ namespace VillageCircle.Controllers
             return Created("Created new link succesffully", link);
         }
 
-        // api/announcements/{linkId}
+        // api/links/{linkId}
         [HttpDelete("{linkId}")]
         public IActionResult DeleteLinkById(int linkId)
         {
