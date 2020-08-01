@@ -9,18 +9,18 @@ using VillageCircle.Models;
 
 namespace VillageCircle.Controllers
 {
-    [Route("api/announcements")]
+    [Route("api/circleannouncements")]
     [ApiController]
-    public class AnnouncementsController : ControllerBase
+    public class CircleAnnouncementsController : ControllerBase
     {
-        AnnouncementsRepo _announcementsRepo;
+        CircleAnnouncementsRepo _announcementsRepo;
 
-        public AnnouncementsController(AnnouncementsRepo announcementsRepo)
+        public CircleAnnouncementsController(CircleAnnouncementsRepo announcementsRepo)
         {
             _announcementsRepo = announcementsRepo;
         }
 
-        // api/announcements/{circleId}
+        // api/circleannouncements/{circleId}
         [HttpGet("{circleId}")]
         public IActionResult GetAllAnnouncementsByCircleId(int circleId)
         {
@@ -28,15 +28,15 @@ namespace VillageCircle.Controllers
             return Ok(announcements);
         }
 
-        // api/announcements
+        // api/circleannouncements
         [HttpPost]
-        public IActionResult CreateNewAnnouncement(Announcement newAnnouncementToAdd)
+        public IActionResult CreateNewAnnouncement(CircleAnnouncement newAnnouncementToAdd)
         {
             var announcement = _announcementsRepo.AddAnnouncement(newAnnouncementToAdd);
             return Created("Create new announcement successfully", announcement);
         }
 
-        // api/announcements/{announcementId}
+        // api/circleannouncements/{announcementId}
         [HttpDelete("{announcementId}")]
         public IActionResult DeleteAnnouncementById(int announcementId)
         {

@@ -4,7 +4,7 @@ import apiKeys from './apiKeys.json';
 const baseUrl = apiKeys.databaseURL;
 
 const getAllAnnouncements = (circleId) => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/announcements/${circleId}`)
+  axios.get(`${baseUrl}/circleannouncements/${circleId}`)
     .then((result) => {
       const announcements = result.data;
       resolve(announcements);
@@ -12,8 +12,8 @@ const getAllAnnouncements = (circleId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const createNewAnnouncement = (announcementObj) => axios.post(`${baseUrl}/announcements`, announcementObj);
+const createNewAnnouncement = (announcementObj) => axios.post(`${baseUrl}/circleannouncements`, announcementObj);
 
-const deleteAnnouncement = (announcementId) => axios.delete(`${baseUrl}/announcements/${announcementId}`);
+const deleteAnnouncement = (announcementId) => axios.delete(`${baseUrl}/circleannouncements/${announcementId}`);
 
 export default { getAllAnnouncements, createNewAnnouncement, deleteAnnouncement };

@@ -1,41 +1,41 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using VillageCircle.Models;
-using Dapper;
-using System.Data.SqlClient;
 
 namespace VillageCircle.DataAccess
 {
-    public class CircleLinksRepo
+    public class GuildLinksRepo
     {
         string connectionString;
-        public CircleLinksRepo(IConfiguration config)
+        public GuildLinksRepo(IConfiguration config)
         {
             connectionString = config.GetConnectionString("VillageCircle");
         }
 
-        public IEnumerable<CircleLink> GetAllLinks(int circleId)
+        public IEnumerable<GuildLink> GetAllLinks(int guildId)
         {
-            var sql = @"select * from CircleLinks
-                        where CircleId = @CircleId and IsAvailable = 1;";
+            var sql = @"select * from GuildLinks
+                        where GuildId = @GuildId and IsAvailable = 1;";
 
             using (var db = new SqlConnection(connectionString))
             {
-                var parameters = new { CircleId = circleId };
-                var result = db.Query<CircleLink>(sql, parameters);
+                var parameters = new { GuildId = guildId };
+                var result = db.Query<GuildLink>(sql, parameters);
                 return result;
             }
         }
 
-        public CircleLink AddLink(CircleLink linkToAdd)
+        public GuildLink AddLink(GuildLink linkToAdd)
         {
             var sql = @"
-                        insert into[CircleLinks](LinkTitle, LinkDescription, LinkUrl, IsAvailable, CircleId)
+                        insert into[GuildLinks](LinkTitle, LinkDescription, LinkUrl, IsAvailable, GuildId)
                         output inserted.*
-                        values(@LinkTitle, @LinkDescription, @LinkUrl, 1, @CircleId);
+                        values(@LinkTitle, @LinkDescription, @LinkUrl, 1, @GuildId);
                         ";
 
             using (var db = new SqlConnection(connectionString))
@@ -45,23 +45,23 @@ namespace VillageCircle.DataAccess
                     LinkTitle = linkToAdd.LinkTitle,
                     LinkDescription = linkToAdd.LinkDescription,
                     LinkUrl = linkToAdd.LinkUrl,
-                    CircleId = linkToAdd.CircleId
+                    GuildId = linkToAdd.GuildId
                 };
-                var result = db.QueryFirstOrDefault<CircleLink>(sql, parameters);
+                var result = db.QueryFirstOrDefault<GuildLink>(sql, parameters);
                 return result;
             }
         }
 
-        public CircleLink DeleteLink(int linkId)
+        public GuildLink DeleteLink(int linkId)
         {
-            var sql = @"update[CircleLinks]
+            var sql = @"update[GuildLinks]
                         set IsAvailable = 0
                         where LinkId = @LinkId;";
 
             using (var db = new SqlConnection(connectionString))
             {
                 var parameters = new { LinkId = linkId };
-                var result = db.QueryFirstOrDefault<CircleLink>(sql, parameters);
+                var result = db.QueryFirstOrDefault<GuildLink>(sql, parameters);
                 return result;
             }
         }

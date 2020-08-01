@@ -1,11 +1,11 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import SingleAnnouncementCard from '../SingleAnnouncementCard/SingleAnnouncementCard';
 import NewAnnouncementModal from '../NewAnnouncementModal/NewAnnouncementModal';
+import announcementsData from '../../../helpers/circleAnnouncementsData';
 import './AnnouncementContainer.scss';
-import announcementsData from '../../../helpers/announcementsData';
 
 class AnnouncementContainer extends React.Component {
   static props = {
@@ -36,14 +36,24 @@ class AnnouncementContainer extends React.Component {
       .catch((err) => console.error('err from delete announcement', err));
   }
 
-  render() {
+  renderAnnouncementsView = () => {
     const { announcements, leaderView } = this.props;
+    if (announcements.length > 0) {
+      return announcements.map((announcement) => <SingleAnnouncementCard
+        key={announcement.announcementId}
+        announcement={announcement}
+        deleteAnnouncement={this.deleteAnnouncement}
+        leaderView={leaderView} />);
+    } return <Grid.Row><Message>Your leader hasn't posted any messages yet...they will.</Message></Grid.Row>;
+  }
+
+  render() {
     return (
       <div className='AnnouncementContainer'>
         <h2>Announcements:</h2>
           {this.renderLeaderView()}
         <Grid>
-          { announcements.map((announcement) => <SingleAnnouncementCard key={announcement.announcementId} announcement={announcement} deleteAnnouncement={this.deleteAnnouncement} leaderView={leaderView} />)}
+          {this.renderAnnouncementsView() }
         </Grid>
       </div>
     );

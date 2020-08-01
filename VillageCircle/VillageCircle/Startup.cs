@@ -36,8 +36,10 @@ namespace VillageCircle
             services.AddTransient<UsersRepo>();
             services.AddTransient<PointSystemRepo>();
             services.AddTransient<GoalsRepo>();
-            services.AddTransient<AnnouncementsRepo>();
+            services.AddTransient<CircleAnnouncementsRepo>();
+            services.AddTransient<GuildAnnouncementsRepo>();
             services.AddTransient<CircleLinksRepo>();
+            services.AddTransient<GuildLinksRepo>();
             services.AddTransient<GuildsRepo>();
 
 

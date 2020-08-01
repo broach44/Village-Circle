@@ -7,7 +7,7 @@ import LinkContainer from '../LinkContainer/LinkContainer';
 import MemberListModal from '../MemberListModal/MemberListModal';
 import MessageContainer from '../MessageContainer/MessageContainer';
 
-import announcementsData from '../../../helpers/announcementsData';
+import announcementsData from '../../../helpers/circleAnnouncementsData';
 import circlesData from '../../../helpers/circlesData';
 import linksData from '../../../helpers/circleLinksData';
 import messagesData from '../../../helpers/messagesData';
