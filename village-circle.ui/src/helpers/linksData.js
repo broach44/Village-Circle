@@ -14,4 +14,6 @@ const getAllLinks = (circleId) => new Promise((resolve, reject) => {
 
 const createNewLink = (linkObject) => axios.post(`${baseUrl}/links`, linkObject);
 
-export default { getAllLinks, createNewLink };
+const deleteLink = (linkId) => axios.delete(`${baseUrl}/links/${linkId}`);
+
+export default { getAllLinks, createNewLink, deleteLink };

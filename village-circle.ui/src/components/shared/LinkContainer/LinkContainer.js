@@ -23,6 +23,12 @@ class LinkContainer extends React.Component {
       .catch((err) => console.error('err from save new link', err));
   }
 
+  deleteLink = (linkId) => {
+    linksData.deleteLink(linkId)
+      .then(() => this.props.getLinkData(this.props.circleId))
+      .catch((err) => console.error('err from delete link', err));
+  }
+
   renderTableView = () => {
     const { links, leaderView } = this.props;
     if (links.length === 0) {
@@ -40,7 +46,7 @@ class LinkContainer extends React.Component {
         </Table.Header>
 
         <Table.Body>
-          { links.map((link) => <LinkTableRow link={link} leaderView={leaderView} />)}
+          { links.map((link) => <LinkTableRow key={link.linkId} deleteLink={this.deleteLink} link={link} leaderView={leaderView} />)}
         </Table.Body>
       </Table>
     );

@@ -14,11 +14,17 @@ class LinkTableRow extends React.Component {
   static props = {
     link: PropTypes.object,
     leaderView: PropTypes.bool,
+    deleteLink: PropTypes.func,
   }
 
   renderLeaderView = () => {
-    if (this.props.leaderView === true) return (<Popup trigger={<Icon name='delete' />} position='top right' content='Delete Link' size='small'/>);
+    if (this.props.leaderView === true) return (<Popup trigger={<Icon name='delete' onClick={this.deleteLinkEvent} />} position='top right' content='Delete Link' size='small'/>);
     return <></>;
+  }
+
+  deleteLinkEvent = (e) => {
+    e.preventDefault();
+    this.props.deleteLink(this.props.link.linkId);
   }
 
   render() {
