@@ -70,5 +70,27 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public IEnumerable<User> GetGuildMemberUsers(int guildId)
+        {
+            var guildLeaderIdQuery = "select userId from [guild] where GuildId = @GuildId;";
+
+            var sql = @"
+                        select [user].*
+                        from [GuildMember]
+                        join [User] on [user].userId = [GuildMember].userId
+                        where GuildId = @GuildId and [User].UserId != @UserId;
+                        ";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters1 = new { GuildId = guildId };
+                var guildLeaderId = db.QueryFirstOrDefault<int>(guildLeaderIdQuery, parameters1);
+
+                var parameters2 = new { GuildId = guildId, UserId = guildLeaderId };
+                var result = db.Query<User>(sql, parameters2);
+                return result;
+            }
+        }
     }
 }
