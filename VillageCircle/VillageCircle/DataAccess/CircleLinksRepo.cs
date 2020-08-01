@@ -9,31 +9,31 @@ using System.Data.SqlClient;
 
 namespace VillageCircle.DataAccess
 {
-    public class LinksRepo
+    public class CircleLinksRepo
     {
         string connectionString;
-        public LinksRepo(IConfiguration config)
+        public CircleLinksRepo(IConfiguration config)
         {
             connectionString = config.GetConnectionString("VillageCircle");
         }
 
-        public IEnumerable<Link> GetAllLinks(int circleId)
+        public IEnumerable<CircleLink> GetAllLinks(int circleId)
         {
-            var sql = @"select * from links
+            var sql = @"select * from CircleLinks
                         where CircleId = @CircleId and IsAvailable = 1;";
 
             using (var db = new SqlConnection(connectionString))
             {
                 var parameters = new { CircleId = circleId };
-                var result = db.Query<Link>(sql, parameters);
+                var result = db.Query<CircleLink>(sql, parameters);
                 return result;
             }
         }
 
-        public Link AddLink(Link linkToAdd)
+        public CircleLink AddLink(CircleLink linkToAdd)
         {
             var sql = @"
-                        insert into[Links](LinkTitle, LinkDescription, LinkUrl, IsAvailable, CircleId)
+                        insert into[CircleLinks](LinkTitle, LinkDescription, LinkUrl, IsAvailable, CircleId)
                         output inserted.*
                         values(@LinkTitle, @LinkDescription, @LinkUrl, 1, @CircleId);
                         ";
@@ -47,12 +47,12 @@ namespace VillageCircle.DataAccess
                     LinkUrl = linkToAdd.LinkUrl,
                     CircleId = linkToAdd.CircleId
                 };
-                var result = db.QueryFirstOrDefault<Link>(sql, parameters);
+                var result = db.QueryFirstOrDefault<CircleLink>(sql, parameters);
                 return result;
             }
         }
 
-        public Link DeleteLink(int linkId)
+        public CircleLink DeleteLink(int linkId)
         {
             var sql = @"update[Links]
                         set IsAvailable = 0
@@ -61,7 +61,7 @@ namespace VillageCircle.DataAccess
             using (var db = new SqlConnection(connectionString))
             {
                 var parameters = new { LinkId = linkId };
-                var result = db.QueryFirstOrDefault<Link>(sql, parameters);
+                var result = db.QueryFirstOrDefault<CircleLink>(sql, parameters);
                 return result;
             }
         }

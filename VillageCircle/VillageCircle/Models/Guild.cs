@@ -12,5 +12,6 @@ namespace VillageCircle.Models
         public string GuildName { get; set; }
         public string GuildDescription { get; set; }
         public int BoardId { get; set; }
+        public string GuildLeader { get; set; }
     }
 }

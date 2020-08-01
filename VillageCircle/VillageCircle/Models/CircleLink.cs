@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace VillageCircle.Models
 {
-    public class Link
+    public class CircleLink
     {
         public int LinkId { get; set; }
         public string LinkTitle { get; set; }

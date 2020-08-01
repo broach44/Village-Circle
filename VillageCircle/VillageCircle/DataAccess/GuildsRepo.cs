@@ -27,7 +27,7 @@ namespace VillageCircle.DataAccess
         public Guild GetSingleGuild(int guildId)
         {
             var sql = @"
-                        select [Guild].*, [user].firstName + ' ' + [user].lastName as CircleLeader
+                        select [Guild].*, [user].firstName + ' ' + [user].lastName as GuildLeader
                         from [Guild]
                         join [User] on [User].UserId = [Guild].UserId
                         where GuildId = @GuildId;

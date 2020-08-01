@@ -9,17 +9,17 @@ using VillageCircle.Models;
 
 namespace VillageCircle.Controllers
 {
-    [Route("api/links")]
+    [Route("api/circleLinks")]
     [ApiController]
-    public class LinksController : ControllerBase
+    public class CircleLinksController : ControllerBase
     {
-        LinksRepo _linksRepository;
-        public LinksController(LinksRepo linkRepository)
+        CircleLinksRepo _linksRepository;
+        public CircleLinksController(CircleLinksRepo linkRepository)
         {
             _linksRepository = linkRepository;
         }
 
-        // api/links/{circleId}
+        // api/circleLinks/{circleId}
         [HttpGet("{circleId}")]
         public IActionResult GetAllLinksByCircleId(int circleId)
         {
@@ -27,16 +27,16 @@ namespace VillageCircle.Controllers
             return Ok(links);
         }
 
-        // api/links
+        // api/circleLinks
         [HttpPost]
-        public IActionResult CreateNewLink(Link newLinkToAdd)
+        public IActionResult CreateNewLink(CircleLink newLinkToAdd)
         {
 
             var link = _linksRepository.AddLink(newLinkToAdd);
             return Created("Created new link succesffully", link);
         }
 
-        // api/links/{linkId}
+        // api/circleLinks/{linkId}
         [HttpDelete("{linkId}")]
         public IActionResult DeleteLinkById(int linkId)
         {
