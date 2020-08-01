@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid } from 'semantic-ui-react';
 
-import AnnouncementContainer from '../AnnouncementContainer/AnnouncementContainer';
-import LinkContainer from '../LinkContainer/LinkContainer';
+import GuildAnnouncementContainer from '../GuildAnnouncementContainer/GuildAnnouncementContainer';
+import GuildLinkContainer from '../GuildLinkContainer/GuildLinkContainer';
 import MemberListModal from '../MemberListModal/MemberListModal';
 import MessageContainer from '../MessageContainer/MessageContainer';
 
-import announcementsData from '../../../helpers/circleAnnouncementsData';
+import announcementsData from '../../../helpers/guildAnnouncementsData';
 import guildsData from '../../../helpers/guildsData';
-import linksData from '../../../helpers/circleLinksData';
+import linksData from '../../../helpers/guildLinksData';
 import messagesData from '../../../helpers/messagesData';
 import userData from '../../../helpers/usersData';
 
@@ -24,6 +24,7 @@ class SingleGuild extends React.Component {
     announcements: [],
     leaderView: false,
     childGuildMembers: [],
+    links: [],
   }
 
   static props = {
@@ -43,6 +44,10 @@ class SingleGuild extends React.Component {
         this.setState({ guild: result });
         if (authed) {
           this.getUser(uid, guildId, result.userId);
+          this.getMessageData(result.boardId);
+          this.getAnnouncementData(result.guildId);
+          this.getLinkData(result.guildId);
+          this.getMembers(result.guildId);
         }
       })
       .catch((err) => console.error('err from get guild data', err));
@@ -62,6 +67,27 @@ class SingleGuild extends React.Component {
     messagesData.getAllMessages(boardId)
       .then((messageArr) => this.setState({ guildMessages: messageArr }))
       .catch((err) => console.error('err from get all messages', err));
+  }
+
+  getAnnouncementData = (guildId) => {
+    announcementsData.getAllAnnouncements(guildId)
+      .then((result) => this.setState({ announcements: result }))
+      .catch((err) => console.error('err from get announcements', err));
+  }
+
+  getLinkData = (guildId) => {
+    linksData.getAllLinks(guildId)
+      .then((result) => this.setState({ links: result }))
+      .catch((err) => console.error('err from get links', err));
+  }
+
+  getMembers = (guildId) => {
+    guildsData.getMemberListOfGuild(guildId)
+      .then((memberData) => {
+        const childUsers = memberData.filter((member) => member.isChild === true);
+        this.setState({ childGuildMembers: childUsers });
+      })
+      .catch((err) => console.error('err from get guild members', err));
   }
 
   verifyGuildMembership = (userId, guildId) => {
@@ -141,8 +167,8 @@ class SingleGuild extends React.Component {
                   updateUserMessage={this.updateUserMessage} />
             </Grid.Column>
             <Grid.Column width={6}>
-              {/* <AnnouncementContainer getAnnouncementData={this.getAnnouncementData} guildId={guild.guildId} announcements={announcements} leaderView={leaderView} />
-              <LinkContainer getLinkData={this.getLinkData} saveNewLink={this.saveNewLink} guildId={guild.guildId} links={links} leaderView={leaderView} /> */}
+              <GuildAnnouncementContainer getAnnouncementData={this.getAnnouncementData} guildId={guild.guildId} announcements={announcements} leaderView={leaderView} />
+              <GuildLinkContainer getLinkData={this.getLinkData} saveNewLink={this.saveNewLink} guildId={guild.guildId} links={links} leaderView={leaderView} />
             </Grid.Column>
           </Grid>
         );
@@ -152,13 +178,18 @@ class SingleGuild extends React.Component {
     } return (<p>You should login if you want to join this board</p>);
   }
 
+  renderLeaderView = () => {
+    if (this.state.leaderView) return <MemberListModal members={this.state.childGuildMembers} />;
+    return <></>;
+  }
+
   render() {
     const { guild } = this.state;
     return (
       <div className="SingleGuild">
         <div className="GuildInfoDiv">
           <h2>Guild: {guild.guildName}</h2>
-          <h3>Leader: {guild.guildLeader} </h3>
+          <h3>Leader: {guild.guildLeader} {this.renderLeaderView()}</h3>
           <p className="GuildDescription">{guild.guildDescription}</p>
         </div>
         { this.renderBoard() }

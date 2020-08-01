@@ -46,7 +46,7 @@ const getMemberListOfCircle = (circleId) => new Promise((resolve, reject) => {
       resolve(members);
     })
     .catch((error) => reject(error));
-})
+});
 
 const joinCircle = (memberInfo) => axios.post(`${baseUrl}/circles/newMember`, memberInfo);
 

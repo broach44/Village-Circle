@@ -40,13 +40,6 @@ class MemberListModal extends Component {
           </Modal.Content>
           <Modal.Actions>
             <Button positive onClick={this.close}>Done</Button>
-            {/* <Button
-              positive
-              icon='save'
-              labelPosition='right'
-              content='Save New Circle'
-              onClick={this.saveNewGoalEvent}
-            /> */}
           </Modal.Actions>
         </Modal>
       </div>

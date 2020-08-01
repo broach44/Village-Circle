@@ -39,6 +39,15 @@ const getGuildsByUser = (userId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getMemberListOfGuild = (guildId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/users/guildMembers/${guildId}`)
+    .then((result) => {
+      const members = result.data;
+      resolve(members);
+    })
+    .catch((error) => reject(error));
+});
+
 const joinGuild = (memberInfo) => axios.post(`${baseUrl}/guilds/newMember`, memberInfo);
 
 const createNewCircle = (guildObj) => axios.post(`${baseUrl}/guilds`, guildObj);
@@ -50,4 +59,5 @@ export default {
   joinGuild,
   getGuildsByUser,
   createNewCircle,
-}
+  getMemberListOfGuild,
+};
