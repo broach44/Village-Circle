@@ -71,7 +71,7 @@ class MessageCard extends React.Component {
     const { message } = this.props;
     const { editMode, textToEdit } = this.state;
     return (
-      <Comment key={message.messageId} fluid raised className="singleMessage">
+      <Comment key={message.messageId} fluid className="singleMessage">
         <Comment.Avatar src={`https://api.adorable.io/avatars/75/${message.userName}@adorable.io.png`}/>
         <Comment.Content>
           <Comment.Author>{message.userName}</Comment.Author>

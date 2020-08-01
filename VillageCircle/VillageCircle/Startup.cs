@@ -36,8 +36,11 @@ namespace VillageCircle
             services.AddTransient<UsersRepo>();
             services.AddTransient<PointSystemRepo>();
             services.AddTransient<GoalsRepo>();
-            services.AddTransient<AnnouncementsRepo>();
-            services.AddTransient<LinksRepo>();
+            services.AddTransient<CircleAnnouncementsRepo>();
+            services.AddTransient<GuildAnnouncementsRepo>();
+            services.AddTransient<CircleLinksRepo>();
+            services.AddTransient<GuildLinksRepo>();
+            services.AddTransient<GuildsRepo>();
 
 
             services.AddSingleton<IConfiguration>(Configuration); // only create one instance and share it always

@@ -44,5 +44,13 @@ namespace VillageCircle.Controllers
             return Ok(members);
         }
 
+        // api/users/guildMembers/{guildId}
+        [HttpGet("guildMembers/{guildId}")]
+        public IActionResult GetGuildMembersByGuildId(int guildId)
+        {
+            var members = _usersRepository.GetGuildMemberUsers(guildId);
+            return Ok(members);
+        }
+
     }
 }

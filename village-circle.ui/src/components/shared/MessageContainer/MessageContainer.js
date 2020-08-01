@@ -9,8 +9,9 @@ import PropTypes from 'prop-types';
 
 import MessageCard from '../MessageCard/MessageCard';
 
-import './MessageContainer.scss';
 import pointsData from '../../../helpers/pointsData';
+
+import './MessageContainer.scss';
 
 class MessageContainer extends React.Component {
   state = {

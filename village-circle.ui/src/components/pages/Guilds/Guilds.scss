@@ -1,3 +1,8 @@
 .Guilds {
-  display: block;
+    display: block;
+    height: 100vh;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../../images/alexander-andrews-craftBG.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0.8rem;
 }

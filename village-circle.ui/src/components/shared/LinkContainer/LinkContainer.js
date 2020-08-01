@@ -5,7 +5,7 @@ import { Table, Message } from 'semantic-ui-react';
 import LinkTableRow from '../LinkTableRow/LinkTableRow';
 import NewLinkModal from '../NewLinkModal/NewLinkModal';
 
-import linksData from '../../../helpers/linksData';
+import linksData from '../../../helpers/circleLinksData';
 
 import './LinkContainer.scss';
 
