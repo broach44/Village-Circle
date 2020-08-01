@@ -4,7 +4,7 @@ import apiKeys from './apiKeys.json';
 const baseUrl = apiKeys.databaseURL;
 
 const getAllLinks = (circleId) => new Promise((resolve, reject) => {
-  axios.get(`${baseUrl}/links/${circleId}`)
+  axios.get(`${baseUrl}/circleLinks/${circleId}`)
     .then((result) => {
       const links = result.data;
       resolve(links);
@@ -12,8 +12,8 @@ const getAllLinks = (circleId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const createNewLink = (linkObject) => axios.post(`${baseUrl}/links`, linkObject);
+const createNewLink = (linkObject) => axios.post(`${baseUrl}/circleLinks`, linkObject);
 
-const deleteLink = (linkId) => axios.delete(`${baseUrl}/links/${linkId}`);
+const deleteLink = (linkId) => axios.delete(`${baseUrl}/circleLinks/${linkId}`);
 
 export default { getAllLinks, createNewLink, deleteLink };

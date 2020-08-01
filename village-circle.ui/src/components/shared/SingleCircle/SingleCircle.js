@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid } from 'semantic-ui-react';
 
+import AnnouncementContainer from '../AnnouncementContainer/AnnouncementContainer';
+import LinkContainer from '../LinkContainer/LinkContainer';
+import MemberListModal from '../MemberListModal/MemberListModal';
 import MessageContainer from '../MessageContainer/MessageContainer';
 
 import announcementsData from '../../../helpers/announcementsData';
 import circlesData from '../../../helpers/circlesData';
+import linksData from '../../../helpers/circleLinksData';
 import messagesData from '../../../helpers/messagesData';
 import userData from '../../../helpers/usersData';
 
 import './SingleCircle.scss';
-import AnnouncementContainer from '../AnnouncementContainer/AnnouncementContainer';
-import linksData from '../../../helpers/linksData';
-import LinkContainer from '../LinkContainer/LinkContainer';
-import MemberListModal from '../MemberListModal/MemberListModal';
 
 class SingleCircle extends React.Component {
   state = {
@@ -35,16 +35,6 @@ class SingleCircle extends React.Component {
     this.getCircleData();
   }
 
-  getUser = (uid, circleId, circleUserId) => {
-    userData.getSingleUserData(uid)
-      .then((user) => {
-        this.setState({ currentUser: user });
-        this.verifyCircleMembership(user.userId, circleId);
-        this.checkLeaderStatus(user.userId, circleUserId);
-      })
-      .catch((err) => console.error('err from get user', err));
-  }
-
   getCircleData = () => {
     const { circleId } = this.props.match.params;
     const { authed, uid } = this.props;
@@ -60,6 +50,16 @@ class SingleCircle extends React.Component {
         }
       })
       .catch((err) => console.error('err from get single circle', err));
+  }
+
+  getUser = (uid, circleId, circleUserId) => {
+    userData.getSingleUserData(uid)
+      .then((user) => {
+        this.setState({ currentUser: user });
+        this.verifyCircleMembership(user.userId, circleId);
+        this.checkLeaderStatus(user.userId, circleUserId);
+      })
+      .catch((err) => console.error('err from get user', err));
   }
 
   getMessageData = (boardId) => {
@@ -135,7 +135,7 @@ class SingleCircle extends React.Component {
     };
     circlesData.joinCircle(memberInfo)
       .then(() => {
-        this.setState({ circleMember: true })
+        this.setState({ circleMember: true });
         this.getCircleData();
       })
       .catch((err) => console.error('err from join circle', err));

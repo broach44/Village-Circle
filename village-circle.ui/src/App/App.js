@@ -68,7 +68,7 @@ class App extends React.Component {
             <PrivateRoute path="/profile" exact component={Profile} authed={authed} uid={uid}/>
             <PrivateRoute path="/childProfile/:uid" exact component={ChildProfile} authed={authed} />
             <Route path="/circle/:circleId" render={(props) => <Circle {...props} authed={authed} uid={uid} />}/>
-            <Route path="/guild/:guildId" render={(props) => <Guild {...props} authed={authed} />}/>
+            <Route path="/guild/:guildId" render={(props) => <Guild {...props} authed={authed} uid={uid} />}/>
             <Route path="/gatheringHall/:gatheringHallId" render={(props) => <GatheringHall {...props} authed={authed} />}/>
             <Route path="/circles" render={(props) => <Circles {...props} authed={authed} />}/>
             <Route path="/guilds" render={(props) => <Guilds {...props} authed={authed} />}/>

@@ -18,7 +18,7 @@ class GuildCard extends React.Component {
         <Card.Content header={guild.guildName} />
         <Card.Content description={guild.guildDescription} />
         <Card.Content extra>
-          <Button as={ Link } to={`/guild/${guild.guild}`} floated='right' color='orange'>Check It Out --&gt;</Button>
+          <Button as={ Link } to={`/guild/${guild.guildId}`} floated='right' color='orange'>Check It Out --&gt;</Button>
         </Card.Content>
       </Card>
     );
