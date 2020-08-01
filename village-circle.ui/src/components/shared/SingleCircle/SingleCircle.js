@@ -13,6 +13,7 @@ import './SingleCircle.scss';
 import AnnouncementContainer from '../AnnouncementContainer/AnnouncementContainer';
 import linksData from '../../../helpers/linksData';
 import LinkContainer from '../LinkContainer/LinkContainer';
+import MemberListModal from '../MemberListModal/MemberListModal';
 
 class SingleCircle extends React.Component {
   state = {
@@ -22,6 +23,7 @@ class SingleCircle extends React.Component {
     currentUser: {},
     announcements: [],
     leaderView: false,
+    childCircleMembers: [],
   }
 
   static props = {
@@ -54,6 +56,7 @@ class SingleCircle extends React.Component {
           this.getUser(uid, circleId, result.userId);
           this.getAnnouncementData(result.circleId);
           this.getLinkData(result.circleId);
+          this.getMembers(result.circleId);
         }
       })
       .catch((err) => console.error('err from get single circle', err));
@@ -75,6 +78,15 @@ class SingleCircle extends React.Component {
     linksData.getAllLinks(circleId)
       .then((result) => this.setState({ links: result }))
       .catch((err) => console.error('err from get links', err));
+  }
+
+  getMembers = (circleId) => {
+    circlesData.getMemberListOfCircle(circleId)
+      .then((memberData) => {
+        const childUsers = memberData.filter((member) => member.isChild === true);
+        this.setState({ childCircleMembers: childUsers });
+      })
+      .catch((err) => console.error('err from get circle members', err));
   }
 
   // The function below will return true or false to check for membership
@@ -167,7 +179,7 @@ class SingleCircle extends React.Component {
   }
 
   renderLeaderView = () => {
-    if (this.state.leaderView) return <Button>View Members</Button>;
+    if (this.state.leaderView) return <MemberListModal members={this.state.childCircleMembers} />;
     return <></>;
   }
 
