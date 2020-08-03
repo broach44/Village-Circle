@@ -63,7 +63,7 @@ class NewGoalModal extends Component {
               positive
               icon='save'
               labelPosition='right'
-              content='Save New Circle'
+              content='Save New Goal'
               onClick={this.saveNewGoalEvent}
             />
           </Modal.Actions>
