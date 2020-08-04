@@ -77,7 +77,7 @@ class AdultProfile extends React.Component {
     return (
       <>
         <Header as='h2' textAlign='left'>My Children</Header>
-        <Grid centered columns='4'>
+        <Grid columns='4'>
           {children.map((child) => <Grid.Column><ChildCard child={child}/></Grid.Column>)}
         </Grid>
       { this.renderSimpleAdultProfile() }

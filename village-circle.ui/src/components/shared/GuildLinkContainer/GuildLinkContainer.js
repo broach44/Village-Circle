@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Table, Message } from 'semantic-ui-react';
+import { Table, Message, Grid } from 'semantic-ui-react';
 import LinkTableRow from '../LinkTableRow/LinkTableRow';
 import NewGuildLinkModal from '../NewGuildLinkModal/NewGuildLinkModal';
 
@@ -53,7 +53,7 @@ class GuildLinkContainer extends React.Component {
   }
 
   renderLeaderView = () => {
-    if (this.props.leaderView) return <NewGuildLinkModal saveNewLink={this.saveNewLink} guildId={this.props.guildId} />;
+    if (this.props.leaderView) return <Grid.Row><NewGuildLinkModal saveNewLink={this.saveNewLink} guildId={this.props.guildId} /></Grid.Row>;
     return <></>;
   }
 
@@ -62,7 +62,11 @@ class GuildLinkContainer extends React.Component {
       <div className='GuildLinkContainer'>
         <h2>Links:</h2>
         { this.renderLeaderView() }
-        { this.renderTableView() }
+        <Grid className='LinkGrid'>
+          <Grid.Row>
+            { this.renderTableView() }
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }

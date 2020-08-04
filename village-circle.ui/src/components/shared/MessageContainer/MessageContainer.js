@@ -70,16 +70,16 @@ class MessageContainer extends React.Component {
       <div className='CircleMessageContainer'>
       <Form onSubmit={this.postEvent}>
         <Grid>
-          <Grid.Row centered>
-            <Grid.Column width={10}>
+          <Grid.Row>
+            <Grid.Column width={15}>
               <Form.TextArea placeholder='Write a message...' value={currentPostMessage} onChange={this.setPostMessage}/>
               <Button floated='right' size='small'>Post Message</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Form>
-      <Grid centered>
-        <Grid.Column className='gridMessageContainer' width={12}>
+      <Grid>
+        <Grid.Column className='gridMessageContainer' width={15}>
           <h3 className="messageBoardTitle">Message Board:</h3>
           {
             (messages.length === 0) ? <h3>Currently no one has posted to this board!</h3>

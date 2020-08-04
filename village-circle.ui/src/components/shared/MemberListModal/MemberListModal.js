@@ -30,7 +30,7 @@ class MemberListModal extends Component {
 
     return (
       <div>
-        <Button onClick={this.show('small')} color='brown' floated='right' size='mini'>View Members</Button>
+        <Button onClick={this.show('small')} color='brown' size='mini'>View Members</Button>
 
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Member List</Modal.Header>

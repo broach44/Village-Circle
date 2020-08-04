@@ -144,19 +144,14 @@ class SingleGuild extends React.Component {
   renderBoard = () => {
     const { authed } = this.props;
     const {
-      announcements,
       guild,
       guildMember,
       guildMessages,
       currentUser,
-      links,
-      leaderView,
     } = this.state;
     if (authed) {
       if (guildMember && guild.boardId !== 0) {
         return (
-          <Grid>
-            <Grid.Column width={10}>
             <MessageContainer
                   currentUser={currentUser}
                   currentUserId={currentUser.userId}
@@ -165,12 +160,6 @@ class SingleGuild extends React.Component {
                   currentBoardId={guild.boardId}
                   deleteMessageFromBoard={this.deleteMessageFromBoard}
                   updateUserMessage={this.updateUserMessage} />
-            </Grid.Column>
-            <Grid.Column width={6}>
-              <GuildAnnouncementContainer getAnnouncementData={this.getAnnouncementData} guildId={guild.guildId} announcements={announcements} leaderView={leaderView} />
-              <GuildLinkContainer getLinkData={this.getLinkData} saveNewLink={this.saveNewLink} guildId={guild.guildId} links={links} leaderView={leaderView} />
-            </Grid.Column>
-          </Grid>
         );
       } return (
         <Button color='brown' onClick={this.joinThisGuild}>Click to Join Guild</Button>
@@ -184,15 +173,27 @@ class SingleGuild extends React.Component {
   }
 
   render() {
-    const { guild } = this.state;
+    const {
+      guild,
+      leaderView,
+      links,
+      announcements,
+    } = this.state;
     return (
       <div className="SingleGuild">
-        <div className="GuildInfoDiv">
-          <h2>Guild: {guild.guildName}</h2>
-          <h3>Leader: {guild.guildLeader} {this.renderLeaderView()}</h3>
-          <p className="GuildDescription">{guild.guildDescription}</p>
-        </div>
-        { this.renderBoard() }
+        <Grid className="GuildInfoDiv">
+          <Grid.Column width={9}>
+            <h2>Guild: {guild.guildName}</h2>
+            <h3>Leader: {guild.guildLeader}</h3>
+            <p className="GuildDescription">{guild.guildDescription}</p>
+            { this.renderLeaderView() }
+            { this.renderBoard() }
+          </Grid.Column>
+          <Grid.Column width={7}>
+            <GuildAnnouncementContainer getAnnouncementData={this.getAnnouncementData} guildId={guild.guildId} announcements={announcements} leaderView={leaderView} />
+            <GuildLinkContainer getLinkData={this.getLinkData} saveNewLink={this.saveNewLink} guildId={guild.guildId} links={links} leaderView={leaderView} />
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }
