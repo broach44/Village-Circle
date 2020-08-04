@@ -9,10 +9,12 @@ import {
 } from 'semantic-ui-react';
 
 import ChildCard from '../../shared/ChildCard/ChildCard';
-
-import './AdultProfile.scss';
 import CircleCard from '../../shared/CircleCard/CircleCard';
 import CircleFormModal from '../../shared/CircleFormModal/CircleFormModal';
+import GuildCard from '../../shared/GuildCard/GuildCard';
+import GuildFormModal from '../../shared/GuildFormModal/GuildFormModal';
+
+import './AdultProfile.scss';
 
 class AdultProfile extends React.Component {
   static props = {
@@ -22,6 +24,8 @@ class AdultProfile extends React.Component {
     children: PropTypes.array,
     circles: PropTypes.arrayOf,
     saveNewCircle: PropTypes.func,
+    guilds: PropTypes.arrayOf,
+    saveNewGuild: PropTypes.func,
   }
 
   renderSimpleAdultProfile = () => {
@@ -38,7 +42,13 @@ class AdultProfile extends React.Component {
           </Grid>
         </Grid.Column>
         <Grid.Column textAlign='center'>
-          <Button color='brown' disabled><Icon name='add circle'/>Create New Guild</Button>
+          <GuildFormModal saveNewGuild={this.props.saveNewGuild} userId={this.props.user.userId} />
+          <Grid columns={2}>
+          {
+            this.props.guilds.map((guild) => <Grid.Column><GuildCard guild={guild} /></Grid.Column>)
+          }
+          </Grid>
+
         </Grid.Column>
         <Grid.Column textAlign='center'>
           <Button color='brown' disabled><Icon name='add circle'/>Create New Gathering Hall</Button>
