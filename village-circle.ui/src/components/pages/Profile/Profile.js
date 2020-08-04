@@ -6,6 +6,7 @@ import ChildProfile from '../ChildProfile/ChildProfile';
 import usersData from '../../../helpers/usersData';
 import circlesData from '../../../helpers/circlesData';
 import guildsData from '../../../helpers/guildsData';
+import gatheringHallsData from '../../../helpers/gatheringHallsData';
 
 import './Profile.scss';
 
@@ -17,6 +18,7 @@ class Profile extends React.Component {
     children: [],
     myCircles: [],
     myGuilds: [],
+    myGatheringHalls: [],
   }
 
   static props = {
@@ -38,6 +40,7 @@ class Profile extends React.Component {
         if (result.isChild === false) {
           this.getMyCircles(result.userId);
           this.getMyGuilds(result.userId);
+          this.getMyGatheringHalls(result.userId);
         }
       })
       .catch((err) => console.error('err from set currentUser', err));
@@ -78,6 +81,18 @@ class Profile extends React.Component {
       .catch((err) => console.error('err from save new guild', err));
   }
 
+  getMyGatheringHalls = (userId) => {
+    gatheringHallsData.getGatheringHallsByUser(userId)
+      .then((data) => this.setState({ myGatheringHalls: data }))
+      .catch((err) => console.error('err from getGatheringHalls', err));
+  }
+
+  saveNewGatheringHall = (gatheringHallObject) => {
+    gatheringHallsData.createNewGatheringHall(gatheringHallObject)
+      .then(() => this.getMyGatheringHalls(this.state.user.userId))
+      .catch((err) => console.error('err from save new guild', err));
+  }
+
   // if isChild is true, render Child Profile otherwise renderAdult Profile
 
   render() {
@@ -88,6 +103,7 @@ class Profile extends React.Component {
       children,
       myCircles,
       myGuilds,
+      myGatheringHalls,
     } = this.state;
     return (
       <React.Fragment className='Profile'>
@@ -98,6 +114,8 @@ class Profile extends React.Component {
             circles={myCircles}
             saveNewGuild={this.saveNewGuild}
             guilds={myGuilds}
+            saveNewGatheringHall={this.saveNewGatheringHall}
+            gatheringHalls={myGatheringHalls}
             user={user}
             isParent={isParent}
             children={children}

@@ -15,6 +15,8 @@ import GuildCard from '../../shared/GuildCard/GuildCard';
 import GuildFormModal from '../../shared/GuildFormModal/GuildFormModal';
 
 import './AdultProfile.scss';
+import GatheringHallFormModal from '../../shared/GatheringHallFormModal/GatheringHallFormModal';
+import GatheringHallCard from '../../shared/GatheringHallCard/GatheringHallCard';
 
 class AdultProfile extends React.Component {
   static props = {
@@ -26,6 +28,8 @@ class AdultProfile extends React.Component {
     saveNewCircle: PropTypes.func,
     guilds: PropTypes.arrayOf,
     saveNewGuild: PropTypes.func,
+    gatheringHalls: PropTypes.arrayOf,
+    saveNewGatheringHall: PropTypes.func,
   }
 
   renderSimpleAdultProfile = () => {
@@ -51,7 +55,12 @@ class AdultProfile extends React.Component {
 
         </Grid.Column>
         <Grid.Column textAlign='center'>
-          <Button color='brown' disabled><Icon name='add circle'/>Create New Gathering Hall</Button>
+        <GatheringHallFormModal saveNewGatheringHall={this.props.saveNewGatheringHall} userId={this.props.user.userId} />
+          <Grid columns={2}>
+          {
+            this.props.gatheringHalls.map((gatheringHall) => <Grid.Column><GatheringHallCard gatheringHall={gatheringHall} /></Grid.Column>)
+          }
+          </Grid>
         </Grid.Column>
       </Grid>
       </>
