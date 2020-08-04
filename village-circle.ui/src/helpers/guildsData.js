@@ -50,7 +50,7 @@ const getMemberListOfGuild = (guildId) => new Promise((resolve, reject) => {
 
 const joinGuild = (memberInfo) => axios.post(`${baseUrl}/guilds/newMember`, memberInfo);
 
-const createNewCircle = (guildObj) => axios.post(`${baseUrl}/guilds`, guildObj);
+const createNewGuild = (guildObj) => axios.post(`${baseUrl}/guilds`, guildObj);
 
 export default {
   getAllGuilds,
@@ -58,6 +58,6 @@ export default {
   verifyMembership,
   joinGuild,
   getGuildsByUser,
-  createNewCircle,
+  createNewGuild,
   getMemberListOfGuild,
 };

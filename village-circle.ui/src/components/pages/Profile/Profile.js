@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Profile.scss';
-
 import AdultProfile from '../AdultProfile/AdultProfile';
 import ChildProfile from '../ChildProfile/ChildProfile';
 import usersData from '../../../helpers/usersData';
 import circlesData from '../../../helpers/circlesData';
+import guildsData from '../../../helpers/guildsData';
+
+import './Profile.scss';
 
 class Profile extends React.Component {
   state = {
@@ -15,6 +16,7 @@ class Profile extends React.Component {
     isChild: false,
     children: [],
     myCircles: [],
+    myGuilds: [],
   }
 
   static props = {
@@ -35,6 +37,7 @@ class Profile extends React.Component {
         }
         if (result.isChild === false) {
           this.getMyCircles(result.userId);
+          this.getMyGuilds(result.userId);
         }
       })
       .catch((err) => console.error('err from set currentUser', err));
@@ -63,6 +66,18 @@ class Profile extends React.Component {
       .catch((err) => console.error('err from save new circle', err));
   }
 
+  getMyGuilds = (userId) => {
+    guildsData.getGuildsByUser(userId)
+      .then((data) => this.setState({ myGuilds: data }))
+      .catch((err) => console.error('err from getGuilds', err));
+  }
+
+  saveNewGuild = (guildObject) => {
+    guildsData.createNewGuild(guildObject)
+      .then(() => this.getMyGuilds(this.state.user.userId))
+      .catch((err) => console.error('err from save new guild', err));
+  }
+
   // if isChild is true, render Child Profile otherwise renderAdult Profile
 
   render() {
@@ -72,13 +87,23 @@ class Profile extends React.Component {
       user,
       children,
       myCircles,
+      myGuilds,
     } = this.state;
     return (
-      <>
+      <React.Fragment className='Profile'>
         {
-          (isChild) ? <ChildProfile uid={this.props.uid} /> : <AdultProfile uid={this.props.uid} saveNewCircle={this.saveNewCircle} circles={myCircles} user={user} isParent={isParent} children={children} />
+          (isChild) ? <ChildProfile uid={this.props.uid} />
+            : <AdultProfile uid={this.props.uid}
+            saveNewCircle={this.saveNewCircle}
+            circles={myCircles}
+            saveNewGuild={this.saveNewGuild}
+            guilds={myGuilds}
+            user={user}
+            isParent={isParent}
+            children={children}
+            />
         }
-      </>
+      </React.Fragment>
     );
   }
 }
