@@ -30,62 +30,64 @@ The app is designed for 3 different types of users.  Children are able to view t
 #### Login View
 Users will login with a simple email and password set up with a generic modal
 
-![Login View]()
+![Login View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/LoginView.PNG)
 
 #### Home Page View
 Users can navigate using the guideposts or the links in the navbar
 
-![Home View]()
+![Home View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/Home-View.PNG)
 
 #### All Circles View
 View of the entire collection of circles
 
-![All Circles View]()
+![All Circles View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/AllCirclesView.PNG)
 
 #### Single Circle - Non-member View
 View of the single circle.  Non-members cannot see any of the message board content but they can still see details about the circle, announcements and links posted from the leader.
 
-![Single Circle NonMember View]()
+![Single Circle NonMember View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/SingleCircle-NonMemberView.PNG)
 
 #### Single Circle - Member View
 View of the single circle when the user is logged in and a member of the circle.  Members can view all the message board and same content as the non-member.  They can post to the message board, edit their content and delete their own posts only.
 
-![Single Circle Member View]()
+![Single Circle Member View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/SingleCircle-MemberView.PNG)
 
 #### Single Circle - Leader View
 The leader view is the same as the other two views except they will have additional functionality options.  The leader can add additional announcements and links.  They can also view the members for their circle and give out points for responses and submission of any "assignments"
 
-![Single Circle Leader View]()
+![Single Circle Leader View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/SingleCircle-LeaderView.PNG)
 
 #### All Guilds View
 View of the entire collection of guilds.  Guilds are the skill based module within the application
 
-![All Guilds View]()
+![All Guilds View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/AllGuildsView.PNG)
 
 #### Single Guild View
 The single guild view is almost identical to the overall functionality and user variety as is above in the circle module.
 
-![Single Guild View]()
+![Single Guild Member View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/SingleGuildMemberView.PNG)
+
+![Single Guild Leader View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/SingleGuild-LeaderView.PNG)
 
 #### All Gathering Halls View
 View of the entire collection of gathering halls.  Gathering halls are the social module for children to get together based on topics that they are interested in.
 
-![All Gathering Hall View]()
+![All Gathering Hall View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/AllGatheringHallsView.PNG)
 
 #### Single Gathering Hall View
 The view within the single gathering hall is a simple message board view.  No frill, just chat.
 
-![Single Gathering Hall]()
+![Single Gathering Hall](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/SingleGatheringHall-MemberView.PNG)
 
 #### Child Profile View
 Within the child's profile view they will be able to see the information from their profile along with their activity/point log.  They can also see their various goals that are set and see which goals of those they have achieved.
 
-![Child Profile View]()
+![Child Profile View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/ProfileView-Child.PNG)
 
 #### Parent Profile View
 If no children you would not see the "My Children" section.  In the parent view you will be able to view your children if you have them. Parents can take a look at their children's profiles and assign point goals for them to work towards. You can also view any circles, guilds or halls that you lead or start one up.
 
-![Parent Profile View]()
+![Parent Profile View](https://raw.githubusercontent.com/broach44/Village-Circle/master/Screenshots/ProfileView-Adult-Parent.PNG)
 
 <!-- ## Live Demo
 
