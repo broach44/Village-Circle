@@ -26,6 +26,7 @@ class ChildProfile extends React.Component {
     userPosts: [],
     userPointTotal: 0,
     goals: [],
+    userActivities: [],
   }
 
   static props = {
@@ -51,6 +52,7 @@ class ChildProfile extends React.Component {
         this.getPostInfo(userData.userId);
         this.getUserTotal(userData.userId);
         this.getUserGoals(userData.userId);
+        this.getUserActivities(userData.userId);
       })
       .catch((err) => console.error('err from getuser', err));
   }
@@ -75,6 +77,12 @@ class ChildProfile extends React.Component {
       .catch((err) => console.error('err from get user goals', err));
   }
 
+  getUserActivities = (userId) => {
+    pointsData.getUserActivityLog(userId)
+      .then((info) => this.setState({ userActivities: info }))
+      .catch((err) => console.error('err from get user activities', err));
+  }
+
   saveNewGoal = (goalObj) => {
     const { childUser } = this.state;
     goalsData.createGoal(goalObj)
@@ -82,10 +90,22 @@ class ChildProfile extends React.Component {
       .catch((err) => console.error('err from save new goal', err));
   }
 
-  renderActivityZone = () => {
+  // The Function below is currently not in use but ready for future releases.  This function will give a log of a user's message posts.
+  renderUserPostLog = () => {
     const { userPosts } = this.state;
     if (userPosts !== 'This user has not posted any messages') {
       return (userPosts.map((post) => <p key={`${post.postLogId}${post.postDateTime}`}>Posted to {post.boardName} Board on {moment(post.postDateTime).format('LL')} : Earned 15 points!</p>));
+    }
+    return (<Message>Oops! Looks like you don't have any activity yet.  Join a group and start participating to earn points!</Message>);
+  }
+
+  renderAllActivity = () => {
+    const { userActivities } = this.state;
+    if (userActivities !== 'This user does not have any activities completed yet') {
+      return (
+        userActivities.map((activity) => <p key={`${activity.pointLogId}`}>
+          Earned {activity.numberOfPoints} points on {moment(activity.earnedDate).format('LL')} from {activity.activityName}
+        </p>));
     }
     return (<Message>Oops! Looks like you don't have any activity yet.  Join a group and start participating to earn points!</Message>);
   }
@@ -132,8 +152,7 @@ class ChildProfile extends React.Component {
           </Grid.Column>
           <Grid.Column>
             <Header>Activity</Header>
-            { this.renderActivityZone() }
-
+            {this.renderAllActivity()}
           </Grid.Column>
         </Grid>
       </Container>
