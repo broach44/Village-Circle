@@ -32,6 +32,11 @@ namespace VillageCircle.Controllers
         public IActionResult GetUserPointLog(int userId)
         {
             var userLog = _pointSystemRepository.GetUserLog(userId);
+            var isEmpty = !userLog.Any();
+            if (isEmpty)
+            {
+                return Ok("This user does not have any activities completed yet");
+            }
             return Ok(userLog);
         }
 

@@ -19,8 +19,22 @@ const getActivityOptions = () => new Promise((resolve, reject) => {
       resolve(options);
     })
     .catch((error) => reject(error));
+});
+
+const getUserActivityLog = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pointsystem/log/${userId}`)
+    .then((result) => {
+      const activities = result.data;
+      resolve(activities);
+    })
+    .catch((error) => reject(error));
 })
 
 const addPoints = (pointEntryObj) => axios.post(`${baseUrl}/pointsystem`, pointEntryObj);
 
-export default { getPointTotal, addPoints, getActivityOptions };
+export default {
+  getPointTotal,
+  addPoints,
+  getActivityOptions,
+  getUserActivityLog,
+};
