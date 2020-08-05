@@ -1,68 +1,116 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Village Circle
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This application was my COVID-19 brainchild and was inspired by my youngest daughter.  She has struggled to maintain social interaction virtually.  She had not developed the strong network of friends prior to be thrown into isolation this year.  The idea behind this app is to provide a fun, social learning environment for children.
 
-### `npm start`
+Within the application a user has 3 modules to choose from: "Circles", "Guilds", and "Gathering Halls".  These 3 modules function very similarly with the first two in the list almost identical.  The difference is simply the focus on their content.  Circles are focused on standard educational topics while Guilds are focused on trade and skill-based content.  Gathering Halls are the simpler of the modules and are intended to be a virtual hangout divided to different tastes and interests.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The app is designed for 3 different types of users.  Children are able to view the 3 modules, contribute to the discussion, view their profile, and set goals for themselves.  Adults who wish to start a circle, guild or hall can do so whether they are a parent or not.  All they need is a desire to teach others.  Parents are able to join up and be linked with their children so they can monitor their child's interactions within the application.  Through their profile they can view all their children that are using the application, review their profile which displays their activity, and set point goals to achieve.  Parents are also able to contribute and lead a circle, guild or gathering hall.  The idea is that we can learn something from everyone that is willing to share their expertise.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- Single page web application using **React** on the client side
+- **React routing** was used to navigate throughout the applicaiton
+- Combination of **Semantic-UI-React** and **Sass** used for styling, modal functionality, toasts, and Grid system
+- **Moment.js** is used for visualization of datetime structures
+- **C#/ASP.NET Core** used to develop web API
+- **SQL Server** Used for data storage
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Versions:
+- React: 16.13.1
+- Semantic UI React: 0.88.2
+- Axios: 0.19.2
+- Firebase: 7.16.0
+- Moment: 2.27.0
+- Sass: 4.14.1
 
-### `npm run build`
+## Screenshots
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Login View
+Users will login with a simple email and password set up with a generic modal
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+![Login View]()
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Home Page View
+Users can navigate using the guideposts or the links in the navbar
 
-### `npm run eject`
+![Home View]()
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### All Circles View
+View of the entire collection of circles
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![All Circles View]()
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Single Circle - Non-member View
+View of the single circle.  Non-members cannot see any of the message board content but they can still see details about the circle, announcements and links posted from the leader.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Single Circle NonMember View]()
 
-## Learn More
+#### Single Circle - Member View
+View of the single circle when the user is logged in and a member of the circle.  Members can view all the message board and same content as the non-member.  They can post to the message board, edit their content and delete their own posts only.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![Single Circle Member View]()
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Single Circle - Leader View
+The leader view is the same as the other two views except they will have additional functionality options.  The leader can add additional announcements and links.  They can also view the members for their circle and give out points for responses and submission of any "assignments"
 
-### Code Splitting
+![Single Circle Leader View]()
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+#### All Guilds View
+View of the entire collection of guilds.  Guilds are the skill based module within the application
 
-### Analyzing the Bundle Size
+![All Guilds View]()
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+#### Single Guild View
+The single guild view is almost identical to the overall functionality and user variety as is above in the circle module.
 
-### Making a Progressive Web App
+![Single Guild View]()
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+#### All Gathering Halls View
+View of the entire collection of gathering halls.  Gathering halls are the social module for children to get together based on topics that they are interested in.
 
-### Advanced Configuration
+![All Gathering Hall View]()
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+#### Single Gathering Hall View
+The view within the single gathering hall is a simple message board view.  No frill, just chat.
 
-### Deployment
+![Single Gathering Hall]()
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+#### Child Profile View
+Within the child's profile view they will be able to see the information from their profile along with their activity/point log.  They can also see their various goals that are set and see which goals of those they have achieved.
 
-### `npm run build` fails to minify
+![Child Profile View]()
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#### Parent Profile View
+If no children you would not see the "My Children" section.  In the parent view you will be able to view your children if you have them. Parents can take a look at their children's profiles and assign point goals for them to work towards. You can also view any circles, guilds or halls that you lead or start one up.
+
+![Parent Profile View]()
+
+<!-- ## Live Demo
+
+TBD -->
+
+## How to Run
+- Clone down the project
+- In the terminal run npm install
+- Create a firebase project [here](https://console.firebase.google.com/)
+- Create a couple sample users and update the SQL script User data to reflect the new users information.
+- Run the SQL Script to create a sample db `**ADD LINK HERE**`
+- In Visual Studio you may need to install a few dependencies: Dapper, Microsoft.AspNetCore.AuthenticationJwtBearer, and System.Data.SqlClient.
+- Once API is setup run IIS Express from Visual Studio
+- Create `src/helpers/apiKeys.json` file and add in your firebase keys that were created in the new firebase project.  Feel free to reference the `apiKeys.example.json` file in the project for the correct structure
+- Once set up to run enter the following in the terminal `npm start`
+
+
+## Future Features
+- Embedded Content
+- Direct Messaging
+- Customizing Profile Images/Avatars
+- Customizing Individual Circles/Guilds/Gathering Halls
+- Search and Filter Functions
+- Favorite Groups
+
+## Contributors
+
+[Crystal Broach](https://github.com/broach44)
