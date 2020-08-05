@@ -110,7 +110,7 @@ class ChildProfile extends React.Component {
             {/* <p>Total Points Earned: 200</p> */}
             <p>Email: {childUser.email}</p>
             <p>Total Points: {userPointTotal}</p>
-            <Button disabled>Edit Profile</Button>
+            {/* <Button disabled>Edit Profile</Button> */}
           </Grid.Column>
         </Grid>
         <Divider hidden />

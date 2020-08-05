@@ -7,7 +7,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  h1, h2, h3, .ui.header {
+    color: rgb(98, 183, 240);
+    text-shadow: 5px 5px 5px black;
+  }
 }
 .ui.card, .ui.cards>.card {
   background-image: linear-gradient( rgba(206, 200, 195, 0.6), rgba(206, 200, 195, .6) ), url('https://images.pexels.com/photos/479444/pexels-photo-479444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');

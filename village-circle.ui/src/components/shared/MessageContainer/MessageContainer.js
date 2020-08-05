@@ -73,7 +73,7 @@ class MessageContainer extends React.Component {
           <Grid.Row>
             <Grid.Column width={15}>
               <Form.TextArea placeholder='Write a message...' value={currentPostMessage} onChange={this.setPostMessage}/>
-              <Button floated='right' size='small'>Post Message</Button>
+              <Button color='blue' floated='right' size='small'>Post Message</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
