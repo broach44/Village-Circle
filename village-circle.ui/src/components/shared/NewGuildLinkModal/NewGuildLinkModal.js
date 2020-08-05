@@ -60,7 +60,7 @@ class NewGuildLinkModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.show('large')} color='brown'><Icon name='add circle'/>Add Link</Button>
+        <Button className='GuildLinkModalButton' onClick={this.show('large')} color='brown'><Icon name='add circle'/>Add Link</Button>
 
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Create New Link</Modal.Header>

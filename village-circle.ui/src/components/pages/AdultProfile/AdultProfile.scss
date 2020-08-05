@@ -5,4 +5,8 @@
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../../images/c-j-brown-pathforProfileBG.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+  .GuildFormModalButton, .CircleFormModalButton, .GatheringHallFormModalButton {
+    margin-bottom: 1rem;
+  }
 }

@@ -23,7 +23,7 @@ class ChildCard extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button as={ Link } to={`/childProfile/${child.uid}`} floated='right' color='orange'>Review Activity/Profile</Button>
+          <Button as={ Link } to={`/childProfile/${child.uid}`} floated='right' color='blue'>Review Activity/Profile</Button>
         </Card.Content>
       </Card>
     );

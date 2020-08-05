@@ -39,7 +39,7 @@ class NewAnnouncementModal extends React.Component {
     const { open, size } = this.state;
     return (
       <div>
-        <Button onClick={this.show('small')} color='brown'><Icon name='add circle'/>Add New Announcement</Button>
+        <Button className='AddAnnouncementModalButton' onClick={this.show('small')} color='brown'><Icon name='add circle'/>Add New Announcement</Button>
 
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Create New Announcement</Modal.Header>

@@ -45,7 +45,7 @@ class NewGoalModal extends Component {
 
     return (
       <div>
-        <Button onClick={this.show('mini')} basic color='green' className='newGoalButton' floated='right' size='mini'><Icon name='add circle'/>Add New Goal</Button>
+        <Button onClick={this.show('mini')} color='blue' className='newGoalButton' floated='right' size='mini'><Icon name='add circle'/>Add New Goal</Button>
 
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Create New Goal</Modal.Header>

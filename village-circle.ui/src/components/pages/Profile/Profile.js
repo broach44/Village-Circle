@@ -106,7 +106,7 @@ class Profile extends React.Component {
       myGatheringHalls,
     } = this.state;
     return (
-      <React.Fragment className='Profile'>
+      <div className='Profile'>
         {
           (isChild) ? <ChildProfile uid={this.props.uid} />
             : <AdultProfile uid={this.props.uid}
@@ -121,7 +121,7 @@ class Profile extends React.Component {
             children={children}
             />
         }
-      </React.Fragment>
+      </div>
     );
   }
 }

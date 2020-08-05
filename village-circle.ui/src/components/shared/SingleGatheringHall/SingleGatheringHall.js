@@ -115,8 +115,8 @@ class SingleGatheringHall extends React.Component {
     if (authed) {
       if (gatheringHallMember && gatheringHall.boardId !== 0) {
         return (
-          <Grid>
-            <Grid.Column>
+          <Grid centered>
+            <Grid.Column width={12}>
             <MessageContainer
                   currentUser={currentUser}
                   currentUserId={currentUser.userId}

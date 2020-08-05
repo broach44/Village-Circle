@@ -52,7 +52,7 @@ class GuildFormModal extends Component {
 
     return (
       <div>
-        <Button onClick={this.show('large')} color='brown'><Icon name='add circle'/>Create New Guild</Button>
+        <Button className='GuildFormModalButton' onClick={this.show('large')} color='brown'><Icon name='add circle'/>Create New Guild</Button>
 
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Create New Guild</Modal.Header>

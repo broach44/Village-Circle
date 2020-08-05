@@ -24,6 +24,7 @@ class SingleCircle extends React.Component {
     announcements: [],
     leaderView: false,
     childCircleMembers: [],
+    links: [],
   }
 
   static props = {
@@ -144,33 +145,22 @@ class SingleCircle extends React.Component {
   renderBoard = () => {
     const { authed } = this.props;
     const {
-      announcements,
       circle,
       circleMember,
       circleMessages,
       currentUser,
-      links,
-      leaderView,
     } = this.state;
     if (authed) {
       if (circleMember && circle.boardId !== 0) {
         return (
-          <Grid>
-            <Grid.Column width={10}>
-            <MessageContainer
-                  currentUser={currentUser}
-                  currentUserId={currentUser.userId}
-                  postMessage={this.postMessageToBoard}
-                  messages={circleMessages}
-                  currentBoardId={circle.boardId}
-                  deleteMessageFromBoard={this.deleteMessageFromBoard}
-                  updateUserMessage={this.updateUserMessage} />
-            </Grid.Column>
-            <Grid.Column width={6}>
-              <AnnouncementContainer getAnnouncementData={this.getAnnouncementData} circleId={circle.circleId} announcements={announcements} leaderView={leaderView} />
-              <LinkContainer getLinkData={this.getLinkData} saveNewLink={this.saveNewLink} circleId={circle.circleId} links={links} leaderView={leaderView} />
-            </Grid.Column>
-          </Grid>
+          <MessageContainer
+                currentUser={currentUser}
+                currentUserId={currentUser.userId}
+                postMessage={this.postMessageToBoard}
+                messages={circleMessages}
+                currentBoardId={circle.boardId}
+                deleteMessageFromBoard={this.deleteMessageFromBoard}
+                updateUserMessage={this.updateUserMessage} />
         );
       } return (
         <Button color='brown' onClick={this.joinThisCircle}>Click to Join Circle</Button>
@@ -186,15 +176,25 @@ class SingleCircle extends React.Component {
   render() {
     const {
       circle,
+      links,
+      announcements,
+      leaderView,
     } = this.state;
     return (
       <div className="SingleCircle">
-        <div className="CircleInfoDiv">
-          <h2>Circle: {circle.circleName}</h2>
-          <h3>Leader: {circle.circleLeader}     {this.renderLeaderView()}</h3>
-          <p className="CircleDescription">{circle.circleDescription}</p>
-        </div>
-        { this.renderBoard() }
+        <Grid className="CircleInfoDiv">
+          <Grid.Column width={9}>
+            <h2>Circle: {circle.circleName}</h2>
+            <h3>Leader: {circle.circleLeader}</h3>
+            <p className="CircleDescription">{circle.circleDescription}</p>
+            {this.renderLeaderView()}
+            { this.renderBoard() }
+          </Grid.Column>
+          <Grid.Column width={7}>
+            <AnnouncementContainer getAnnouncementData={this.getAnnouncementData} circleId={circle.circleId} announcements={announcements} leaderView={leaderView} />
+            <LinkContainer getLinkData={this.getLinkData} saveNewLink={this.saveNewLink} circleId={circle.circleId} links={links} leaderView={leaderView} />
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }

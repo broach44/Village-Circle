@@ -52,7 +52,7 @@ class CircleFormModal extends Component {
 
     return (
       <div>
-        <Button onClick={this.show('large')} color='brown'><Icon name='add circle'/>Create New Circle</Button>
+        <Button className='CircleFormModalButton' onClick={this.show('large')} color='brown'><Icon name='add circle'/>Create New Circle</Button>
 
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Create New Circle</Modal.Header>

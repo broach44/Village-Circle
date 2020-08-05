@@ -52,7 +52,7 @@ class GatheringHallFormModal extends Component {
 
     return (
       <div>
-        <Button onClick={this.show('large')} color='brown'><Icon name='add circle'/>Create New Gathering Hall</Button>
+        <Button className='GatheringHallFormModalButton' onClick={this.show('large')} color='brown'><Icon name='add circle'/>Create New Gathering Hall</Button>
 
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Create New Gathering Hall</Modal.Header>

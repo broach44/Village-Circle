@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Table, Message } from 'semantic-ui-react';
+import { Table, Message, Grid } from 'semantic-ui-react';
 import LinkTableRow from '../LinkTableRow/LinkTableRow';
 import NewLinkModal from '../NewLinkModal/NewLinkModal';
 
@@ -53,7 +53,7 @@ class LinkContainer extends React.Component {
   }
 
   renderLeaderView = () => {
-    if (this.props.leaderView) return <NewLinkModal saveNewLink={this.saveNewLink} circleId={this.props.circleId} />;
+    if (this.props.leaderView) return <Grid.Row><NewLinkModal saveNewLink={this.saveNewLink} circleId={this.props.circleId} /></Grid.Row>;
     return <></>;
   }
 
@@ -61,8 +61,12 @@ class LinkContainer extends React.Component {
     return (
       <div className='LinkContainer'>
         <h2>Links:</h2>
-        { this.renderLeaderView() }
-        { this.renderTableView() }
+            { this.renderLeaderView() }
+        <Grid className='LinkGrid'>
+          <Grid.Row>
+            { this.renderTableView() }
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }
