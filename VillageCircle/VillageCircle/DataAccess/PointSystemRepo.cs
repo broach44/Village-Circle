@@ -12,8 +12,10 @@ namespace VillageCircle.DataAccess
     public class PointSystemRepo
     {
         string connectionString;
-        public PointSystemRepo(IConfiguration config)
+        GoalsRepo _goalsRepo;
+        public PointSystemRepo(IConfiguration config, GoalsRepo goalsRepository)
         {
+            _goalsRepo = goalsRepository;
             connectionString = config.GetConnectionString("VillageCircle");
         }
 
@@ -78,6 +80,20 @@ namespace VillageCircle.DataAccess
                     ActivityPointId = pointEntryToAdd.ActivityPointId,
                 };
                 var result = db.QueryFirstOrDefault<PointEntry>(sql, parameters);
+
+                // get total points
+                var currentTotal = GetTotal(pointEntryToAdd.UserId);
+                // get goals
+                var goals = _goalsRepo.GetGoals(pointEntryToAdd.UserId);
+                // loop through the goals and compare to total; if equal mark is complete to true.
+                foreach (var goal in goals)
+                {
+                    if (goal.IsComplete == false && currentTotal >= goal.PointTarget)
+                    {
+                        _goalsRepo.CompleteGoal(goal.GoalId);
+                    }
+                }
+
                 return result;
             }
         }

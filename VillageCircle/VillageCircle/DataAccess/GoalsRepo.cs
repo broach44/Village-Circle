@@ -47,5 +47,18 @@ namespace VillageCircle.DataAccess
                 return result;
             }
         }
+
+        public void CompleteGoal(int goalId)
+        {
+            var sql = @"update [Goals]
+                        set [IsComplete] = 1
+                        where GoalId = @GoalId";
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                var parameters = new { GoalId = goalId };
+                var result = db.QueryFirstOrDefault<Goal>(sql, parameters);
+            }
+        }
     }
 }
