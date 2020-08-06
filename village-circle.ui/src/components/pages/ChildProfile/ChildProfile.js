@@ -136,7 +136,7 @@ class ChildProfile extends React.Component {
         <Divider hidden />
         <Grid columns={2}>
           <Grid.Column>
-            <Header floated='left'>My Goals</Header><NewGoalModal saveNewGoal={this.saveNewGoal} userId={childUser.userId} />
+            <Header floated='left'>My Goals</Header><NewGoalModal currentPointTotal={userPointTotal} saveNewGoal={this.saveNewGoal} userId={childUser.userId} />
             <Table>
               <Table.Header>
                 <Table.Row>
