@@ -17,6 +17,7 @@ class NewGoalModal extends Component {
   static props = {
     userId: PropTypes.int,
     saveNewGoal: PropTypes.func,
+    currentPointTotal: PropTypes.int,
   }
 
   show = (size) => () => this.setState({ size, open: true })
@@ -64,6 +65,7 @@ class NewGoalModal extends Component {
               icon='save'
               labelPosition='right'
               content='Save New Goal'
+              disabled={this.state.pointGoalInput < this.props.currentPointTotal + 10}
               onClick={this.saveNewGoalEvent}
             />
           </Modal.Actions>
