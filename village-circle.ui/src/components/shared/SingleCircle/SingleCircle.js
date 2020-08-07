@@ -186,6 +186,7 @@ class SingleCircle extends React.Component {
           <Grid.Column width={9}>
             <h2>Circle: {circle.circleName}</h2>
             <h3>Leader: {circle.circleLeader}</h3>
+            <h3>Leader Email: {circle.circleLeaderEmail}</h3>
             <p className="CircleDescription">{circle.circleDescription}</p>
             {this.renderLeaderView()}
             { this.renderBoard() }

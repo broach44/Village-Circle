@@ -185,6 +185,7 @@ class SingleGuild extends React.Component {
           <Grid.Column width={9}>
             <h2>Guild: {guild.guildName}</h2>
             <h3>Leader: {guild.guildLeader}</h3>
+            <h3>Leader Email: {guild.guildLeaderEmail}</h3>
             <p className="GuildDescription">{guild.guildDescription}</p>
             { this.renderLeaderView() }
             { this.renderBoard() }
