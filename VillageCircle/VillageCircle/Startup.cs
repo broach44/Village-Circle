@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using VillageCircle.DataAccess;
+using VillageCircle.Models;
 
 namespace VillageCircle
 {
@@ -63,6 +64,13 @@ namespace VillageCircle
                     };
                 }
             );
+
+            // ---------------Twilio Configuration ------------------------
+
+            services.Configure<TwilioAccountDetails>(Configuration.GetSection("TwilioAccountDetails"));
+
+            // -----------------------------------------------------------------
+
             services.AddCors(options =>
                 options.AddPolicy("ItsAllGood",
                     builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
